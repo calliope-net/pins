@@ -9,7 +9,8 @@
         "main.blocks",
         "main.ts",
         "README.md",
-        "pins.ts"
+        "pins.ts",
+        "i2c.ts"
     ],
     "testFiles": [
         "test.ts"
@@ -21,6 +22,5 @@
     "supportedTargets": [
         "calliopemini"
     ],
-    "preferredEditor": "tsprj",
-    "languageRestriction": "javascript-only"
+    "preferredEditor": "tsprj"
 }

@@ -67,26 +67,6 @@ namespace pins { // pins.ts
 
 
 
-    // ========== group="I²C" subcategory=Buffer
-
-    //% group="I²C" subcategory=Buffer
-    //% block="i2cWriteBuffer I²C %i2c_address Buffer %buf || repeat %repeat" weight=9
-    //% i2c_address.min=0 i2c_address.max=127
-    //% repeat.shadow=toggleYesNo
-    export function pins_i2cWriteBuffer(i2c_address: number, buf: Buffer, repeat = false) {
-        return pins.i2cWriteBuffer(i2c_address, buf, repeat)
-    }
-
-    //% group="I²C" subcategory=Buffer
-    //% block="i2cReadBuffer I²C %i2c_address size %size || repeat %repeat" weight=8
-    //% i2c_address.min=0 i2c_address.max=127
-    //% size.min=1 size.max=128 size.defl=1
-    //% repeat.shadow=toggleYesNo
-    export function pins_i2cReadBuffer(i2c_address: number, size: number, repeat = false) {
-        return pins.i2cReadBuffer(i2c_address, size, repeat)
-    }
-
-
 
     // ========== group="Buffer create" subcategory=Buffer
 
