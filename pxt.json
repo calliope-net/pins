@@ -6,6 +6,7 @@
         "core": "*"
     },
     "files": [
+        "main.blocks",
         "main.ts",
         "README.md",
         "pins.ts"
