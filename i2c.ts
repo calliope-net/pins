@@ -137,8 +137,8 @@ namespace pins { // i2c.ts
     }
 
 
-    //% group="sammelt gültige i2c-Adressen in Array" subcategory=I²C
-    //% block="i2c-Scan von %von_i2cAdresse bis %bis_i2cAdresse Pause %ms ms"
+    //% group="sammelt gültige I²C-Adressen in Array" subcategory=I²C
+    //% block="I²C-Scan von %von_i2cAdresse bis %bis_i2cAdresse Pause %ms ms"
     //% von_i2cAdresse.shadow=pins_i2cAdressen
     //% bis_i2cAdresse.shadow=pins_i2cAdressen bis_i2cAdresse.defl=pins.ei2cAdressen.x7F
     //% ms.min=0 ms.max=500 ms.defl=100
