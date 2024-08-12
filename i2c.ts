@@ -27,7 +27,7 @@ namespace pins { // i2c.ts
         //% block="0x20 SparkFun Qwiic Joystick"
         Joystick_x20 = 0x20,
 
-        //% block="0x20 CalliBot"
+        //% block="0x20 CalliBot (blockiert 8 Adressen 0x20-0x27)"
         CalliBot_x20 = 0x20,
 
         //% block="0x21 CalliBot"
