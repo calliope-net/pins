@@ -10,7 +10,8 @@
         "main.ts",
         "README.md",
         "pins.ts",
-        "i2c.ts"
+        "i2c.ts",
+        "keyboards.ts"
     ],
     "testFiles": [
         "test.ts"

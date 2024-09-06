@@ -181,9 +181,25 @@ namespace pins { // i2c.ts
     }
 
 
+
+    // ========== group="Funktionen" subcategory=I²C
+
+    //% blockId=pins_text block="%s" blockHidden=true
+    export function pins_text(s: string): string { return s }
+
+    //% group="Funktionen" subcategory=I²C
+    //% block="// %text" weight=9
+    //% text.shadow="pins_text"
+    export function comment(text: any): void { }
+
     //% group="Funktionen" subcategory=I²C
     //% block="%i0 zwischen %i1 und %i2" weight=4
     export function between(i0: number, i1: number, i2: number): boolean { return (i0 >= i1 && i0 <= i2) }
 
+    //% group="Funktionen" subcategory=I²C
+    //% block="is undefined %variable" weight=3
+    export function isundefined(variable: any) {
+        return variable == undefined
+    }
 
 } // i2c.ts
