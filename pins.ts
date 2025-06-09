@@ -25,7 +25,7 @@ namespace pins { // pins.ts
     //% pin.shadow=pins_eDigitalPins
     //% on.shadow=toggleOnOff
     export function pinDigitalWrite(pin: number, on: boolean) {
-        pins.digitalWritePin(<DigitalPin>pin, on ? 0 : 1)
+        pins.digitalWritePin(<DigitalPin>pin, on ? 1 : 0)
     }
 
     //% group="Digital"
