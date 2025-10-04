@@ -126,6 +126,16 @@ namespace pins { // i2c.ts
         return pins.i2cReadBuffer(i2cAdresse, size, repeat)
     }
 
+    //% group="I²C Write / Read" subcategory=I²C
+    //% block="i2cWriteReadBuffer I²C %i2cAdresse Buffer %buf size %size" weight=7
+    //% i2cAdresse.min=0 i2cAdresse.max=127
+    export function pins_i2cWriteReadBuffer(i2cAdresse: number, buf: Buffer, size: number) {
+        if (pins.i2cWriteBuffer(i2cAdresse, buf, true) == 0)
+            return pins.i2cReadBuffer(i2cAdresse, size)
+        else
+            return Buffer.create(0)
+    }
+
 
 
     //% blockId=pins_i2cAdressen

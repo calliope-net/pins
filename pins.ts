@@ -76,7 +76,7 @@ namespace pins { // pins.ts
         return Buffer.create(size)
     }
     //% group="Buffer create" subcategory=Buffer
-    //% block="Buffer.fromArray %bytes" weight=8
+    //% block="Buffer.from %bytes" weight=8
     export function buffer_fromArray(bytes: number[]) {
         return Buffer.fromArray(bytes)
     }
