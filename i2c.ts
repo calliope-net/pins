@@ -12,13 +12,13 @@ namespace pins { // i2c.ts
         //% block="0x03 Grove - 6-Position DIP Switch; 5-Way Switch"
         DIP_x03 = 0x03,
 
-        //% block="0x68 Bosch BMX055 magnetic (Calliope v1-2)"
+        //% block="0x10 Bosch BMX055 magnetic (Calliope v1-2)"
         magnetic_x10 = 0x10,
 
         //% block="0x11 Grove - 4-Channel SPDT Relay"
         Rel_x11 = 0x11, Rel_x12 = 0x12,
 
-        //% block="0x68 Bosch BMX055 accelerometer (Calliope v1-2)"
+        //% block="0x18 Bosch BMX055 accelerometer (Calliope v1-2)"
         accelerometer_x18 = 0x18,
 
         //% block="0x18 Qwiic Single Relay"
@@ -36,14 +36,20 @@ namespace pins { // i2c.ts
         //% block="0x22 CalliBot 2"
         CalliBot2_x22 = 0x22,
 
+        //% block="0x24 PN532 NFC- und RFID-Modul"
+        PN532_x24 = (0x48 >> 1),
+
         //% block="0x27 SparkFun Qwiic GPIO"
         GPIO_x27 = 0x27, GPIO_x26 = 0x26, GPIO_x25 = 0x25, GPIO_x24 = 0x24,
         GPIO_x23 = 0x23, GPIO_x22 = 0x22, GPIO_x21 = 0x21, GPIO_x20 = 0x20,
 
+        //% block="0x28 SparkFun Capacitive Touch Slider - CAP1203"
+        CAP1203_x28 = 0x28,
+
         // Power Delivery Board - USB-C (Qwiic)
         //Power = 0x28, Power_x29 = 0x29, Power_x2A = 0x2A, Power_x2B = 0x2B,
 
-        //% block="0x29 SparkFun Distance Sensor - 1.3 Meter, VL53L4CD (Qwiic)"
+        //% block="0x29 SparkFun Laser Distance Sensor VL53L4CD und VL53L1X"
         LaserDistance_x29 = 0x29,
 
         //% block="0x2A SparkFun Qwiic OpenLog"
@@ -61,6 +67,9 @@ namespace pins { // i2c.ts
         //% block="0x3C Grove - OLED Display 1.12 (SH1107) - Matrix"
         OLED_1286x128_x3C = 0x3C,
 
+        //% block="0x3C SparkFun Micro Temperature Sensor - STTS22H"
+        STTS22H_x3C = 0x3C,
+
         //% block="0x3D Grove - OLED Yellow&Blue Display 0.96 (SSD1315)"
         OLED_16x8_x3D = 0x3D,
 
@@ -70,8 +79,14 @@ namespace pins { // i2c.ts
         //% block="0x3E Grove - 16x2 LCD Display"
         LCD_16x2_x3E = 0x3E, //LCD_16x2_V4 = 0x70,
 
+        //% block="0x40 Grove - 16-Channel PWM Driver (PCA9685)"
+        PCA9685_x40 = 0x40,
+
         //% block="0x45 Gravity: I2C Digital Wattmeter"
         Wattmeter_x45 = 0x45, Wattmeter_x40 = 0x40, Wattmeter_x41 = 0x41, Wattmeter_x44 = 0x44,
+
+        //% block="0x48 SparkFun Digital Temperature Sensor - TMP102"
+        TMP102_x48 = 0x48,
 
         //% block="0x48 SparkFun Qwiic Keypad - 12 Button"
         Keypad_x4B = 0x4B, Keypad_x4A_Jumper = 0x4A,
@@ -86,6 +101,14 @@ namespace pins { // i2c.ts
         //% block="0x52 M5Stack U024-C Joystick"
         Joystick_x52 = 0x52,
 
+        // 0x53 System Memory: 0x57 RF Switch Off: 0x51 RF Switch On: 0x55 Arduino Library Features
+        // https://www.sparkfun.com/sparkfun-qwiic-dynamic-nfc-rfid-tag.html
+        //% block="0x53 0x57 0x51 0x55 SparkFun Qwiic Dynamic NFC/RFID Tag"
+        NFC_0x53 = 0x53, NFC_0x57 = 0x57, NFC_0x51 = 0x51, NFC_0x55 = 0x55,
+
+        //% block="0x5B Grove - 12 Key Capacitive I2C Touch Sensor V3 (MPR121)"
+        MPR121_x5B = 0x5B, MPR121_x5C = 0x5C, MPR121_x5D = 0x5D,
+
         //% block="0x5F M5Stack U305-B CardKB"
         CardKB_x5F = 0x5F,
 
@@ -93,8 +116,23 @@ namespace pins { // i2c.ts
         Motor_x5D = 0x5D, Motor_x58 = 0x58, Motor_x59 = 0x59, Motor_x5A = 0x5A, Motor_x5B = 0x5B, Motor_x5C = 0x5C,
         Motor_x5E = 0x5E, Motor_x5F = 0x5F, Motor_x60 = 0x60, Motor_x61 = 0x61,
 
+        //% block="0x60 SparkFun Proximity Sensor - 20cm, VCNL4040"
+        VCNL4040_x60 = 0x60,
+
+        //% block="0x62 Calliope mini CO2 Sensor - SCD40"
+        SCD40_x62 = 0x62,
+
+        //% block="0x64 Offline Language Learning Voice Recognition Sensor"
+        Voive_x64 = 0x64,
+
         //% block="0x68 Bosch BMX055 gyro (Calliope v1-2)"
         gyro_x68 = 0x68,
+
+        //% block="0x6F SparkFun Qwiic Button"
+        QButton_x6F = 0x6F, QButton_x6E = 0x6E, QButton_x6D = 0x6D, QButton_x6C = 0x6C,
+
+        //% block="0x70 SparkFun Qwiic Multiplexer - 8 Channel (TCA9548A)"
+        Multiplexer_x70 = 0x70,
 
         //% block="0x72 SparkFun 16x2 SerLCD - RGB Backlight (Qwiic)"
         LCD_16x2_x72 = 0x72,
