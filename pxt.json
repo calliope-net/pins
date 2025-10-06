@@ -11,7 +11,8 @@
         "README.md",
         "pins.ts",
         "i2c.ts",
-        "keyboards.ts"
+        "keyboards.ts",
+        "joystick.ts"
     ],
     "testFiles": [
         "test.ts"
@@ -23,5 +24,5 @@
     "supportedTargets": [
         "calliopemini"
     ],
-    "preferredEditor": "blocksprj"
+    "preferredEditor": "tsprj"
 }

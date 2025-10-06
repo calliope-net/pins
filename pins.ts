@@ -178,4 +178,33 @@ namespace pins { // pins.ts
         return buffer.toString()
     }
 
+
+
+    // ========== group="Buffer Funktionen" subcategory=Buffer
+
+    //% group="Buffer Funktionen" subcategory=Buffer
+    //% block="Buffer %buffer .length" weight=8
+    export function buffer_length(buffer: Buffer) {
+        return buffer.length
+    }
+
+    //% group="Buffer Funktionen" subcategory=Buffer
+    //% block="Buffer %buffer .concat(other %other)" weight=6
+    export function buffer_concat(buffer: Buffer, other: Buffer) {
+        return buffer.concat(other)
+    }
+
+    //% group="Buffer Funktionen" subcategory=Buffer
+    //% block="Buffer %buffer .slice(offset %offset length %length )" weight=4
+    export function buffer_slice(buffer: Buffer, offset: number, length: number) {
+        return buffer.slice(offset, length)
+    }
+
+    //% group="Buffer Funktionen" subcategory=Buffer
+    //% block="Buffer %buffer .chunked(maxSize %maxSize)" weight=2
+    export function buffer_chunked(buffer: Buffer, maxSize: number) {
+        return buffer.chunked(maxSize)
+    }
+
+
 } // pins.ts
