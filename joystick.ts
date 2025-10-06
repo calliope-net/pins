@@ -44,7 +44,6 @@ Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
     //% block="Joystick x || Nullstelle %nullstelle" weight=4
     //% nullstelle.defl=6
     export function get_x(nullstelle?: number) {
-        basic.showNumber(nullstelle)
         if (nullstelle && between(q_x, STOP - nullstelle, STOP + nullstelle))
             return STOP
         else
