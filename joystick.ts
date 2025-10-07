@@ -76,8 +76,8 @@ Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
 
     // ========== group="Raupensteuerung -1 .. 0 .. +1" subcategory="Joystick"
 
-    //% group="Raupensteuerung -1 .. 0 .. +1" subcategory="Joystick"
-    //% block="Raupensteuerung || PWM_MAX %pwm_max"
+    //% group="Raupensteuerung 0..128..255 | -MAX..0..+MAX" subcategory="Joystick"
+    //% block="Raupensteuerung [ml,mr] || PWM_MAX %pwm_max"
     export function raupensteuerung(pwm_max?: number): number[] {
         // 0 .. 128 .. 255 -> -1 .. 0 .. +1
         let x = (q_y * 2) / 255 - 1
@@ -116,6 +116,12 @@ Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
         if (pwm_max) {
             ml = Math.round(ml * pwm_max)
             mr = Math.round(mr * pwm_max)
+        }
+        else {
+            // 127,5 sollte mit round aus 128 aufgerundet werden
+            // sonst Math.ceil aufrunden auf 128, weil Nullstelle = 127,5
+            ml = Math.round(Math.map(ml, -1, 1, 0, 255))
+            mr = Math.round(Math.map(mr, -1, 1, 0, 255))
         }
         return [ml, mr]
     }
