@@ -41,7 +41,7 @@ Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
     // ========== group="Joystick Position 0 .. 128 .. 255" subcategory="Joystick"
 
     //% group="Joystick Position 0 .. 128 .. 255" subcategory="Joystick"
-    //% block="Joystick x || Nullstelle %nullstelle" weight=4
+    //% block="Joystick x || Stop bei 128 ±%nullstelle" weight=4
     //% nullstelle.defl=6
     export function get_x(nullstelle?: number) {
         if (nullstelle && between(q_x, STOP - nullstelle, STOP + nullstelle))
@@ -51,7 +51,7 @@ Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
     }
 
     //% group="Joystick Position 0 .. 128 .. 255" subcategory="Joystick"
-    //% block="Joystick y || Nullstelle %nullstelle" weight=3
+    //% block="Joystick y || Stop bei 128 ± %nullstelle" weight=3
     //% nullstelle.defl=6
     export function get_y(nullstelle?: number) {
         if (nullstelle && between(q_y, STOP - nullstelle, STOP + nullstelle))
@@ -71,6 +71,55 @@ Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
     //% group="Joystick Button" subcategory="Joystick"
     //% block="Button an/aus" weight=2
     export function get_button_on_off() { return q_button_on_off }
+
+
+
+    // ========== group="Raupensteuerung -1 .. 0 .. +1" subcategory="Joystick"
+
+    //% group="Raupensteuerung -1 .. 0 .. +1" subcategory="Joystick"
+    //% block="Raupensteuerung || PWM_MAX %pwm_max"
+    export function raupensteuerung(pwm_max?: number): number[] {
+        // 0 .. 128 .. 255 -> -1 .. 0 .. +1
+        let x = (q_y * 2) / 255 - 1
+        let y = (q_x * 2) / 255 - 1
+
+        // 3. Totzone (Deadband) joystick ±122..133 wird 0
+        const deadband = 0.05
+        if (Math.abs(x) < deadband)
+            x = 0
+        if (Math.abs(y) < deadband)
+            y = 0
+
+        /*
+        x:lenken (-1 links .. 0 .. +1 rechts)
+        y:fahren (-1 rückwärts .. 0 .. +1 vorwärts)
+        Berechnet linke und rechte Motorwerte aus
+        Joystick-Eingaben x, y im Bereich [-1.0, +1.0]
+        deadband: Schwelle, unterhalb derer das
+        Signal auf 0 gesetzt wird
+        ml, mr: Referenzen für die
+        Motor-Ausgangswerte im Bereich [-1.0, +1.0]
+        */
+        // 1. Rohmixing
+        let ml = y + x
+        let mr = y - x
+
+        // 2. Normalisierung(Skalierung), falls Werte außerhalb[-1, 1]
+        let maxv = Math.max(Math.abs(ml), Math.abs(mr))
+        if (maxv > 1) {
+            ml /= maxv
+            mr /= maxv
+        }
+        // 3. Totzone (Deadband) steht oben
+        // 4. Skalierung auf PWM - Bereich[-PWM_MAX.. + PWM_MAX]
+        //PWM_MAX = 512 für fischertechnik Controller
+        if (pwm_max) {
+            ml = Math.round(ml * pwm_max)
+            mr = Math.round(mr * pwm_max)
+        }
+        return [ml, mr]
+    }
+
 
 
 } // joystick.ts
