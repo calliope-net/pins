@@ -10,10 +10,11 @@ n_button_position = (JOYSTICK_BUFFER[4] == 0) # Current Button Position BUTTON 0
 Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
 */ {
 
-    const q_i2c: number = 0x20
-    const STOP = 128
-    const X_MSB = 3
-    const STATUS = 8
+    const q_i2c_joystick_x20 = 0x20
+    let q_i2c_joystick_connected = true
+    const STOP = 128 // Joystick Mittelstellung
+    const X_MSB = 3  // I²C Register
+    const STATUS = 8 // I²C Register
     let q_joystick_buffer: Buffer
     let q_x = STOP
     let q_y = STOP
@@ -26,13 +27,15 @@ Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
     //% group="in jeder Schleife aufrufen" subcategory="Joystick"
     //% block="Joystick einlesen"
     export function read_joystick() {
-        q_joystick_buffer = pins_i2cWriteReadBuffer(q_i2c, Buffer.fromArray([X_MSB]), 6)
-        q_x = q_joystick_buffer[0]
-        q_y = q_joystick_buffer[2]
-        q_button_position = q_joystick_buffer[4] == 0
-        if (q_joystick_buffer[5] == 1) { // Button Status: Indicates if button was pressed since last read of button state. Clears after read.
-            q_button_on_off = !q_button_on_off // OnOff umschalten
-            pins_i2cWriteBuffer(q_i2c, Buffer.fromArray([STATUS, 0]))
+        if (q_i2c_joystick_connected) {
+            q_joystick_buffer = pins_i2cWriteReadBuffer(q_i2c_joystick_x20, Buffer.fromArray([X_MSB]), 6)
+            q_x = q_joystick_buffer[0]
+            q_y = q_joystick_buffer[2]
+            q_button_position = q_joystick_buffer[4] == 0
+            if (q_joystick_buffer[5] == 1) { // Button Status: Indicates if button was pressed since last read of button state. Clears after read.
+                q_button_on_off = !q_button_on_off // OnOff umschalten
+                pins_i2cWriteBuffer(q_i2c_joystick_x20, Buffer.fromArray([STATUS, 0]))
+            }
         }
     }
 
@@ -71,6 +74,19 @@ Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
     //% group="Joystick Button" subcategory="Joystick"
     //% block="Button an/aus" weight=2
     export function get_button_on_off() { return q_button_on_off }
+
+
+
+    // ========== group="Qwiic Joystick (I²C 0x20)" subcategory="Joystick"
+
+    //% group="Qwiic Joystick (I²C 0x20)" subcategory="Joystick"
+    //% block="Joystick angeschlossen"
+    export function joystick_connected() {
+        q_i2c_joystick_connected = pins_i2cWriteBuffer(q_i2c_joystick_x20, Buffer.fromArray([0])) == 0
+        if (q_i2c_joystick_connected)
+            pins_i2cReadBuffer(q_i2c_joystick_x20, 1) // liest ID, aber wertet nicht aus
+        return q_i2c_joystick_connected
+    }
 
 
 

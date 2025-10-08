@@ -35,7 +35,7 @@ namespace pins { // pins.ts
         return pins.digitalReadPin(pin) == 1
     }
 
-    //% blockId=pins_DigitalPin 
+    //% blockId=pins_DigitalPin blockHidden=true
     //% group="Digital"
     //% block="DigitalPin %pin" weight=1
     export function pins_DigitalPin(pin: DigitalPin) {
@@ -46,7 +46,7 @@ namespace pins { // pins.ts
 
     // ========== group="Analog"
 
-    //% blockId=pins_AnalogPin
+    //% blockId=pins_AnalogPin blockHidden=true
     //% group="Analog"
     //% block="AnalogPin %pin" weight=1
     export function pins_AnalogPin(pin: AnalogPin) {
@@ -58,7 +58,7 @@ namespace pins { // pins.ts
     // ========== group="Servo"
 
     //% group="Servo"
-    //% block="Servo Pin %pin Winkel %winkel °" weight=2
+    //% block="Servo PWM %pin Winkel %winkel °" weight=2
     //% pin.shadow=pins_AnalogPin
     //% winkel.min=45 winkel.max=135 winkel.defl=90
     export function pinServo(pin: number, winkel: number) {
