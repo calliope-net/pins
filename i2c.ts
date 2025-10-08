@@ -168,10 +168,10 @@ namespace pins { // i2c.ts
     //% block="i2cWriteReadBuffer I²C %i2cAdresse Buffer %buf size %size" weight=7
     //% i2cAdresse.shadow=pins_i2cAdressen
     export function pins_i2cWriteReadBuffer(i2cAdresse: number, buf: Buffer, size: number) {
+        let buffer: Buffer
         if (pins.i2cWriteBuffer(i2cAdresse, buf, true) == 0)
-            return pins.i2cReadBuffer(i2cAdresse, size)
-        else
-            return Buffer.create(0)
+            buffer = pins.i2cReadBuffer(i2cAdresse, size)
+        return buffer
     }
 
 
