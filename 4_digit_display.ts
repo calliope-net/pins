@@ -19,11 +19,15 @@ namespace pins {/* 4_digit_display.ts
     //% block="beim Start Takt %clkPin Daten %dataPin" weight=9
     //% clkPin.defl=DigitalPin.C16 dataPin.defl=DigitalPin.C17
     export function createDisplay(clkPin: DigitalPin, dataPin: DigitalPin) {
+        qDisplayPins = []
         qDisplayPins.push([clkPin, dataPin])
     }
 
 
-    function segmente_anzeigen(seg_byte: number, stelle: number) {
+    //% group="Grove - 4-Digit Display" subcategory="4-Digit Display"
+    //% block="7 Segmente pgfedcba %seg_byte Stelle 3210 %stelle" weight=9
+    //% 
+    export function segmente_anzeigen(seg_byte: number, stelle: number) {
         // 76543210 seg_byte: Punkt p und 7 Segmente a..g 
         // pgfedcba
         let displayIndex = stelle >> 2
