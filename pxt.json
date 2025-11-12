@@ -12,7 +12,8 @@
         "pins.ts",
         "i2c.ts",
         "keyboards.ts",
-        "joystick.ts"
+        "joystick.ts",
+        "4_digit_display.ts"
     ],
     "testFiles": [
         "test.ts"
@@ -24,5 +25,5 @@
     "supportedTargets": [
         "calliopemini"
     ],
-    "preferredEditor": "tsprj"
+    "preferredEditor": "blocksprj"
 }
