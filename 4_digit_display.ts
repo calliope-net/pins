@@ -4,8 +4,9 @@ namespace pins {/* 4_digit_display.ts
 */
 
 
-    type DisplayPins<T> = [T, T]
-    let qDisplayPins: DisplayPins<DigitalPin>[]
+    //  type typeDisplayPins<T> = [T, T]
+    //  let qDisplayPins: typeDisplayPins<DigitalPin>[]
+    let qDisplayPins: DigitalPin[]
     let qBrightnessLevel = 5
 
     /*   const beispiel: DisplayPins<DigitalPin>[] = [
@@ -20,30 +21,44 @@ namespace pins {/* 4_digit_display.ts
     //% clkPin.defl=DigitalPin.C16 dataPin.defl=DigitalPin.C17
     export function createDisplay(clkPin: DigitalPin, dataPin: DigitalPin) {
         qDisplayPins = []
-        qDisplayPins.push([clkPin, dataPin])
+        // qDisplayPins.push([clkPin, dataPin])
+        qDisplayPins.push(clkPin)
+        qDisplayPins.push(dataPin)
+
+        basic.showNumber(qDisplayPins.length)
     }
+
+    //% group="Grove - 4-Digit Display" subcategory="4-Digit Display"
+    //% block="%Display löschen" weight=4
+    export function clear() {
+        segmente_anzeigen(0, 0x00);
+        segmente_anzeigen(0, 0x01);
+        segmente_anzeigen(0, 0x02);
+        segmente_anzeigen(0, 0x03);
+    }
+
 
 
     //% group="Grove - 4-Digit Display" subcategory="4-Digit Display"
     //% block="7 Segmente pgfedcba %seg_byte Stelle 3210 %stelle" weight=9
-    //% 
     export function segmente_anzeigen(seg_byte: number, stelle: number) {
         // 76543210 seg_byte: Punkt p und 7 Segmente a..g 
         // pgfedcba
-        let displayIndex = stelle >> 2
-        if (displayIndex < qDisplayPins.length) {
-            let clkPin: DigitalPin = qDisplayPins[displayIndex][0]
-            let dataPin: DigitalPin = qDisplayPins[displayIndex][1]
+        let displayIndex = 0//(stelle >> 2)
+        if (displayIndex + 1 < qDisplayPins.length) {
+
+            let clkPin: DigitalPin = qDisplayPins[0] // qDisplayPins[displayIndex][0]
+            let dataPin: DigitalPin = qDisplayPins[1] // qDisplayPins[displayIndex][1]
 
             start(clkPin, dataPin)
             writeByte(0x44, clkPin, dataPin)
             stop(clkPin, dataPin)
             start(clkPin, dataPin)
-            writeByte(0xc0 | (stelle & 0x03), clkPin, dataPin)
+            writeByte(0xc0 | 3 - (stelle & 0x03), clkPin, dataPin)
             writeByte(seg_byte, clkPin, dataPin)
             stop(clkPin, dataPin)
             start(clkPin, dataPin)
-            writeByte(0x88 | (qBrightnessLevel & 0x07), clkPin, dataPin)
+            writeByte(0x88 + (qBrightnessLevel & 0x07), clkPin, dataPin)
             stop(clkPin, dataPin)
         }
     }
@@ -79,6 +94,13 @@ namespace pins {/* 4_digit_display.ts
         pins.digitalWritePin(dataPin, 0);
         pins.digitalWritePin(clkPin, 1);
         pins.digitalWritePin(dataPin, 1);
+    }
+
+
+    //% group="Funktionen" subcategory="4-Digit Display"
+    //% block="Simulator" weight=7
+    export function simulator() {
+        return "€".charCodeAt(0) == 8364
     }
 
 
