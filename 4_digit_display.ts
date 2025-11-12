@@ -16,8 +16,10 @@ namespace pins {/* 4_digit_display.ts
         qDisplayPins = []
         qDisplayPins.push(clkPin)
         qDisplayPins.push(dataPin)
-        qDisplayPins.push(clkPin)
-        qDisplayPins.push(dataPin)
+        qDisplayPins.push(DigitalPin.P2)
+        qDisplayPins.push(DigitalPin.P3)
+        qDisplayPins.push(DigitalPin.P0)
+        qDisplayPins.push(DigitalPin.P1)
 
         basic.showNumber(qDisplayPins.length)
     }
@@ -42,11 +44,11 @@ namespace pins {/* 4_digit_display.ts
     export function segmente_anzeigen(seg_byte: number, stelle: number) {
         // 76543210 seg_byte: Punkt p und 7 Segmente a..g 
         // pgfedcba
-        let displayIndex = (stelle >> 3)
+        let displayIndex = (stelle >> 2)
         if (displayIndex + 1 < qDisplayPins.length && seg_byte >= 0x00 && seg_byte <= 0xFF) {
 
-            let clkPin: DigitalPin = qDisplayPins[displayIndex]
-            let dataPin: DigitalPin = qDisplayPins[displayIndex + 1]
+            let clkPin: DigitalPin = qDisplayPins[displayIndex * 2]
+            let dataPin: DigitalPin = qDisplayPins[displayIndex * 2 + 1]
 
             start(clkPin, dataPin)
             writeByte(0x44, clkPin, dataPin)
