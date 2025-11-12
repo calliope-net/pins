@@ -3,17 +3,10 @@ namespace pins {/* 4_digit_display.ts
 
 */
 
-
     //  type typeDisplayPins<T> = [T, T]
     //  let qDisplayPins: typeDisplayPins<DigitalPin>[]
     let qDisplayPins: DigitalPin[]
     let qBrightnessLevel = 5
-
-    /*   const beispiel: DisplayPins<DigitalPin>[] = [
-          [1, 2],       // Tupel mit zwei Zahlen
-          [3, 4, 5],    // Array mit mehreren Zahlen
-          [6, 6],       // Auch ein gültiges Paar
-      ]; */
 
 
     //% group="Grove - 4-Digit Display" subcategory="4-Digit Display"
@@ -21,7 +14,6 @@ namespace pins {/* 4_digit_display.ts
     //% clkPin.defl=DigitalPin.C16 dataPin.defl=DigitalPin.C17
     export function createDisplay(clkPin: DigitalPin, dataPin: DigitalPin) {
         qDisplayPins = []
-        // qDisplayPins.push([clkPin, dataPin])
         qDisplayPins.push(clkPin)
         qDisplayPins.push(dataPin)
         qDisplayPins.push(clkPin)
@@ -31,26 +23,30 @@ namespace pins {/* 4_digit_display.ts
     }
 
     //% group="Grove - 4-Digit Display" subcategory="4-Digit Display"
-    //% block="%Display löschen" weight=4
+    //% block="%Display löschen" weight=8
     export function clear() {
-        segmente_anzeigen(0, 0x00);
-        segmente_anzeigen(0, 0x01);
-        segmente_anzeigen(0, 0x02);
-        segmente_anzeigen(0, 0x03);
+        for (let i = 0; i < qDisplayPins.length * 2; i++) {
+            segmente_anzeigen(0, i)
+        }
+        /* 
+                segmente_anzeigen(0, 0x00);
+                segmente_anzeigen(0, 0x01);
+                segmente_anzeigen(0, 0x02);
+                segmente_anzeigen(0, 0x03); */
     }
 
 
 
     //% group="Grove - 4-Digit Display" subcategory="4-Digit Display"
-    //% block="7 Segmente pgfedcba %seg_byte Stelle 3210 %stelle" weight=9
+    //% block="7 Segmente pgfedcba %seg_byte Stelle 3210 %stelle" weight=6
     export function segmente_anzeigen(seg_byte: number, stelle: number) {
         // 76543210 seg_byte: Punkt p und 7 Segmente a..g 
         // pgfedcba
         let displayIndex = (stelle >> 3)
-        if (displayIndex + 1 < qDisplayPins.length) {
+        if (displayIndex + 1 < qDisplayPins.length && seg_byte >= 0x00 && seg_byte <= 0xFF) {
 
-            let clkPin: DigitalPin = qDisplayPins[displayIndex] 
-            let dataPin: DigitalPin = qDisplayPins[displayIndex + 1] 
+            let clkPin: DigitalPin = qDisplayPins[displayIndex]
+            let dataPin: DigitalPin = qDisplayPins[displayIndex + 1]
 
             start(clkPin, dataPin)
             writeByte(0x44, clkPin, dataPin)
