@@ -10,8 +10,8 @@
         "main.ts",
         "README.md",
         "pins.ts",
-        "4_digit_display.ts",
         "i2c.ts",
+        "4_digit_display.ts",
         "keyboards.ts",
         "joystick.ts"
     ],
