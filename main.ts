@@ -9,5 +9,5 @@ if (!(pins.simulator())) {
     pins.d4CreateDisplay(pins.pins_DigitalPin(DigitalPin.P2), pins.pins_DigitalPin(DigitalPin.P3), true)
     pins.d4CreateDisplay(pins.pins_DigitalPin(DigitalPin.P0), pins.pins_DigitalPin(DigitalPin.P1), true)
     pins.d4Clear()
-    pins.d7String("-127 °C")
+    pins.d7String("-127 -+b °C")
 }

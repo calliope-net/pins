@@ -51,16 +51,18 @@ namespace pins {/* 4_digit_display.ts
             for (let i = 0; i < hex_string.length; i++) {
                 let ci = hex_string.charAt(i) // 1 Zeichen aus hex_string (char)
                 let hi = parseInt(ci, 16) // HEX Wert 0..15 oder NaN
-                if (!Number.isNaN(hi))
+                if (ci =="-")
+                    d7_array.push(0b01000000)  // Minus - (- und + wird 0 bei parseInt16)
+                else if ( ci == "+")
+                    d7_array.push(0b01110000)  // Plus +
+                else if (ci == " " )
+                    d7_array.push(0b00000000)  // Leerzeichen
+                else if (!Number.isNaN(hi))
                     d7_array.push([
                         0x3f, 0x06, 0x5b, 0x4f, 0x66, 0x6d, 0x7d, 0x07, // 0 1 2 3 4 5 6 7
                         0x7f, 0x6f, 0x77, 0x7c, 0x39, 0x5e, 0x79, 0x71 // 8 9 A b C d E F
                     ][hi]) // HEX Wert 0..15
-                else if (ci == ' ')
-                    d7_array.push(0b00000000)  // Leerzeichen
-                else if (ci == '-')
-                    d7_array.push(0b01000000)  // Minus -
-                else if (ci == '°')
+                else if (ci == "°")
                     d7_array.push(0b01100011)  // Grad °
                 else // bei allen ungültigen Zeichen kein push
                     d7_array[d7_array.length - 1] |= 0x80 // Doppelpunkt bei letzter Ziffer an schalten
@@ -68,6 +70,7 @@ namespace pins {/* 4_digit_display.ts
             while (len && d7_array.length < len) {
                 d7_array.push(0x3f) // Ziffer 0 nach links anhängen
             }
+            d7_array.reverse()
             d7SegmentArray(d7_array)
         }
     }
