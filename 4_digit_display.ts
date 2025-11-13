@@ -20,10 +20,10 @@ namespace pins {/* 4_digit_display.ts
         qDisplayPins.push(dataPin)
     }
 
-    //% group="Grove - 4-Digit Display" subcategory="4-Digit Display"
-    //% block="beim Start Takt %clkPin Daten %dataPin" weight=9
-    //% clkPin.defl=DigitalPin.C16 dataPin.defl=DigitalPin.C17
-    export function createDisplay(clkPin: DigitalPin, dataPin: DigitalPin) {
+    // group="Grove - 4-Digit Display" subcategory="4-Digit Display"
+    // block="beim Start Takt %clkPin Daten %dataPin" weight=9
+    // clkPin.defl=DigitalPin.C16 dataPin.defl=DigitalPin.C17
+    /* export function createDisplay(clkPin: DigitalPin, dataPin: DigitalPin) {
         qDisplayPins = []
         qDisplayPins.push(clkPin)
         qDisplayPins.push(dataPin)
@@ -33,25 +33,20 @@ namespace pins {/* 4_digit_display.ts
         qDisplayPins.push(DigitalPin.P1)
 
         basic.showNumber(qDisplayPins.length)
-    }
+    } */
 
     //% group="Grove - 4-Digit Display" subcategory="4-Digit Display"
-    //% block="%Display löschen" weight=8
-    export function clear() {
+    //% block="Displays löschen" weight=8
+    export function d4Clear() {
         for (let i = 0; i < qDisplayPins.length * 2; i++) {
             segmente_anzeigen(0, i)
         }
-        /* 
-                segmente_anzeigen(0, 0x00);
-                segmente_anzeigen(0, 0x01);
-                segmente_anzeigen(0, 0x02);
-                segmente_anzeigen(0, 0x03); */
     }
 
 
 
-    //% group="Grove - 4-Digit Display" subcategory="4-Digit Display"
-    //% block="7 Segmente pgfedcba %seg_byte Stelle 3210 %stelle" weight=6
+    //% group="Punkt und 7 Segmente pgfedcba" subcategory="4-Digit Display"
+    //% block="7 Segment Byte %seg_byte Stelle ←3210 %stelle" weight=6
     export function segmente_anzeigen(seg_byte: number, stelle: number) {
         // 76543210 seg_byte: Punkt p und 7 Segmente a..g 
         // pgfedcba
@@ -80,31 +75,32 @@ namespace pins {/* 4_digit_display.ts
     function writeByte(wrData: number, clkPin: DigitalPin, dataPin: DigitalPin) {
         for (let i = 0; i < 8; i++) {
             pins.digitalWritePin(clkPin, 0)
-            if (wrData & 0x01)
+            pins.digitalWritePin(dataPin, wrData & 0x01)
+           /*  if (wrData & 0x01)
                 pins.digitalWritePin(dataPin, 1)
             else
-                pins.digitalWritePin(dataPin, 0)
+                pins.digitalWritePin(dataPin, 0) */
             wrData >>= 1
             pins.digitalWritePin(clkPin, 1)
         }
 
-        pins.digitalWritePin(clkPin, 0); // Wait for ACK
-        pins.digitalWritePin(dataPin, 1);
-        pins.digitalWritePin(clkPin, 1);
+        pins.digitalWritePin(clkPin, 0) // Wait for ACK
+        pins.digitalWritePin(dataPin, 1)
+        pins.digitalWritePin(clkPin, 1)
     }
 
     function start(clkPin: DigitalPin, dataPin: DigitalPin) {
-        pins.digitalWritePin(clkPin, 1);
-        pins.digitalWritePin(dataPin, 1);
-        pins.digitalWritePin(dataPin, 0);
-        pins.digitalWritePin(clkPin, 0);
+        pins.digitalWritePin(clkPin, 1)
+        pins.digitalWritePin(dataPin, 1)
+        pins.digitalWritePin(dataPin, 0)
+        pins.digitalWritePin(clkPin, 0)
     }
 
     function stop(clkPin: DigitalPin, dataPin: DigitalPin) {
-        pins.digitalWritePin(clkPin, 0);
-        pins.digitalWritePin(dataPin, 0);
-        pins.digitalWritePin(clkPin, 1);
-        pins.digitalWritePin(dataPin, 1);
+        pins.digitalWritePin(clkPin, 0)
+        pins.digitalWritePin(dataPin, 0)
+        pins.digitalWritePin(clkPin, 1)
+        pins.digitalWritePin(dataPin, 1)
     }
 
 
