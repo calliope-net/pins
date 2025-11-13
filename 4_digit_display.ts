@@ -56,6 +56,8 @@ namespace pins {/* 4_digit_display.ts
                         0x3f, 0x06, 0x5b, 0x4f, 0x66, 0x6d, 0x7d, 0x07, // 0 1 2 3 4 5 6 7
                         0x7f, 0x6f, 0x77, 0x7c, 0x39, 0x5e, 0x79, 0x71 // 8 9 A b C d E F
                     ][hi]) // HEX Wert 0..15
+                else if (ci == ' ')
+                    d7_array.push(0b00000000)  // Leerzeichen
                 else if (ci == '-')
                     d7_array.push(0b01000000)  // Minus -
                 else if (ci == '°')
