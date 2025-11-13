@@ -39,15 +39,48 @@ namespace pins {/* 4_digit_display.ts
     //% block="Displays löschen" weight=8
     export function d4Clear() {
         for (let i = 0; i < qDisplayPins.length * 2; i++) {
-            segmente_anzeigen(0, i)
+            d7SegmentByte(0, i)
         }
     }
 
+    //% group="hexadezimal" subcategory="4-Digit Display"
+    //% block="%Display HEX anzeigen %hex_string || %len Ziffern" weight=9
+    //% display0.shadow=toggleYesNo
+    export function d7String(hex_string: string, len?: number) {
+        if (hex_string) {
+            let d7_array: number[] = []
+            for (let i = 0; i < hex_string.length; i++) {
+                let ci = hex_string.charAt(i) // 1 Zeichen aus hex_string (char)
+                let hi = parseInt(ci, 16) // HEX Wert 0..15 oder NaN
+                if (!Number.isNaN(hi))
+                    d7_array.push([
+                        0x3f, 0x06, 0x5b, 0x4f, 0x66, 0x6d, 0x7d, 0x07, // 0 1 2 3 4 5 6 7
+                        0x7f, 0x6f, 0x77, 0x7c, 0x39, 0x5e, 0x79, 0x71 // 8 9 A b C d E F
+                    ][hi]) // HEX Wert 0..15
+                else if (ci == '-')
+                    d7_array.push(0b01000000)  // Minus -
+                else if (ci == '°')
+                    d7_array.push(0b01100011)  // Grad °
+                else // bei allen ungültigen Zeichen kein push
+                    d7_array[d7_array.length - 1] |= 0x80 // Doppelpunkt bei letzter Ziffer an schalten
+            }
+            d7SegmentArray(d7_array)
+        }
+    }
 
+    //% group="Punkt und 7 Segmente pgfedcba" subcategory="4-Digit Display"
+    //% block="7 Segment Array %seg_array" weight=7
+    export function d7SegmentArray(seg_array: number[]) {
+        if (seg_array) {
+            for (let i = 0; i < seg_array.length; i++) {
+                d7SegmentByte(seg_array[i], i)
+            }
+        }
+    }
 
     //% group="Punkt und 7 Segmente pgfedcba" subcategory="4-Digit Display"
     //% block="7 Segment Byte %seg_byte Stelle ←3210 %stelle" weight=6
-    export function segmente_anzeigen(seg_byte: number, stelle: number) {
+    export function d7SegmentByte(seg_byte: number, stelle: number) {
         // 76543210 seg_byte: Punkt p und 7 Segmente a..g 
         // pgfedcba
         let displayIndex = (stelle >> 2) * 2
@@ -76,10 +109,10 @@ namespace pins {/* 4_digit_display.ts
         for (let i = 0; i < 8; i++) {
             pins.digitalWritePin(clkPin, 0)
             pins.digitalWritePin(dataPin, wrData & 0x01)
-           /*  if (wrData & 0x01)
-                pins.digitalWritePin(dataPin, 1)
-            else
-                pins.digitalWritePin(dataPin, 0) */
+            /*  if (wrData & 0x01)
+                 pins.digitalWritePin(dataPin, 1)
+             else
+                 pins.digitalWritePin(dataPin, 0) */
             wrData >>= 1
             pins.digitalWritePin(clkPin, 1)
         }
