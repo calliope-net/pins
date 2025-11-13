@@ -69,11 +69,11 @@ namespace pins {/* 4_digit_display.ts
             }
             if (stelle < 0 || stelle > qDisplayPins.length * 2) // Parameter %stelle Gültigkeit testen
                 stelle = 0
-            while (d7_array.length < stelle) {
+            for (let i = 0; i < stelle; i++) {
                 d7_array.push(undefined) // von rechts Stellen überspringen
             }
             d7_array.reverse()
-            while (len && d7_array.length < Math.abs(len) - stelle) {
+            while (len && d7_array.length < Math.abs(len) + stelle) {
                 d7_array.push(len < 0 ? 0x3f : 0x00) // Leerzeichen oder Ziffer 0 nach links anhängen
             }
             d7SegmentArray(d7_array)
