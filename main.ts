@@ -1,4 +1,5 @@
 input.onButtonEvent(Button.B, input.buttonEventClick(), function () {
+    pins.d4CreateDisplay(pins.pins_DigitalPin(DigitalPin.C16), pins.pins_DigitalPin(DigitalPin.C17), false)
     pins.clear()
 })
 if (!(pins.simulator())) {

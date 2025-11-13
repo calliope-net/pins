@@ -37,7 +37,7 @@ namespace pins { // pins.ts
 
     //% blockId=pins_DigitalPin blockHidden=true
     //% group="Digital"
-    //% block="DigitalPin %pin" weight=1
+    //% block="%pin" weight=1
     export function pins_DigitalPin(pin: DigitalPin) {
         return pin
     }
