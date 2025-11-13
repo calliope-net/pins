@@ -9,7 +9,7 @@ namespace pins {/* 4_digit_display.ts
     let qBrightnessLevel = 5
 
 
-    //% group="Grove - 4-Digit Display" subcategory="4-Digit Display"
+    //% group="Grove - 4-Digit Display" subcategory="4-Digit Displays"
     //% block="beim Start CLK %clkPin DIO %dataPin || + 4 Ziffern %addDisplay" weight=9
     //% clkPin.shadow=pins_DigitalPin dataPin.shadow=pins_DigitalPin addDisplay.shadow=toggleYesNo
     //% clkPin.defl=DigitalPin.C16 dataPin.defl=DigitalPin.C17
@@ -20,7 +20,7 @@ namespace pins {/* 4_digit_display.ts
         qDisplayPins.push(dataPin)
     }
 
-    // group="Grove - 4-Digit Display" subcategory="4-Digit Display"
+    // group="Grove - 4-Digit Display" subcategory="4-Digit Displays"
     // block="beim Start Takt %clkPin Daten %dataPin" weight=9
     // clkPin.defl=DigitalPin.C16 dataPin.defl=DigitalPin.C17
     /* export function createDisplay(clkPin: DigitalPin, dataPin: DigitalPin) {
@@ -35,7 +35,7 @@ namespace pins {/* 4_digit_display.ts
         basic.showNumber(qDisplayPins.length)
     } */
 
-    //% group="Grove - 4-Digit Display" subcategory="4-Digit Display"
+    //% group="Grove - 4-Digit Display" subcategory="4-Digit Displays"
     //% block="Displays löschen" weight=8
     export function d4Clear() {
         for (let i = 0; i < qDisplayPins.length * 2; i++) {
@@ -43,19 +43,19 @@ namespace pins {/* 4_digit_display.ts
         }
     }
 
-    //% group="hexadezimal" subcategory="4-Digit Display"
-    //% block="HEX anzeigen %hex_string || %len Ziffern" weight=9
-    export function d7String(hex_string: string, len?: number) {
+    //% group="Zeichen 0123456789AbCdEF +-°" subcategory="4-Digit Displays"
+    //% block="HEX anzeigen %hex_string || ab %stelle %len Ziffern" weight=9
+    export function d7String(hex_string: string, stelle?: number, len?: number) {
         if (hex_string) {
             let d7_array: number[] = []
             for (let i = 0; i < hex_string.length; i++) {
                 let ci = hex_string.charAt(i) // 1 Zeichen aus hex_string (char)
                 let hi = parseInt(ci, 16) // HEX Wert 0..15 oder NaN
-                if (ci =="-")
+                if (ci == "-")
                     d7_array.push(0b01000000)  // Minus - (- und + wird 0 bei parseInt16)
-                else if ( ci == "+")
+                else if (ci == "+")
                     d7_array.push(0b01110000)  // Plus +
-                else if (ci == " " )
+                else if (ci == " ")
                     d7_array.push(0b00000000)  // Leerzeichen
                 else if (!Number.isNaN(hi))
                     d7_array.push([
@@ -67,15 +67,20 @@ namespace pins {/* 4_digit_display.ts
                 else // bei allen ungültigen Zeichen kein push
                     d7_array[d7_array.length - 1] |= 0x80 // Doppelpunkt bei letzter Ziffer an schalten
             }
-            while (len && d7_array.length < len) {
-                d7_array.push(0x3f) // Ziffer 0 nach links anhängen
+            if (stelle < 0 || stelle > qDisplayPins.length * 2) // Parameter %stelle Gültigkeit testen
+                stelle = 0
+            while (d7_array.length < stelle) {
+                d7_array.push(undefined) // von rechts Stellen überspringen
             }
             d7_array.reverse()
+            while (len && d7_array.length < Math.abs(len) - stelle) {
+                d7_array.push(len < 0 ? 0x3f : 0x00) // Leerzeichen oder Ziffer 0 nach links anhängen
+            }
             d7SegmentArray(d7_array)
         }
     }
 
-    //% group="Punkt und 7 Segmente pgfedcba" subcategory="4-Digit Display"
+    //% group="Punkt und 7 Segmente pgfedcba" subcategory="4-Digit Displays"
     //% block="7 Segment Array %seg_array" weight=7
     export function d7SegmentArray(seg_array: number[]) {
         if (seg_array) {
@@ -85,7 +90,7 @@ namespace pins {/* 4_digit_display.ts
         }
     }
 
-    //% group="Punkt und 7 Segmente pgfedcba" subcategory="4-Digit Display"
+    //% group="Punkt und 7 Segmente pgfedcba" subcategory="4-Digit Displays"
     //% block="7 Segment Byte %seg_byte Stelle ←3210 %stelle" weight=6
     export function d7SegmentByte(seg_byte: number, stelle: number) {
         // 76543210 seg_byte: Punkt p und 7 Segmente a..g 
@@ -144,7 +149,7 @@ namespace pins {/* 4_digit_display.ts
     }
 
 
-    //% group="Funktionen" subcategory="4-Digit Display"
+    //% group="Funktionen" subcategory="4-Digit Displays"
     //% block="Simulator" weight=7
     export function simulator() {
         return "€".charCodeAt(0) == 8364
