@@ -44,8 +44,7 @@ namespace pins {/* 4_digit_display.ts
     }
 
     //% group="hexadezimal" subcategory="4-Digit Display"
-    //% block="%Display HEX anzeigen %hex_string || %len Ziffern" weight=9
-    //% display0.shadow=toggleYesNo
+    //% block="HEX anzeigen %hex_string || %len Ziffern" weight=9
     export function d7String(hex_string: string, len?: number) {
         if (hex_string) {
             let d7_array: number[] = []
@@ -63,6 +62,9 @@ namespace pins {/* 4_digit_display.ts
                     d7_array.push(0b01100011)  // Grad °
                 else // bei allen ungültigen Zeichen kein push
                     d7_array[d7_array.length - 1] |= 0x80 // Doppelpunkt bei letzter Ziffer an schalten
+            }
+            while (len && d7_array.length < len) {
+                d7_array.push(0x3f) // Ziffer 0 nach links anhängen
             }
             d7SegmentArray(d7_array)
         }

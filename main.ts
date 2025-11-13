@@ -1,5 +1,8 @@
 input.onButtonEvent(Button.B, input.buttonEventClick(), function () {
-	
+    let list: number[] = []
+    while (list.length < 8) {
+        list.push(0)
+    }
 })
 if (!(pins.simulator())) {
     pins.d4CreateDisplay(pins.pins_DigitalPin(DigitalPin.C16), pins.pins_DigitalPin(DigitalPin.C17))
