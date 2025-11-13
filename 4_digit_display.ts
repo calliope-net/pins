@@ -10,7 +10,7 @@ namespace pins {/* 4_digit_display.ts
 
 
     //% group="Grove - 4-Digit Display" subcategory="4-Digit Display"
-    //% block="beim Start CLK %clkPin DIO %dataPin || add %addDisplay" weight=9
+    //% block="beim Start CLK %clkPin DIO %dataPin || + 4 Ziffern %addDisplay" weight=9
     //% clkPin.shadow=pins_DigitalPin dataPin.shadow=pins_DigitalPin addDisplay.shadow=toggleYesNo
     //% clkPin.defl=DigitalPin.C16 dataPin.defl=DigitalPin.C17
     export function d4CreateDisplay(clkPin: number, dataPin: number, addDisplay = false) {
