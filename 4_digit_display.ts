@@ -72,7 +72,7 @@ namespace pins {/* 4_digit_display.ts
                 if (ci == "-")
                     d7_array.push(0b01000000)  // Minus - (- und + wird 0 bei parseInt16)
                 else if (ci == "+")
-                    d7_array.push(0b01110000)  // Plus +
+                    d7_array.push(0b01110000)  // halbes Plus +
                 else if (ci == " ")
                     d7_array.push(0b00000000)  // Leerzeichen
                 else if (!Number.isNaN(hi))
@@ -172,7 +172,7 @@ namespace pins {/* 4_digit_display.ts
     //% block="7 Segment Byte %seg_byte Ziffer %stelle ←3210" weight=6
     //% stelle.min=0 stelle.max=15
     export function d7SegmentByte(seg_byte: number, stelle: number) {
-        // 76543210 seg_byte: Punkt p und 7 Segmente a..g 
+        // 76543210 seg_byte Doppelpunkt : und 7 Segmente g..a
         // :gfedcba
         let displayIndex = stelle >> 2
         let displayPinsIndex = displayIndex * 2 // 2 Pins pro Display im Array
@@ -204,10 +204,6 @@ namespace pins {/* 4_digit_display.ts
         for (let i = 0; i < 8; i++) {
             pins.digitalWritePin(clkPin, 0)
             pins.digitalWritePin(dataPin, wrData & 0x01)
-            /*  if (wrData & 0x01)
-                 pins.digitalWritePin(dataPin, 1)
-             else
-                 pins.digitalWritePin(dataPin, 0) */
             wrData >>= 1
             pins.digitalWritePin(clkPin, 1)
         }
