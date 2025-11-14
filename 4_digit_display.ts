@@ -31,7 +31,11 @@ namespace pins {/* 4_digit_display.ts
         }
     }
 
-    //% group="Zeichen 0123456789AbCdEF +-°" subcategory="4-Digit Displays"
+
+
+    // ========== group="Zeichen 0123456789AbCdEF hHLPU +-°" subcategory="4-Digit Displays"
+
+    //% group="Zeichen 0123456789AbCdEF hHLPU +-°" subcategory="4-Digit Displays"
     //% block="zeige Text %hex_string || von rechts %stelle Länge %len Ziffern" weight=9
     //% len.min=-8 len.max=8
     export function d7String(hex_string: string, stelle?: number, len?: number) {
@@ -53,6 +57,16 @@ namespace pins {/* 4_digit_display.ts
                     ][hi]) // HEX Wert 0..15
                 else if (ci == "°")
                     d7_array.push(0b01100011)  // Grad °
+                else if (ci == "H")
+                    d7_array.push(0b01110110)  // H
+                else if (ci == "h")
+                    d7_array.push(0b01110100)  // h
+                else if (ci == "L")
+                    d7_array.push(0b00111000)  // L
+                else if (ci == "P")
+                    d7_array.push(0b01110011)  // P
+                else if (ci == "U")
+                    d7_array.push(0b00111110)  // U
                 else // bei allen ungültigen Zeichen kein push
                     d7_array[d7_array.length - 1] |= 0x80 // Doppelpunkt bei letzter Ziffer an schalten
             }
@@ -69,33 +83,41 @@ namespace pins {/* 4_digit_display.ts
         }
     }
 
-    //% group="Zeichen 0123456789AbCdEF +-°" subcategory="4-Digit Displays"
+    //% group="Zeichen 0123456789AbCdEF hHLPU +-°" subcategory="4-Digit Displays"
     //% block="Zahl %n → Text" weight=6
     export function toText(n: number): string {
         return n.toString()
     }
 
 
-    //% group="Zeichen 0123456789AbCdEF +-°" subcategory="4-Digit Displays"
-    //% block="Zahl %n → HEX" weight=5
-    export function toHex(n: number): string {
+    //% group="Zeichen 0123456789AbCdEF hHLPU +-°" subcategory="4-Digit Displays"
+    //% block="Zahl %n → HEX || %h" weight=5
+    //% h.defl=h
+    export function toHex(n: number, h?: string): string {
         let hex = ""
         do {
             hex = "0123456789AbCdEF".charAt(n % 16) + hex
             n >>= 4 //   n = Math.idiv(n, 16) // Integer-Division in MakeCode
         } while (n > 0)
-        return hex
+        if (h)
+            return h + hex
+        else
+            return hex
     }
 
-    //% group="Zeichen 0123456789AbCdEF +-°" subcategory="4-Digit Displays"
-    //% block="Zahl %n → BIN" weight=4
-    export function toBin(n: number): string {
+    //% group="Zeichen 0123456789AbCdEF hHLPU +-°" subcategory="4-Digit Displays"
+    //% block="Zahl %n → BIN || %b" weight=4
+    //% b.defl=b
+    export function toBin(n: number, b?: string): string {
         let bin = ""
         do {
             bin = "01".charAt(n % 2) + bin
             n = n >> 1
         } while (n > 0)
-        return bin
+        if (b)
+            return b + bin
+        else
+            return bin
     }
 
 
@@ -170,7 +192,6 @@ namespace pins {/* 4_digit_display.ts
         pins.digitalWritePin(clkPin, 1)
         pins.digitalWritePin(dataPin, 1)
     }
-
 
 
 
