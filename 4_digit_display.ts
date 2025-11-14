@@ -41,6 +41,7 @@ namespace pins {/* 4_digit_display.ts
     //% group="Grove - 4-Digit Display TM1637" subcategory="4-Digit Displays"
     //% block="zeige Zahl %zahl" weight=5
     export function zeigeZahl(zahl: number) {
+        clearDisplays()
         zeigeText(zahl.toString())
     }
 
