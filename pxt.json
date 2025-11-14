@@ -13,7 +13,8 @@
         "4_digit_display.ts",
         "i2c.ts",
         "keyboards.ts",
-        "joystick.ts"
+        "joystick.ts",
+        "functions.ts"
     ],
     "testFiles": [
         "test.ts"

@@ -228,7 +228,7 @@ namespace pins { // i2c.ts
         return Buffer.fromArray(i2cScan(von_i2cAdresse, bis_i2cAdresse, ms)).toHex()
     }
 
-
+/* 
 
     // ========== group="Funktionen" subcategory=I²C
 
@@ -270,5 +270,5 @@ namespace pins { // i2c.ts
         return Number.isNaN(variable)
     }
 
-
+ */
 } // i2c.ts
