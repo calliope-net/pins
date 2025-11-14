@@ -10,11 +10,11 @@
         "main.ts",
         "README.md",
         "pins.ts",
+        "functions.ts",
         "4_digit_display.ts",
         "i2c.ts",
         "keyboards.ts",
-        "joystick.ts",
-        "functions.ts"
+        "joystick.ts"
     ],
     "testFiles": [
         "test.ts"
