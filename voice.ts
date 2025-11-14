@@ -4,6 +4,7 @@ Am Anfang muss man das Wake-up word:
 "Hello robot" sagen, dann geht die blaue LED an.
 Jetzt erkennt der Sensor diese Begriffe
 und gibt mit voice_read_cmdid() die ID zurück:
+
 command_list = [
     # Wake-up words	1..2
     '0', # 0
@@ -155,13 +156,47 @@ command_list = [
 */
     const voice_I2C_ADDRESS = 0x64
     const voice_DF2301Q_I2C_REG_CMDID = 0x02
+    const voice_DF2301Q_I2C_REG_PLAY_CMDID = 0x03
+    const voice_DF2301Q_I2C_REG_SET_MUTE = 0x04
+    const voice_DF2301Q_I2C_REG_SET_VOLUME = 0x05
+    const voice_DF2301Q_I2C_REG_WAKE_TIME = 0x06
 
+
+
+    // ========== group="Gravity: Voice Recognition Sensor" subcategory="Spracherkennung"
 
     //% group="Gravity: Voice Recognition Sensor" subcategory="Spracherkennung"
     //% block="Kommando ID" weight=7
     export function voice_read_cmdid(): number {
         let bu = pins_i2cWriteReadBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_DF2301Q_I2C_REG_CMDID]), 1)
         return bu[0]
+    }
+
+    //% group="Gravity: Voice Recognition Sensor" subcategory="Spracherkennung"
+    //% block="spiele Antwort ID %id" weight=5
+    export function voice_play_cmdid(id: number) {
+        pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_DF2301Q_I2C_REG_PLAY_CMDID, id]))
+    }
+
+
+
+    // ========== group="Konfiguration" subcategory="Spracherkennung"
+
+    //% group="Konfiguration" subcategory="Spracherkennung"
+    //% block="Wachzeit %sekunden Sekunden" weight=7
+    //% sekunden.min=5 sekunden.max=60 sekunden.defl=15
+    export function voice_waketime(sekunden: number) {
+        pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_DF2301Q_I2C_REG_WAKE_TIME, sekunden]))
+    }
+
+    //% group="Konfiguration" subcategory="Spracherkennung"
+    //% block="Lautsprecher %on Lautstärke %volume" weight=5
+    //% on.shadow=toggleOnOff
+    //% volume.min=5 volume.max=15 volume.defl=15
+    export function voice_speaker(on: boolean, volume: number) { // true = Mute = aus
+        pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_DF2301Q_I2C_REG_SET_MUTE, on ? 0 : 1]))
+        if (on)
+            pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_DF2301Q_I2C_REG_SET_VOLUME, volume]))
     }
 
 
