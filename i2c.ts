@@ -240,14 +240,28 @@ namespace pins { // i2c.ts
     //% text.shadow="pins_text"
     export function comment(text: any): void { }
 
+
+    //% group="Funktionen" subcategory=I²C
+    //% block="Simulator" weight=7
+    export function simulator() {
+        return "€".charCodeAt(0) == 8364
+    }
+
     //% group="Funktionen" subcategory=I²C
     //% block="%i0 zwischen %i1 und %i2" weight=4
     export function between(i0: number, i1: number, i2: number): boolean { return (i0 >= i1 && i0 <= i2) }
 
     //% group="Funktionen" subcategory=I²C
-    //% block="is undefined %variable" weight=3
-    export function isundefined(variable: any) {
-        return variable == undefined
+    //% block="%variable === undefined" weight=3
+    export function isundefined(variable: any): boolean {
+        return (variable === undefined)
     }
+
+    //% group="Funktionen" subcategory=I²C
+    //% block="Number.isNaN(%variable)" weight=2
+    export function isnan(variable: any): boolean {
+        return Number.isNaN(variable)
+    }
+
 
 } // i2c.ts

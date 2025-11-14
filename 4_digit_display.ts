@@ -14,26 +14,14 @@ namespace pins {/* 4_digit_display.ts
     //% clkPin.shadow=pins_DigitalPin dataPin.shadow=pins_DigitalPin addDisplay.shadow=toggleYesNo
     //% clkPin.defl=DigitalPin.C16 dataPin.defl=DigitalPin.C17
     export function d4CreateDisplay(clkPin: number, dataPin: number, addDisplay = false) {
-        if (!addDisplay)
+        if (!addDisplay || !qDisplayPins)
             qDisplayPins = []
         qDisplayPins.push(clkPin)
         qDisplayPins.push(dataPin)
+        d7String("FEdCbA9876543210")
     }
 
-    // group="Grove - 4-Digit Display" subcategory="4-Digit Displays"
-    // block="beim Start Takt %clkPin Daten %dataPin" weight=9
-    // clkPin.defl=DigitalPin.C16 dataPin.defl=DigitalPin.C17
-    /* export function createDisplay(clkPin: DigitalPin, dataPin: DigitalPin) {
-        qDisplayPins = []
-        qDisplayPins.push(clkPin)
-        qDisplayPins.push(dataPin)
-        qDisplayPins.push(DigitalPin.P2)
-        qDisplayPins.push(DigitalPin.P3)
-        qDisplayPins.push(DigitalPin.P0)
-        qDisplayPins.push(DigitalPin.P1)
-
-        basic.showNumber(qDisplayPins.length)
-    } */
+  
 
     //% group="Grove - 4-Digit Display" subcategory="4-Digit Displays"
     //% block="Displays löschen" weight=8
@@ -67,7 +55,7 @@ namespace pins {/* 4_digit_display.ts
                 else // bei allen ungültigen Zeichen kein push
                     d7_array[d7_array.length - 1] |= 0x80 // Doppelpunkt bei letzter Ziffer an schalten
             }
-            if (stelle < 0 || stelle > qDisplayPins.length * 2) // Parameter %stelle Gültigkeit testen
+            if (!stelle || stelle < 0 || stelle > qDisplayPins.length * 2) // Parameter %stelle Gültigkeit testen
                 stelle = 0
             for (let i = 0; i < stelle; i++) {
                 d7_array.push(undefined) // von rechts Stellen überspringen
@@ -149,11 +137,7 @@ namespace pins {/* 4_digit_display.ts
     }
 
 
-    //% group="Funktionen" subcategory="4-Digit Displays"
-    //% block="Simulator" weight=7
-    export function simulator() {
-        return "€".charCodeAt(0) == 8364
-    }
+
 
 
 } // 4_digit_display.ts
