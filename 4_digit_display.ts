@@ -2,53 +2,53 @@
 namespace pins {/* 4_digit_display.ts
 
 */
-
     //  type typeDisplayPins<T> = [T, T]
     //  let qDisplayPins: typeDisplayPins<DigitalPin>[]
     let qDisplayPins: DigitalPin[] // 2 Elemente pro Display
     let qDoppelpunkt: boolean[]    // 1 Element pro Display
-    let qBrightnessLevel = 0
+    let qBrightnessLevel = 3       // Helligkeit gilt für alle Displays
 
+
+
+    // ========== group="Grove - 4-Digit Display TM1637" subcategory="4-Digit Displays"
 
     //% group="Grove - 4-Digit Display TM1637" subcategory="4-Digit Displays"
-    //% block="beim Start CLK %clkPin DIO %dataPin || + 4 Ziffern %addDisplay" weight=9
-    //% clkPin.shadow=pins_DigitalPin dataPin.shadow=pins_DigitalPin addDisplay.shadow=toggleYesNo
+    //% block="Display hinzu fügen an CLK %clkPin DIO %dataPin" weight=9
+    //% clkPin.shadow=pins_DigitalPin dataPin.shadow=pins_DigitalPin
     //% clkPin.defl=DigitalPin.C16 dataPin.defl=DigitalPin.C17
-    export function d4CreateDisplay(clkPin: number, dataPin: number, addDisplay = false) {
-        if (!addDisplay || !qDisplayPins) {
+    export function addDisplay(clkPin: number, dataPin: number) {
+        if (!qDisplayPins || !qDoppelpunkt) {
             qDisplayPins = []
             qDoppelpunkt = []
         }
         qDisplayPins.push(clkPin)
         qDisplayPins.push(dataPin)
         qDoppelpunkt.push(false)
-        d7String("FEdCbA9876543210")
+        zeigeText("FEdCbA9876543210")
     }
-
-
 
     //% group="Grove - 4-Digit Display TM1637" subcategory="4-Digit Displays"
     //% block="Displays löschen || Helligkeit %helligkeit" weight=8
-    //% helligkeit.min=0 helligkeit.max=7 helligkeit.defl=4
-    export function d4Clear(helligkeit?: number) {
+    //% helligkeit.min=0 helligkeit.max=7
+    export function clearDisplays(helligkeit?: number) {
         if (helligkeit && helligkeit >= 0 && helligkeit <= 7)
             qBrightnessLevel = helligkeit
         for (let i = 0; i < qDisplayPins.length * 2; i++) {
-            d7SegmentByte(0, i)
+            zeige7SegmentByte(0, i)
         }
     }
 
     //% group="Grove - 4-Digit Display TM1637" subcategory="4-Digit Displays"
     //% block="zeige Zahl %zahl" weight=5
-    export function d7Zahl(zahl: number) {
-        d7String(zahl.toString())
+    export function zeigeZahl(zahl: number) {
+        zeigeText(zahl.toString())
     }
 
     //% group="Grove - 4-Digit Display TM1637" subcategory="4-Digit Displays"
     //% block="zeige Doppelpunkt %on || auf Display %displayIndex" weight=4
     //% on.shadow=toggleOnOff 
     //% displayIndex.min=0 displayIndex.max=3 displayIndex.defl=0
-    export function d7Doppelpunkt(on: boolean, displayIndex?: number) {
+    export function zeigeDoppelpunkt(on: boolean, displayIndex?: number) {
         if (!displayIndex)
             displayIndex = 0
         if (displayIndex < qDoppelpunkt.length) {
@@ -63,7 +63,7 @@ namespace pins {/* 4_digit_display.ts
     //% group="Zeichen 0123456789AbCdEF hHLPU +-°" subcategory="4-Digit Displays"
     //% block="zeige Text %hex_string || von rechts %stelle Länge %len Ziffern" weight=9
     //% len.min=-8 len.max=8
-    export function d7String(hex_string: string, stelle?: number, len?: number) {
+    export function zeigeText(hex_string: string, stelle?: number, len?: number) {
         if (hex_string) {
             let d7_array: number[] = []
             for (let i = 0; i < hex_string.length; i++) {
@@ -104,7 +104,7 @@ namespace pins {/* 4_digit_display.ts
             while (len && d7_array.length < Math.abs(len) + stelle) {
                 d7_array.push(len < 0 ? 0x3f : 0x00) // Leerzeichen oder Ziffer 0 nach links anhängen
             }
-            d7SegmentArray(d7_array)
+            zeige7SegmentArray(d7_array)
         }
     }
 
@@ -155,15 +155,15 @@ namespace pins {/* 4_digit_display.ts
     }
 
 
-    // ========== group="7 Segmente :gfedcba | Ziffer 0 rechts" subcategory="4-Digit Displays"
 
+    // ========== group="7 Segmente :gfedcba | Ziffer 0 rechts" subcategory="4-Digit Displays"
 
     //% group="7 Segmente :gfedcba | Ziffer 0 rechts" subcategory="4-Digit Displays"
     //% block="7 Segment %seg_array" weight=7
-    export function d7SegmentArray(seg_array: number[]) {
+    export function zeige7SegmentArray(seg_array: number[]) {
         if (seg_array) {
             for (let i = 0; i < seg_array.length; i++) {
-                d7SegmentByte(seg_array[i], i)
+                zeige7SegmentByte(seg_array[i], i)
             }
         }
     }
@@ -171,7 +171,7 @@ namespace pins {/* 4_digit_display.ts
     //% group="7 Segmente :gfedcba | Ziffer 0 rechts" subcategory="4-Digit Displays"
     //% block="7 Segment Byte %seg_byte Ziffer %stelle ←3210" weight=6
     //% stelle.min=0 stelle.max=15
-    export function d7SegmentByte(seg_byte: number, stelle: number) {
+    export function zeige7SegmentByte(seg_byte: number, stelle: number) {
         // 76543210 seg_byte Doppelpunkt : und 7 Segmente g..a
         // :gfedcba
         let displayIndex = stelle >> 2
@@ -198,7 +198,8 @@ namespace pins {/* 4_digit_display.ts
     }
 
 
-    // ========== private
+
+    // ========== private digitalWritePin
 
     function writeByte(wrData: number, clkPin: DigitalPin, dataPin: DigitalPin) {
         for (let i = 0; i < 8; i++) {
@@ -226,8 +227,5 @@ namespace pins {/* 4_digit_display.ts
         pins.digitalWritePin(clkPin, 1)
         pins.digitalWritePin(dataPin, 1)
     }
-
-
-
 
 } // 4_digit_display.ts
