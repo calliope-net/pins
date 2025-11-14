@@ -7,6 +7,7 @@ und gibt mit voice_read_cmdid() die ID zurück
 */
 
     const voice_I2C_ADDRESS = 0x64
+    let voice_I2C_connected: boolean = undefined
     const voice_DF2301Q_I2C_REG_CMDID = 0x02
     const voice_DF2301Q_I2C_REG_PLAY_CMDID = 0x03
     const voice_DF2301Q_I2C_REG_SET_MUTE = 0x04
@@ -18,22 +19,14 @@ und gibt mit voice_read_cmdid() die ID zurück
     // ========== group="Gravity: Voice Recognition Sensor" subcategory="Spracherkennung"
 
     //% group="Gravity: Voice Recognition Sensor" subcategory="Spracherkennung"
-    //% block="Sensor angeschlossen" weight=9
-    export function voice_connected() {
-        if (pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_DF2301Q_I2C_REG_CMDID])) == 0) {
-            let bu = pins_i2cReadBuffer(voice_I2C_ADDRESS, 1)
-            return true
-        }
-        else
-            return false
-    }
-
-
-    //% group="Gravity: Voice Recognition Sensor" subcategory="Spracherkennung"
     //% block="Kommando ID" weight=7
     export function voice_read_cmdid(): number {
-        let bu = pins_i2cWriteReadBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_DF2301Q_I2C_REG_CMDID]), 1)
-        return bu[0]
+        if (pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_DF2301Q_I2C_REG_CMDID])) == 0)
+            return pins_i2cReadBuffer(voice_I2C_ADDRESS, 1)[0]
+        else
+            return -1
+        //let bu = pins_i2cWriteReadBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_DF2301Q_I2C_REG_CMDID]), 1)
+        //return bu[0]
     }
 
     //% group="Gravity: Voice Recognition Sensor" subcategory="Spracherkennung"
@@ -221,6 +214,14 @@ und gibt mit voice_read_cmdid() die ID zurück
             ].get(id - 200)
         else
             return ""
+    }
+
+
+    //% group="Kommandos 0..142 und 200..208" subcategory="Spracherkennung"
+    //% block="spiele ODE" weight=4
+    export function play_ode() {
+        const melodyArray = ['e4', 'e', 'f', 'g', 'g', 'f', 'e', 'd', 'c', 'c', 'd', 'e', 'e:6', 'd:2', 'd:8', 'e:4', 'e', 'f', 'g', 'g', 'f', 'e', 'd', 'c', 'c', 'd', 'e', 'd:6', 'c:2', 'c:8']
+        music.startMelody(melodyArray, MelodyOptions.Once)
     }
 
 } // voice.ts
