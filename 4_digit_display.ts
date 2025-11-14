@@ -5,37 +5,57 @@ namespace pins {/* 4_digit_display.ts
 
     //  type typeDisplayPins<T> = [T, T]
     //  let qDisplayPins: typeDisplayPins<DigitalPin>[]
-    let qDisplayPins: DigitalPin[]
-    let qBrightnessLevel = 5
+    let qDisplayPins: DigitalPin[] // 2 Elemente pro Display
+    let qDoppelpunkt: boolean[]    // 1 Element pro Display
+    let qBrightnessLevel = 0
 
 
-    //% group="Grove - 4-Digit Display" subcategory="4-Digit Displays"
+    //% group="Grove - 4-Digit Display TM1637" subcategory="4-Digit Displays"
     //% block="beim Start CLK %clkPin DIO %dataPin || + 4 Ziffern %addDisplay" weight=9
     //% clkPin.shadow=pins_DigitalPin dataPin.shadow=pins_DigitalPin addDisplay.shadow=toggleYesNo
     //% clkPin.defl=DigitalPin.C16 dataPin.defl=DigitalPin.C17
     export function d4CreateDisplay(clkPin: number, dataPin: number, addDisplay = false) {
-        if (!addDisplay || !qDisplayPins)
+        if (!addDisplay || !qDisplayPins) {
             qDisplayPins = []
+            qDoppelpunkt = []
+        }
         qDisplayPins.push(clkPin)
         qDisplayPins.push(dataPin)
+        qDoppelpunkt.push(false)
         d7String("FEdCbA9876543210")
     }
 
 
 
-    //% group="Grove - 4-Digit Display" subcategory="4-Digit Displays"
-    //% block="Displays löschen" weight=8
-    export function d4Clear() {
+    //% group="Grove - 4-Digit Display TM1637" subcategory="4-Digit Displays"
+    //% block="Displays löschen || Helligkeit %helligkeit" weight=8
+    //% helligkeit.min=0 helligkeit.max=7 helligkeit.defl=4
+    export function d4Clear(helligkeit?: number) {
+        if (helligkeit && helligkeit >= 0 && helligkeit <= 7)
+            qBrightnessLevel = helligkeit
         for (let i = 0; i < qDisplayPins.length * 2; i++) {
             d7SegmentByte(0, i)
         }
     }
 
-    //% group="Grove - 4-Digit Display" subcategory="4-Digit Displays"
+    //% group="Grove - 4-Digit Display TM1637" subcategory="4-Digit Displays"
     //% block="zeige Zahl %zahl" weight=5
     export function d7Zahl(zahl: number) {
         d7String(zahl.toString())
     }
+
+    //% group="Grove - 4-Digit Display TM1637" subcategory="4-Digit Displays"
+    //% block="zeige Doppelpunkt %on || auf Display %displayIndex" weight=4
+    //% on.shadow=toggleOnOff 
+    //% displayIndex.min=0 displayIndex.max=3 displayIndex.defl=0
+    export function d7Doppelpunkt(on: boolean, displayIndex?: number) {
+        if (!displayIndex)
+            displayIndex = 0
+        if (displayIndex < qDoppelpunkt.length) {
+            qDoppelpunkt[displayIndex] = on
+        }
+    }
+
 
 
     // ========== group="Zeichen 0123456789AbCdEF hHLPU +-°" subcategory="4-Digit Displays"
@@ -117,7 +137,7 @@ namespace pins {/* 4_digit_display.ts
         let bin = ""
         do {
             bin = "01".charAt(n % 2) + bin
-            n = n >> 1
+            n >>= 1
         } while (n > 0)
         if (b)
             return b + bin
@@ -145,11 +165,15 @@ namespace pins {/* 4_digit_display.ts
     export function d7SegmentByte(seg_byte: number, stelle: number) {
         // 76543210 seg_byte: Punkt p und 7 Segmente a..g 
         // :gfedcba
-        let displayIndex = (stelle >> 2) * 2
-        if (displayIndex + 1 < qDisplayPins.length && seg_byte >= 0x00 && seg_byte <= 0xFF) {
+        let displayIndex = stelle >> 2
+        let displayPinsIndex = displayIndex * 2 // 2 Pins pro Display im Array
+        if (displayPinsIndex + 1 < qDisplayPins.length && seg_byte >= 0x00 && seg_byte <= 0xFF) {
 
-            let clkPin: DigitalPin = qDisplayPins[displayIndex]
-            let dataPin: DigitalPin = qDisplayPins[displayIndex + 1]
+            if (displayIndex < qDoppelpunkt.length && qDoppelpunkt[displayIndex] && stelle % 4 == 2)
+                seg_byte |= 0x80 // Doppelpunkt an schalten nur bei Stelle 2
+
+            let clkPin: DigitalPin = qDisplayPins[displayPinsIndex]
+            let dataPin: DigitalPin = qDisplayPins[displayPinsIndex + 1]
 
             start(clkPin, dataPin)
             writeByte(0x44, clkPin, dataPin)
