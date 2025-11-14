@@ -109,11 +109,20 @@ namespace pins {/* 4_digit_display.ts
     }
 
     //% group="Zeichen 0123456789AbCdEF hHLPU +-°" subcategory="4-Digit Displays"
-    //% block="Zahl %n → Text" weight=6
-    export function toText(n: number): string {
-        return n.toString()
+    //% block="Zahl %n → Text || Kommastellen %kommastellen" weight=6
+    //% kommastellen.min=0 kommastellen.max=4
+    export function toText(n: number, kommastellen?: number): string {
+        let t = n.toString()
+        if (kommastellen > 0 && kommastellen <= 4) {
+            let i = t.indexOf(".")
+            if (i == -1) { // i=-1 Zahl enthält kein Komma
+                t += "."
+                i = t.indexOf(".")
+            }
+            t = (t + "0000").substr(0, i + 1 + kommastellen)
+        }
+        return t.replace(".", ",")
     }
-
 
     //% group="Zeichen 0123456789AbCdEF hHLPU +-°" subcategory="4-Digit Displays"
     //% block="Zahl %n → HEX || %h" weight=5
