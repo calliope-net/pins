@@ -248,8 +248,15 @@ namespace pins { // i2c.ts
     }
 
     //% group="Funktionen" subcategory=I²C
-    //% block="%i0 zwischen %i1 und %i2" weight=4
+    //% block="%i0 zwischen %i1 und %i2" weight=6
     export function between(i0: number, i1: number, i2: number): boolean { return (i0 >= i1 && i0 <= i2) }
+
+
+    //% group="Funktionen" subcategory=I²C
+    //% block="roundWithPrecision number %x digits %digits" weight=5
+    //% digits.min=0 digits.max=4 digits.defl=2
+    export function roundWithPrecision(x: number, digits: number) { return Math.roundWithPrecision(x, digits) }
+
 
     //% group="Funktionen" subcategory=I²C
     //% block="%variable === undefined" weight=3

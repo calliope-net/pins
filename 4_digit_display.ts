@@ -31,6 +31,11 @@ namespace pins {/* 4_digit_display.ts
         }
     }
 
+    //% group="Grove - 4-Digit Display" subcategory="4-Digit Displays"
+    //% block="zeige Zahl %zahl" weight=5
+    export function d7Zahl(zahl: number) {
+        d7String(zahl.toString())
+    }
 
 
     // ========== group="Zeichen 0123456789AbCdEF hHLPU +-°" subcategory="4-Digit Displays"
