@@ -41,12 +41,12 @@ und gibt mit voice_read_cmdid() die ID zurück
     }
 
     //% group="Konfiguration" subcategory="Spracherkennung"
-    //% block="Lautsprecher %on Lautstärke %volume" weight=5
+    //% block="Lautsprecher %on || Lautstärke %volume" weight=5
     //% on.shadow=toggleOnOff
-    //% volume.min=5 volume.max=15 volume.defl=15
+    //% volume.min=5 volume.max=15
     export function voice_speaker(on: boolean, volume: number) { // true = Mute = aus
         pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_DF2301Q_I2C_REG_SET_MUTE, on ? 0 : 1]))
-        if (on)
+        if (on && volume)
             pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_DF2301Q_I2C_REG_SET_VOLUME, volume]))
     }
 
@@ -54,8 +54,8 @@ und gibt mit voice_read_cmdid() die ID zurück
 
     // ========== group="Kommandos" subcategory="Spracherkennung"
 
-    //% group="Kommandos" subcategory="Spracherkennung"
-    //% block="Kommando Text %id" weight=5
+    //% group="Kommandos 0..142 und 200..208" subcategory="Spracherkennung"
+    //% block="Kommando Text ID %id" weight=5
     export function voice_command_text(id: number) {
         if (id >= 0 && id <= 142)
             return [
@@ -65,24 +65,12 @@ und gibt mit voice_read_cmdid() die ID zurück
                 'Hello robot',
                 '3',
                 '4',
-                // Commands for learning	5..21
-                'The first custom command', // 5
-                'The second custom command',
-                'The third custom command',
-                'The fourth custom command',
-                'The fifth custom command',
-                'The sixth custom command', // 10
-                'The seventh custom command',
-                'The eighth custom command',
-                'The ninth custom command',
-                'The tenth custom command',
-                'The eleventh custom command', // 15
-                'The twelfth custom command',
-                'The thirteenth custom command',
-                'The fourteenth custom command',
-                'The fifteenth custom command',
-                'The sixteenth custom command', // 20
-                'The seventeenth custom command',
+                // Commands for learning 5..21 A..Q
+                "A", // 5
+                "B", "C", "D", "E", "F", // 10
+                "G", "H", "I", "J", "K", // 15
+                "L", "M", "N", "O", "P", // 20
+                "Q", // 21
                 // Fixed Command Words 22..142
                 'Go forward',
                 'Retreat',
@@ -206,6 +194,19 @@ und gibt mit voice_read_cmdid() die ID zurück
                 'Open the door',
                 'Close the door' // 142
             ].get(id)
+        else if (id >= 200 && id <= 208)
+            return [
+                // Learning - related commands 200..208
+                'Learning wake word	', // 200
+                'Learning command word',
+                'Re-learn',
+                'Exit learning',
+                'I want to delete',
+                'Delete wake word', // 205
+                'Delete command word',
+                'Exit deleting',
+                'Delete all' // 208
+            ].get(id - 200)
         else
             return ""
     }
