@@ -21,7 +21,7 @@ namespace pins {/* 4_digit_display.ts
         d7String("FEdCbA9876543210")
     }
 
-  
+
 
     //% group="Grove - 4-Digit Display" subcategory="4-Digit Displays"
     //% block="Displays löschen" weight=8
@@ -32,7 +32,8 @@ namespace pins {/* 4_digit_display.ts
     }
 
     //% group="Zeichen 0123456789AbCdEF +-°" subcategory="4-Digit Displays"
-    //% block="HEX anzeigen %hex_string || ab %stelle %len Ziffern" weight=9
+    //% block="zeige Text %hex_string || von rechts %stelle Länge %len Ziffern" weight=9
+    //% len.min=-8 len.max=8
     export function d7String(hex_string: string, stelle?: number, len?: number) {
         if (hex_string) {
             let d7_array: number[] = []
@@ -68,8 +69,41 @@ namespace pins {/* 4_digit_display.ts
         }
     }
 
-    //% group="Punkt und 7 Segmente pgfedcba" subcategory="4-Digit Displays"
-    //% block="7 Segment Array %seg_array" weight=7
+    //% group="Zeichen 0123456789AbCdEF +-°" subcategory="4-Digit Displays"
+    //% block="Zahl %n → Text" weight=6
+    export function toText(n: number): string {
+        return n.toString()
+    }
+
+
+    //% group="Zeichen 0123456789AbCdEF +-°" subcategory="4-Digit Displays"
+    //% block="Zahl %n → HEX" weight=5
+    export function toHex(n: number): string {
+        let hex = ""
+        do {
+            hex = "0123456789AbCdEF".charAt(n % 16) + hex
+            n >>= 4 //   n = Math.idiv(n, 16) // Integer-Division in MakeCode
+        } while (n > 0)
+        return hex
+    }
+
+    //% group="Zeichen 0123456789AbCdEF +-°" subcategory="4-Digit Displays"
+    //% block="Zahl %n → BIN" weight=4
+    export function toBin(n: number): string {
+        let bin = ""
+        do {
+            bin = "01".charAt(n % 2) + bin
+            n = n >> 1
+        } while (n > 0)
+        return bin
+    }
+
+
+    // ========== group="7 Segmente :gfedcba | Ziffer 0 rechts" subcategory="4-Digit Displays"
+
+
+    //% group="7 Segmente :gfedcba | Ziffer 0 rechts" subcategory="4-Digit Displays"
+    //% block="7 Segment %seg_array" weight=7
     export function d7SegmentArray(seg_array: number[]) {
         if (seg_array) {
             for (let i = 0; i < seg_array.length; i++) {
@@ -78,11 +112,12 @@ namespace pins {/* 4_digit_display.ts
         }
     }
 
-    //% group="Punkt und 7 Segmente pgfedcba" subcategory="4-Digit Displays"
-    //% block="7 Segment Byte %seg_byte Stelle ←3210 %stelle" weight=6
+    //% group="7 Segmente :gfedcba | Ziffer 0 rechts" subcategory="4-Digit Displays"
+    //% block="7 Segment Byte %seg_byte Ziffer %stelle ←3210" weight=6
+    //% stelle.min=0 stelle.max=15
     export function d7SegmentByte(seg_byte: number, stelle: number) {
         // 76543210 seg_byte: Punkt p und 7 Segmente a..g 
-        // pgfedcba
+        // :gfedcba
         let displayIndex = (stelle >> 2) * 2
         if (displayIndex + 1 < qDisplayPins.length && seg_byte >= 0x00 && seg_byte <= 0xFF) {
 

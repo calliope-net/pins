@@ -5,4 +5,6 @@ if (!(pins.simulator())) {
     pins.d4CreateDisplay(pins.pins_DigitalPin(DigitalPin.C16), pins.pins_DigitalPin(DigitalPin.C17))
     pins.d4CreateDisplay(pins.pins_DigitalPin(DigitalPin.P2), pins.pins_DigitalPin(DigitalPin.P3), true)
     pins.d4CreateDisplay(pins.pins_DigitalPin(DigitalPin.P0), pins.pins_DigitalPin(DigitalPin.P1), true)
+    pins.d4Clear()
+    pins.d7String(pins.toBin(2), 0, -8)
 }
