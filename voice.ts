@@ -21,8 +21,8 @@ und gibt mit voice_read_cmdid() die ID zurück
     //% group="Gravity: Voice Recognition Sensor" subcategory="Spracherkennung"
     //% block="Kommando ID" weight=7
     export function voice_read_cmdid(): number {
-        if (pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_DF2301Q_I2C_REG_CMDID])) == 0)
-            return pins_i2cReadBuffer(voice_I2C_ADDRESS, 1)[0]
+        if (pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_DF2301Q_I2C_REG_CMDID]), true) == 0)
+            return pins_i2cReadBuffer(voice_I2C_ADDRESS, 1).getUint8(0)
         else
             return -1
         //let bu = pins_i2cWriteReadBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_DF2301Q_I2C_REG_CMDID]), 1)
