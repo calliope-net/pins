@@ -230,46 +230,53 @@ und gibt mit voice_read_cmdid() die ID zurück
     }
 
 
+    //% blockId=pins_voice_command_enum
+    //% group="Kommandos 5..142 und 200..208" subcategory="Spracherkennung"
+    //% block="Kommando ID %e" weight=5
+    export function voice_command_enum(e: voice_FixedCommandWords) {
+        return e
+    }
+
     export enum voice_FixedCommandWords {
-        //% block="A"
+        //% block="5 A"
         W5 = 5,
-        //% block="B"
+        //% block="6 B"
         W6 = 6,
-        //% block="C"
+        //% block="7 C"
         W7 = 7,
-        //% block="D"
+        //% block="8 D"
         W8 = 8,
-        //% block="E"
+        //% block="9 E"
         W9 = 9,
-        //% block="F"
+        //% block="10 F"
         W10 = 10,
-        //% block="G"
+        //% block="11 G"
         W11 = 11,
-        //% block="H"
+        //% block="12 H"
         W12 = 12,
-        //% block="I"
+        //% block="13 I"
         W13 = 13,
-        //% block="J"
+        //% block="14 J"
         W14 = 14,
-        //% block="K"
+        //% block="15 K"
         W15 = 15,
-        //% block="L"
+        //% block="16 L"
         W16 = 16,
-        //% block="M"
+        //% block="17 M"
         W17 = 17,
-        //% block="N"
+        //% block="18 N"
         W18 = 18,
-        //% block="O"
+        //% block="19 O"
         W19 = 19,
-        //% block="P"
+        //% block="20 P"
         W20 = 20,
-        //% block="Q"
+        //% block="21 Q"
         W21 = 21,
 
 
-        //% block="Go forward"
+        //% block="22 Go forward"
         W22 = 22,
-        //% block="Retreat"
+        //% block="23 Retreat"
         W23 = 23,
         //% blockId="voiceRecognition_W24" block="Park a car"
         W24 = 24,
