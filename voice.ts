@@ -7,7 +7,7 @@ und gibt mit voice_read_cmdid() die ID zurück
 */
 
     const voice_I2C_ADDRESS = 0x64
-    let voice_I2C_connected: boolean = undefined
+    // let voice_I2C_connected: boolean = undefined
     const voice_DF2301Q_I2C_REG_CMDID = 0x02
     const voice_DF2301Q_I2C_REG_PLAY_CMDID = 0x03
     const voice_DF2301Q_I2C_REG_SET_MUTE = 0x04
@@ -20,7 +20,7 @@ und gibt mit voice_read_cmdid() die ID zurück
 
     //% group="Gravity: Voice Recognition Sensor" subcategory="Spracherkennung"
     //% block="Kommando ID" weight=7
-    export function voice_read_cmdid(): number {
+    export function voice_read_cmdid(): number { // repeat=true muss angegeben werden
         if (pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_DF2301Q_I2C_REG_CMDID]), true) == 0)
             return pins_i2cReadBuffer(voice_I2C_ADDRESS, 1).getUint8(0)
         else
@@ -55,12 +55,25 @@ und gibt mit voice_read_cmdid() die ID zurück
             pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_DF2301Q_I2C_REG_SET_VOLUME, volume]))
     }
 
+    //% group="Konfiguration" subcategory="Spracherkennung"
+    //% block="Register %reg (2..6) lesen" weight=3
+    //% reg.min=2 reg.max=6 reg.defl=6
+    export function voice_register(reg: number) {
+        if (between(reg, voice_DF2301Q_I2C_REG_CMDID, voice_DF2301Q_I2C_REG_WAKE_TIME)) {
+            let bu = pins_i2cWriteReadBuffer(voice_I2C_ADDRESS, Buffer.fromArray([reg]), 1)
+            if (bu)
+                return bu.getUint8(0)
+            else
+                return -1
+        } else
+            return NaN
+    }
 
 
     // ========== group="Kommandos" subcategory="Spracherkennung"
 
     //% group="Kommandos 0..142 und 200..208" subcategory="Spracherkennung"
-    //% block="Kommando Text ID %id" weight=5
+    //% block="Kommando ID %id als Text" weight=5
     export function voice_command_text(id: number) {
         if (id >= 0 && id <= 142)
             return [
@@ -217,11 +230,11 @@ und gibt mit voice_read_cmdid() die ID zurück
     }
 
 
-    //% group="Kommandos 0..142 und 200..208" subcategory="Spracherkennung"
-    //% block="spiele ODE" weight=4
-    export function play_ode() {
+    // group="Kommandos 0..142 und 200..208" subcategory="Spracherkennung"
+    // block="spiele ODE" weight=4
+    /* export function play_ode() {
         const melodyArray = ['e4', 'e', 'f', 'g', 'g', 'f', 'e', 'd', 'c', 'c', 'd', 'e', 'e:6', 'd:2', 'd:8', 'e:4', 'e', 'f', 'g', 'g', 'f', 'e', 'd', 'c', 'c', 'd', 'e', 'd:6', 'c:2', 'c:8']
         music.startMelody(melodyArray, MelodyOptions.Once)
-    }
+    } */
 
 } // voice.ts
