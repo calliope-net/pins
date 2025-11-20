@@ -12,10 +12,12 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
     const rtc_I2C_ADDRESS = 0x51
     let rtc_Buffer: Buffer //= Buffer.create(7)
 
-    export enum eControl { Control_1 = 0, Control_2 = 1, Offset = 2, RAM_byte = 3 }
-    export enum eFormat { DEC, zehner, einer, BCD }
+    export enum rtc_eControl {
+        Control_1 = 0, Control_2 = 1, Offset = 2, RAM_byte = 3,
+        Sekunde = 4, Minute = 5, Stunde = 6, Tag = 7, Wochentag = 8, Monat = 9, Jahr = 10
+    }
     export enum rtc_eRegister { Sekunde = 0, Minute = 1, Stunde = 2, Tag = 3, Wochentag = 4, Monat = 5, Jahr = 6 }
-
+    //  export enum eFormat { DEC, zehner, einer, BCD }
 
     //% blockId=pins_rtc_eRegister blockHidden=true
     //% group="Real Time Clock PCF85063TP" subcategory="RTC Uhr"
@@ -114,6 +116,22 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
         else
             return []
     }
+
+
+
+
+    //% group="RTC Register" subcategory="RTC Uhr"
+    //% block="read RTC Register" weight=9
+    export function rtc_read_control(register: rtc_eControl): number {
+        return pins_i2cWriteReadBuffer(rtc_I2C_ADDRESS, Buffer.fromArray([register]), 1).getUint8(0)
+    }
+
+    //% group="RTC Register" subcategory="RTC Uhr"
+    //% block="write RTC Register" weight=8
+    export function rtc_write_control(register: rtc_eControl, byte: number): number {
+        return pins_i2cWriteBuffer(rtc_I2C_ADDRESS, Buffer.fromArray([register, byte]))
+    }
+
 
 
 } // rtc.ts
