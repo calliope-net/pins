@@ -109,11 +109,11 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
 
     // ========== group="Uhr stellen" subcategory="RTC Uhr"
 
-    let key_string = ""
+    let rtc_key_string = ""
 
     //% group="Uhr stellen" subcategory="RTC Uhr"
-    //% block="Uhr stellen %key_code" weight=9
-    export function rtc_set(key_code: number) {
+    //% block="Uhr stellen 1 Zeichencode %key_code" weight=9
+    export function rtc_set_key(key_code: number) {
         /*
         1. Zeichen: *
         2. Zeichen: Register 0..6
@@ -125,14 +125,23 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
 
         let key_char = String.fromCharCode(key_code)
         if (key_char == '*')
-            key_string = key_char
-        else if (key_code >= 48 && key_code <= 57 && key_string.length > 0 && key_string.length < 4)
-            key_string = key_string + key_char
-        else if ((key_char == '#' || key_code == 13) && key_string.length == 4) {
+            rtc_key_string = key_char
+        else if (key_code >= 48 && key_code <= 57 && rtc_key_string.length > 0 && rtc_key_string.length < 4)
+            rtc_key_string = rtc_key_string + key_char
+        else if ((key_char == '#' || key_code == 13) && rtc_key_string.length == 4) {
             //rtc_write(int(key_string[1], 10), int(key_string[2 : 4], 10))
+            rtc_set_stringkey(rtc_key_string)
+            rtc_key_string = rtc_key_string + '#'
         }
-        key_string = key_string + '#'
-        return key_string
+        return rtc_key_string
+    }
+
+
+    //% group="Uhr stellen" subcategory="RTC Uhr"
+    //% block="Uhr stellen 5 Zeichen %key_string" weight=7
+    export function rtc_set_stringkey(key_string: string) { // *259 (1) register (2-3) byte dezimal
+        if (key_string && key_string.length >= 4 && key_string.charAt(0) == "*" && !Number.isNaN(parseInt(key_string.substr(1, 3), 10)))
+            rtc_write_control(parseInt(key_string.charAt(1), 10) + 4, rtc_convert_byte(parseInt(key_string.substr(2, 2), 10), eFormat.bcd))
     }
 
 
