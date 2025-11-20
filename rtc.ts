@@ -26,13 +26,13 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
 
 
     //% group="Real Time Clock PCF85063TP" subcategory="RTC Uhr"
-    //% block="Datum und Zeit einlesen"
+    //% block="Datum und Zeit einlesen" weight=9
     export function rtc_read() {
         rtc_Buffer = pins_i2cWriteReadBuffer(rtc_I2C_ADDRESS, Buffer.fromArray([4]), 7)
     }
 
     //% group="Real Time Clock PCF85063TP" subcategory="RTC Uhr"
-    //% block="Array (7 Byte) [s,m,H,d,w,M,y] im Format BCD"
+    //% block="Array (7 Byte) [s,m,H,d,w,M,y] im Format BCD" weight=6
     export function rtc_get_array(): number[] {
         if (rtc_Buffer)
             return rtc_Buffer.toArray(NumberFormat.UInt8LE)
@@ -41,7 +41,7 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
     }
 
     //% group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr"
-    //% block="%register als Zahl" weight=6
+    //% block="%register als Zahl" weight=8
     //% register.min=0 register.max=6
     //% register.shadow=pins_rtc_eRegister
     export function rtc_get_int(register: number): number {
@@ -51,6 +51,25 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
             return -1
     }
 
+    //% group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr"
+    //% block="Datum als Text" weight=6
+    export function rtc_get_date(): string {
+        // date_string = str(RTC_BUFFER[3] >> 4) + str(RTC_BUFFER[3] & 0x0F) + "." + str(RTC_BUFFER[5] >> 4) + str(RTC_BUFFER[5] & 0x0F) + ".20" + str(RTC_BUFFER[6] >> 4) + str(RTC_BUFFER[6] & 0x0F)
+        if (rtc_Buffer)
+            return (rtc_Buffer[3] >> 4) + (rtc_Buffer[3] & 0x0F) + "." + (rtc_Buffer[5] >> 4) + (rtc_Buffer[5] & 0x0F) + ".20" + (rtc_Buffer[6] >> 4) + (rtc_Buffer[6] & 0x0F)
+        else
+            return ""
+    }
+
+    //% group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr"
+    //% block="Zeit als Text" weight=6
+    export function rtc_get_time(): string {
+        // time_string = str(RTC_BUFFER[2] >> 4) + str(RTC_BUFFER[2] & 0x0F) + ":" + str(RTC_BUFFER[1] >> 4) + str(RTC_BUFFER[1] & 0x0F) + ":" + str(RTC_BUFFER[0] >> 4) + str(RTC_BUFFER[0] & 0x0F)
+        if (rtc_Buffer)
+            return (rtc_Buffer[2] >> 4) + (rtc_Buffer[2] & 0x0F) + ":" + (rtc_Buffer[1] >> 4) + (rtc_Buffer[1] & 0x0F) + ":" + (rtc_Buffer[0] >> 4) + (rtc_Buffer[0] & 0x0F)
+        else
+            return ""
+    }
 
 
 } // rtc.ts
