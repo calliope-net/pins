@@ -8,12 +8,13 @@ und gibt mit voice_read_cmdid() die ID zurück
 
     const voice_I2C_ADDRESS = 0x64
     // let voice_I2C_connected: boolean = undefined
+    /*
     const voice_DF2301Q_I2C_REG_CMDID = 0x02
     const voice_DF2301Q_I2C_REG_PLAY_CMDID = 0x03
     const voice_DF2301Q_I2C_REG_SET_MUTE = 0x04
     const voice_DF2301Q_I2C_REG_SET_VOLUME = 0x05
     const voice_DF2301Q_I2C_REG_WAKE_TIME = 0x06
-
+    */
     export enum voice_eRegister {
         CMDID = 0x02, PLAY_CMDID = 0x03, SET_MUTE = 0x04, SET_VOLUME = 0x05, WAKE_TIME = 0x06
     }
@@ -21,7 +22,6 @@ und gibt mit voice_read_cmdid() die ID zurück
     //% blockId=pins_voice_eRegister blockHidden=true
     //% group="Gravity: Voice Recognition Sensor" subcategory="Spracherkennung"
     //% block="%pRegister"
-    // pRegister.defl=pins.voice_eRegister.WAKE_TIME
     export function pins_voice_eRegister(pRegister: voice_eRegister): number { return pRegister }
 
 
@@ -30,7 +30,7 @@ und gibt mit voice_read_cmdid() die ID zurück
     //% group="Gravity: Voice Recognition Sensor" subcategory="Spracherkennung"
     //% block="Kommando ID" weight=7
     export function voice_read_cmdid(): number { // repeat=true muss angegeben werden
-        if (pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_DF2301Q_I2C_REG_CMDID]), true) == 0)
+        if (pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_eRegister.CMDID]), true) == 0)
             return pins_i2cReadBuffer(voice_I2C_ADDRESS, 1).getUint8(0)
         else
             return -1
@@ -41,7 +41,7 @@ und gibt mit voice_read_cmdid() die ID zurück
     //% group="Gravity: Voice Recognition Sensor" subcategory="Spracherkennung"
     //% block="spiele Antwort ID %id" weight=5
     export function voice_play_cmdid(id: number) {
-        pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_DF2301Q_I2C_REG_PLAY_CMDID, id]))
+        pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_eRegister.PLAY_CMDID, id]))
     }
 
 
@@ -51,7 +51,7 @@ und gibt mit voice_read_cmdid() die ID zurück
     //% block="Wachzeit %sekunden Sekunden" weight=7
     //% sekunden.min=5 sekunden.max=60 sekunden.defl=15
     export function voice_waketime(sekunden: number) {
-        pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_DF2301Q_I2C_REG_WAKE_TIME, sekunden]))
+        pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_eRegister.WAKE_TIME, sekunden]))
     }
 
     //% group="Konfiguration" subcategory="Spracherkennung"
@@ -59,9 +59,9 @@ und gibt mit voice_read_cmdid() die ID zurück
     //% on.shadow=toggleOnOff
     //% volume.min=5 volume.max=15
     export function voice_speaker(on: boolean, volume: number) { // true = Mute = aus
-        pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_DF2301Q_I2C_REG_SET_MUTE, on ? 0 : 1]))
+        pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_eRegister.SET_MUTE, on ? 0 : 1]))
         if (on && volume)
-            pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_DF2301Q_I2C_REG_SET_VOLUME, volume]))
+            pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_eRegister.SET_VOLUME, volume]))
     }
 
     //% group="Konfiguration" subcategory="Spracherkennung"
@@ -69,7 +69,7 @@ und gibt mit voice_read_cmdid() die ID zurück
     // reg.min=2 reg.max=6
     //% reg.shadow=pins_voice_eRegister reg.defl=pins.voice_eRegister.WAKE_TIME
     export function voice_register(reg: number) {
-        if (between(reg, voice_DF2301Q_I2C_REG_CMDID, voice_DF2301Q_I2C_REG_WAKE_TIME)) {
+        if (between(reg, voice_eRegister.CMDID, voice_eRegister.WAKE_TIME)) {
             let bu = pins_i2cWriteReadBuffer(voice_I2C_ADDRESS, Buffer.fromArray([reg]), 1)
             if (bu)
                 return bu.getUint8(0)
