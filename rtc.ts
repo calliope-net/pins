@@ -17,7 +17,7 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
         Sekunde = 4, Minute = 5, Stunde = 6, Tag = 7, Wochentag = 8, Monat = 9, Jahr = 10
     }
     export enum rtc_eRegister { Sekunde = 0, Minute = 1, Stunde = 2, Tag = 3, Wochentag = 4, Monat = 5, Jahr = 6 }
-    //  export enum eFormat { DEC, zehner, einer, BCD }
+    export enum eFormat { DEC, zehner, einer, BCD }
 
     //% blockId=pins_rtc_eRegister blockHidden=true
     //% group="Real Time Clock PCF85063TP" subcategory="RTC Uhr"
@@ -121,17 +121,42 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
 
 
     //% group="RTC Register" subcategory="RTC Uhr"
-    //% block="read RTC Register" weight=9
+    //% block="read RTC Register %register" weight=9
     export function rtc_read_control(register: rtc_eControl): number {
         return pins_i2cWriteReadBuffer(rtc_I2C_ADDRESS, Buffer.fromArray([register]), 1).getUint8(0)
     }
 
     //% group="RTC Register" subcategory="RTC Uhr"
-    //% block="write RTC Register" weight=8
+    //% block="write RTC Register %register Byte %byte" weight=8
     export function rtc_write_control(register: rtc_eControl, byte: number): number {
         return pins_i2cWriteBuffer(rtc_I2C_ADDRESS, Buffer.fromArray([register, byte]))
     }
 
+
+    //% group="RTC Register" subcategory="RTC Uhr"
+    //% block="convertByte %byte %format" weight=5
+    //% byte.min=0 byte.max=255
+    export function rtc_convert_byte(byte: number, format: eFormat) {
+        byte = byte & 0xFF
+        switch (format) {
+            case eFormat.DEC:
+                return (byte >> 4) * 10 + byte & 0x0F
+            case eFormat.zehner:
+                return byte >> 4
+            case eFormat.einer:
+                return byte & 0x0F
+            case eFormat.BCD:
+                return (Math.idiv(byte, 10) << 4) + byte % 10
+            default:
+                return 0
+        }
+        /*  let iByte = byte & 0xFF
+         if (format == eFormat.DEC) { iByte = (iByte >> 4) * 10 + iByte & 0x0F }
+         else if (format == eFormat.zehner) { iByte = iByte >> 4 }
+         else if (format == eFormat.einer) { iByte = iByte % 16 }
+         else if (format == eFormat.BCD) { iByte = Math.trunc(iByte / 10) * 16 + iByte % 10 }
+         return iByte */
+    }
 
 
 } // rtc.ts
