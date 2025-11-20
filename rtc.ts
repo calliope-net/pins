@@ -107,7 +107,33 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
             return ""
     }
 
+    // ========== group="Uhr stellen" subcategory="RTC Uhr"
 
+    let key_string = ""
+
+    //% group="Uhr stellen" subcategory="RTC Uhr"
+    //% block="Uhr stellen %key_code" weight=9
+    export function rtc_set(key_code: number) {
+        /*
+        1. Zeichen: *
+        2. Zeichen: Register 0..6
+        3. und 4.: 2 Ziffern dezimal Zahl 00..59
+        5. Zeichen: # speichern
+        Register: [0]=Seconds, [1]=Minutes, [2]=Hours, [3]=Days, [4]=Weekdays, [5]=Months, [6]=Years
+        Weekdays 0..6: [0]=Sonntag
+        */
+
+        let key_char = String.fromCharCode(key_code)
+        if (key_char == '*')
+            key_string = key_char
+        else if (key_code >= 48 && key_code <= 57 && key_string.length > 0 && key_string.length < 4)
+            key_string = key_string + key_char
+        else if ((key_char == '#' || key_code == 13) && key_string.length == 4) {
+            //rtc_write(int(key_string[1], 10), int(key_string[2 : 4], 10))
+        }
+        key_string = key_string + '#'
+        return key_string
+    }
 
 
     // ========== group="RTC Register" subcategory="RTC Uhr"
