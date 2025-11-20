@@ -17,7 +17,6 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
         Sekunde = 4, Minute = 5, Stunde = 6, Tag = 7, Wochentag = 8, Monat = 9, Jahr = 10
     }
     export enum rtc_eRegister { Sekunde = 0, Minute = 1, Stunde = 2, Tag = 3, Wochentag = 4, Monat = 5, Jahr = 6 }
-    export enum eFormat { DEC, zehner, einer, BCD }
 
     //% blockId=pins_rtc_eRegister blockHidden=true
     //% group="Real Time Clock PCF85063TP" subcategory="RTC Uhr"
@@ -108,8 +107,13 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
             return ""
     }
 
-    //% group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr"
-    //% block="Array (7 Byte) [s,m,H,d,w,M,y] im Format BCD" weight=1
+
+
+
+    // ========== group="RTC Register" subcategory="RTC Uhr"
+
+    //% group="RTC Register" subcategory="RTC Uhr"
+    //% block="Array (7 Byte) [s,m,H,d,w,M,y] im Format BCD" weight=9
     export function rtc_get_array(): number[] {
         if (rtc_Buffer)
             return rtc_Buffer.toArray(NumberFormat.UInt8LE)
@@ -117,35 +121,42 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
             return []
     }
 
-
-
-
     //% group="RTC Register" subcategory="RTC Uhr"
-    //% block="read RTC Register %register" weight=9
+    //% block="read RTC Register %register" weight=8
     export function rtc_read_control(register: rtc_eControl): number {
         return pins_i2cWriteReadBuffer(rtc_I2C_ADDRESS, Buffer.fromArray([register]), 1).getUint8(0)
     }
 
     //% group="RTC Register" subcategory="RTC Uhr"
-    //% block="write RTC Register %register Byte %byte" weight=8
+    //% block="write RTC Register %register Byte %byte" weight=7
     export function rtc_write_control(register: rtc_eControl, byte: number): number {
         return pins_i2cWriteBuffer(rtc_I2C_ADDRESS, Buffer.fromArray([register, byte]))
     }
 
+    export enum eFormat {
+        //% block="BCD → DEC"
+        dec,
+        //% block="BCD Zehner"
+        zehner,
+        //% block="BCD Einer"
+        einer,
+        //% block="DEC → BCD"
+        bcd
+    }
 
     //% group="RTC Register" subcategory="RTC Uhr"
-    //% block="convertByte %byte %format" weight=5
+    //% block="convert Byte %byte %format" weight=5
     //% byte.min=0 byte.max=255
-    export function rtc_convert_byte(byte: number, format: eFormat) {
+    export function rtc_convert_byte(byte: number, format: eFormat): number {
         byte = byte & 0xFF
         switch (format) {
-            case eFormat.DEC:
+            case eFormat.dec:
                 return (byte >> 4) * 10 + byte & 0x0F
             case eFormat.zehner:
                 return byte >> 4
             case eFormat.einer:
                 return byte & 0x0F
-            case eFormat.BCD:
+            case eFormat.bcd:
                 return (Math.idiv(byte, 10) << 4) + byte % 10
             default:
                 return 0
