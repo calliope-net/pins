@@ -15,7 +15,8 @@
         "i2c.ts",
         "keyboards.ts",
         "joystick.ts",
-        "voice.ts"
+        "voice.ts",
+        "rtc.ts"
     ],
     "testFiles": [
         "test.ts"
