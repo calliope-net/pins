@@ -44,4 +44,30 @@ namespace pins { // functions.ts
     }
 
 
+
+    // ========== group="25 LED Matrix" subcategory=Funktionen
+
+    //% group="25 LED Matrix" subcategory=Funktionen
+    //% block="25 LED x(0..3)→ %x y(0..31)↑ %n" weight=5
+    //% x.min=0 x.max=4 y.min=0 y.max=31
+    export function plot25LED(x: number, n: number) {
+        if (between(x, 0, 4)) {
+            if ((n & 1) == 1) { led.plot(x, 4) } else { led.unplot(x, 4) }
+            n >>= 1
+            if ((n & 1) == 1) { led.plot(x, 3) } else { led.unplot(x, 3) }
+            n >>= 1
+            if ((n & 1) == 1) { led.plot(x, 2) } else { led.unplot(x, 2) }
+            n >>= 1
+            if ((n & 1) == 1) { led.plot(x, 1) } else { led.unplot(x, 1) }
+            n >>= 1
+            if ((n & 1) == 1) { led.plot(x, 0) } else { led.unplot(x, 0) }
+
+            /*   if (y.length > 0 && y.get(0)) { led.plot(x, 4) } else { led.unplot(x, 4) }
+              if (y.length > 1 && y.get(1)) { led.plot(x, 3) } else { led.unplot(x, 3) }
+              if (y.length > 2 && y.get(2)) { led.plot(x, 2) } else { led.unplot(x, 2) }
+              if (y.length > 3 && y.get(3)) { led.plot(x, 1) } else { led.unplot(x, 1) }
+              if (y.length > 4 && y.get(4)) { led.plot(x, 0) } else { led.unplot(x, 0) } */
+        }
+    }
+
 } // functions.ts

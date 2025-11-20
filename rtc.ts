@@ -211,4 +211,8 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
     //% block="%pRegister"
     export function pins_rtc_eRegister(pRegister: rtc_eRegister): number { return pRegister }
 
+
+
+
+
 } // rtc.ts
