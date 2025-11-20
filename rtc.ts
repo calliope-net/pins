@@ -16,12 +16,7 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
         Control_1 = 0, Control_2 = 1, Offset = 2, RAM_byte = 3,
         Sekunde = 4, Minute = 5, Stunde = 6, Tag = 7, Wochentag = 8, Monat = 9, Jahr = 10
     }
-    export enum rtc_eRegister { Sekunde = 0, Minute = 1, Stunde = 2, Tag = 3, Wochentag = 4, Monat = 5, Jahr = 6 }
 
-    //% blockId=pins_rtc_eRegister blockHidden=true
-    //% group="Real Time Clock PCF85063TP" subcategory="RTC Uhr"
-    //% block="%pRegister"
-    export function pins_rtc_eRegister(pRegister: rtc_eRegister): number { return pRegister }
 
 
     // ========== group="Real Time Clock PCF85063TP" subcategory="RTC Uhr"
@@ -111,7 +106,7 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
 
     let rtc_key_string = ""
 
-    //% group="Uhr stellen" subcategory="RTC Uhr"
+    //% group="Uhr stellen *rdd#" subcategory="RTC Uhr"
     //% block="Uhr stellen 1 Zeichencode %key_code" weight=9
     export function rtc_set_key(key_code: number) {
         /*
@@ -137,7 +132,7 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
     }
 
 
-    //% group="Uhr stellen" subcategory="RTC Uhr"
+    //% group="Uhr stellen *rdd#" subcategory="RTC Uhr"
     //% block="Uhr stellen 5 Zeichen %key_string" weight=7
     export function rtc_set_stringkey(key_string: string) { // *259 (1) register (2-3) byte dezimal
         if (key_string && key_string.length >= 4 && key_string.charAt(0) == "*" && !Number.isNaN(parseInt(key_string.substr(1, 3), 10)))
@@ -204,5 +199,26 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
          return iByte */
     }
 
+    export enum rtc_eRegister { // yyMMddHHmmss
+        //% block="0 Sekunde"
+        Sekunde = 0,
+        //% block="1 Minute"
+        Minute = 1,
+        //% block="2 Stunde"
+        Stunde = 2,
+        //% block="3 Tag"
+        Tag = 3,
+        //% block="4 Wochentag"
+        Wochentag = 4,
+        //% block="5 Monat"
+        Monat = 5,
+        //% block="6 Jahr"
+        Jahr = 6
+    }
+
+    //% blockId=pins_rtc_eRegister blockHidden=true
+    //% group="Real Time Clock PCF85063TP" subcategory="RTC Uhr"
+    //% block="%pRegister"
+    export function pins_rtc_eRegister(pRegister: rtc_eRegister): number { return pRegister }
 
 } // rtc.ts
