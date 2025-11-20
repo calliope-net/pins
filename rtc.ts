@@ -10,7 +10,7 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
 
 */
     const rtc_I2C_ADDRESS = 0x51
-    let n_Buffer: Buffer //= Buffer.create(7)
+    let rtc_Buffer: Buffer //= Buffer.create(7)
 
     export enum eControl { Control_1 = 0, Control_2 = 1, Offset = 2, RAM_byte = 3 }
     export enum eFormat { DEC, zehner, einer, BCD }
@@ -28,22 +28,29 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
     //% group="Real Time Clock PCF85063TP" subcategory="RTC Uhr"
     //% block="Datum und Zeit einlesen"
     export function rtc_read() {
-        n_Buffer = pins_i2cWriteReadBuffer(rtc_I2C_ADDRESS, Buffer.fromArray([4]), 7)
+        rtc_Buffer = pins_i2cWriteReadBuffer(rtc_I2C_ADDRESS, Buffer.fromArray([4]), 7)
     }
 
     //% group="Real Time Clock PCF85063TP" subcategory="RTC Uhr"
     //% block="Array (7 Byte) [s,m,H,d,w,M,y] im Format BCD"
-    export function rtc_get_array() {
-        return n_Buffer.toArray(NumberFormat.UInt8LE)
+    export function rtc_get_array(): number[] {
+        if (rtc_Buffer)
+            return rtc_Buffer.toArray(NumberFormat.UInt8LE)
+        else
+            return []
     }
 
     //% group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr"
     //% block="%register als Zahl" weight=6
     //% register.min=0 register.max=6
     //% register.shadow=pins_rtc_eRegister
-    export function rtc_get_int(register: number) {
-        return n_Buffer.toArray(NumberFormat.UInt8LE)
+    export function rtc_get_int(register: number): number {
+        if (rtc_Buffer && between(register, 0, 6))
+            return (rtc_Buffer[register] >> 4) * 10 + (rtc_Buffer[register] & 0x0F)
+        else
+            return -1
     }
+
 
 
 } // rtc.ts
