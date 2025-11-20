@@ -14,6 +14,15 @@ und gibt mit voice_read_cmdid() die ID zurück
     const voice_DF2301Q_I2C_REG_SET_VOLUME = 0x05
     const voice_DF2301Q_I2C_REG_WAKE_TIME = 0x06
 
+    export enum voice_eRegister {
+        CMDID = 0x02, PLAY_CMDID = 0x03, SET_MUTE = 0x04, SET_VOLUME = 0x05, WAKE_TIME = 0x06
+    }
+
+    //% blockId=pins_voice_eRegister blockHidden=true
+    //% group="Gravity: Voice Recognition Sensor" subcategory="Spracherkennung"
+    //% block="%pRegister"
+    // pRegister.defl=pins.voice_eRegister.WAKE_TIME
+    export function pins_voice_eRegister(pRegister: voice_eRegister): number { return pRegister }
 
 
     // ========== group="Gravity: Voice Recognition Sensor" subcategory="Spracherkennung"
@@ -57,7 +66,8 @@ und gibt mit voice_read_cmdid() die ID zurück
 
     //% group="Konfiguration" subcategory="Spracherkennung"
     //% block="Register %reg (2..6) lesen" weight=3
-    //% reg.min=2 reg.max=6 reg.defl=6
+    // reg.min=2 reg.max=6
+    //% reg.shadow=pins_voice_eRegister reg.defl=pins.voice_eRegister.WAKE_TIME
     export function voice_register(reg: number) {
         if (between(reg, voice_DF2301Q_I2C_REG_CMDID, voice_DF2301Q_I2C_REG_WAKE_TIME)) {
             let bu = pins_i2cWriteReadBuffer(voice_I2C_ADDRESS, Buffer.fromArray([reg]), 1)

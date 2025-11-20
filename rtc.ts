@@ -148,7 +148,7 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
 
     //% group="RTC Register" subcategory="RTC Uhr"
     //% block="write RTC Register %register Byte %byte" weight=6
-    //% register.defl=rtc_eControl.Control_2 byte.defl=6
+    //% register.defl=pins.rtc_eControl.Control_2 byte.defl=6
     export function rtc_write_control(register: rtc_eControl, byte: number): number { // defl: CLKOUT=1Hz
         return pins_i2cWriteBuffer(rtc_I2C_ADDRESS, Buffer.fromArray([register, byte]))
     }
