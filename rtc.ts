@@ -31,16 +31,6 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
         rtc_Buffer = pins_i2cWriteReadBuffer(rtc_I2C_ADDRESS, Buffer.fromArray([4]), 7)
     }
 
-    //% group="Real Time Clock PCF85063TP" subcategory="RTC Uhr"
-    //% block="Array (7 Byte) [s,m,H,d,w,M,y] im Format BCD" weight=6
-    export function rtc_get_array(): number[] {
-        if (rtc_Buffer)
-            return rtc_Buffer.toArray(NumberFormat.UInt8LE)
-        else
-            return []
-    }
-
-
 
     // ========== group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr"
 
@@ -55,43 +45,45 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
             return -1
     }
 
-    //% group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr"
-    //% block="Datum als Text" weight=6
-    export function rtc_get_date(): string {
-        // date_string = str(RTC_BUFFER[3] >> 4) + str(RTC_BUFFER[3] & 0x0F) + "." + str(RTC_BUFFER[5] >> 4) + str(RTC_BUFFER[5] & 0x0F) + ".20" + str(RTC_BUFFER[6] >> 4) + str(RTC_BUFFER[6] & 0x0F)
-        if (rtc_Buffer)
-            return (rtc_Buffer[3] >> 4) + (rtc_Buffer[3] & 0x0F) + "." + (rtc_Buffer[5] >> 4) + (rtc_Buffer[5] & 0x0F) + ".20" + (rtc_Buffer[6] >> 4) + (rtc_Buffer[6] & 0x0F)
-        else
-            return ""
-    }
+    // group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr"
+    // block="Datum als Text" weight=6
+    /*   export function rtc_get_date(): string {
+          // date_string = str(RTC_BUFFER[3] >> 4) + str(RTC_BUFFER[3] & 0x0F) + "." + str(RTC_BUFFER[5] >> 4) + str(RTC_BUFFER[5] & 0x0F) + ".20" + str(RTC_BUFFER[6] >> 4) + str(RTC_BUFFER[6] & 0x0F)
+          if (rtc_Buffer)
+              return (rtc_Buffer[3] >> 4) + (rtc_Buffer[3] & 0x0F) + "." + (rtc_Buffer[5] >> 4) + (rtc_Buffer[5] & 0x0F) + ".20" + (rtc_Buffer[6] >> 4) + (rtc_Buffer[6] & 0x0F)
+          else
+              return ""
+      } */
 
-    //% group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr"
-    //% block="Zeit als Text" weight=4
-    export function rtc_get_time(): string {
-        // time_string = str(RTC_BUFFER[2] >> 4) + str(RTC_BUFFER[2] & 0x0F) + ":" + str(RTC_BUFFER[1] >> 4) + str(RTC_BUFFER[1] & 0x0F) + ":" + str(RTC_BUFFER[0] >> 4) + str(RTC_BUFFER[0] & 0x0F)
-        if (rtc_Buffer)
-            return (rtc_Buffer[2] >> 4) + (rtc_Buffer[2] & 0x0F) + ":" + (rtc_Buffer[1] >> 4) + (rtc_Buffer[1] & 0x0F) + ":" + (rtc_Buffer[0] >> 4) + (rtc_Buffer[0] & 0x0F)
-        else
-            return ""
-    }
+    // group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr"
+    // block="Zeit als Text" weight=4
+    /*  export function rtc_get_time(): string {
+         // time_string = str(RTC_BUFFER[2] >> 4) + str(RTC_BUFFER[2] & 0x0F) + ":" + str(RTC_BUFFER[1] >> 4) + str(RTC_BUFFER[1] & 0x0F) + ":" + str(RTC_BUFFER[0] >> 4) + str(RTC_BUFFER[0] & 0x0F)
+         if (rtc_Buffer)
+             return (rtc_Buffer[2] >> 4) + (rtc_Buffer[2] & 0x0F) + ":" + (rtc_Buffer[1] >> 4) + (rtc_Buffer[1] & 0x0F) + ":" + (rtc_Buffer[0] >> 4) + (rtc_Buffer[0] & 0x0F)
+         else
+             return ""
+     } */
 
     export enum rtc_eFormat {
-        //% block="dd.MM.yy"
+        //% block="Datum dd.MM.yy"
         ddMMyy,
-        //% block="dd.MM.20yy"
+        //% block="Datum dd.MM.20yy"
         ddMM20yy,
-        //% block="ddd (Wochentag)"
+        //% block="Wochentag ddd"
         ddd,
-        //% block="HH:mm"
+        //% block="Zeit HH:mm"
         hhmm,
-        //% block="HH:mm:ss"
-        hhmss
+        //% block="Zeit HH:mm:ss"
+        hhmss,
+        //% block="yyMMddHHmmss"
+        yyMMddHHmmss
     }
 
 
     //% group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr"
-    //% block="%format als Text" weight=3
-    export function rtc_get(format: rtc_eFormat) {
+    //% block="%format" weight=3
+    export function rtc_get(format: rtc_eFormat): string {
         if (rtc_Buffer)
             switch (format) {
                 case rtc_eFormat.ddMMyy:
@@ -104,11 +96,24 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
                     return (rtc_Buffer[2] >> 4) + (rtc_Buffer[2] & 0x0F) + ":" + (rtc_Buffer[1] >> 4) + (rtc_Buffer[1] & 0x0F) + ":" + (rtc_Buffer[0] >> 4) + (rtc_Buffer[0] & 0x0F)
                 case rtc_eFormat.hhmss:
                     return (rtc_Buffer[2] >> 4) + (rtc_Buffer[2] & 0x0F) + ":" + (rtc_Buffer[1] >> 4) + (rtc_Buffer[1] & 0x0F)
+                case rtc_eFormat.yyMMddHHmmss:
+                    // iso_string = str(RTC_BUFFER[6] >> 4) + str(RTC_BUFFER[6] & 0x0F) + str(RTC_BUFFER[5] >> 4) + str(RTC_BUFFER[5] & 0x0F) + str(RTC_BUFFER[3] >> 4) + str(RTC_BUFFER[3] & 0x0F) + str(RTC_BUFFER[2] >> 4) + str(RTC_BUFFER[2] & 0x0F) + str(RTC_BUFFER[1] >> 4) + str(RTC_BUFFER[1] & 0x0F) + str(RTC_BUFFER[0] >> 4) + str(RTC_BUFFER[0] & 0x0F)
+                    return "" + (rtc_Buffer[6] >> 4) + (rtc_Buffer[6] & 0x0F) + (rtc_Buffer[5] >> 4) + (rtc_Buffer[5] & 0x0F) + (rtc_Buffer[3] >> 4) + (rtc_Buffer[3] & 0x0F) + (rtc_Buffer[2] >> 4) + (rtc_Buffer[2] & 0x0F) + (rtc_Buffer[1] >> 4) + (rtc_Buffer[1] & 0x0F) + (rtc_Buffer[0] >> 4) + (rtc_Buffer[0] & 0x0F)
                 default:
                     return ""
             }
         else
             return ""
     }
+
+    //% group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr"
+    //% block="Array (7 Byte) [s,m,H,d,w,M,y] im Format BCD" weight=1
+    export function rtc_get_array(): number[] {
+        if (rtc_Buffer)
+            return rtc_Buffer.toArray(NumberFormat.UInt8LE)
+        else
+            return []
+    }
+
 
 } // rtc.ts
