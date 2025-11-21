@@ -7,15 +7,17 @@ https://learn.sparkfun.com/tutorials/sparkfun-qwiic-gpio-hookup-guide
 
 https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
 */
-    export enum gpio_eI2C_ADDRESS {
-        GPIO_x27 = 0x27, GPIO_x26 = 0x26, GPIO_x25 = 0x25, GPIO_x24 = 0x24,
-        GPIO_x23 = 0x23, GPIO_x22 = 0x22, GPIO_x21 = 0x21, GPIO_x20 = 0x20
-    }
+
+    const gpio_OUT_Buffer: Buffer = Buffer.create(8) // index [i2c_addr & 7]
 
     //% blockId=pins_gpio_I2C_ADDRESS blockHidden=true
     //% group="SparkFun Qwiic GPIO (I²C 0x20..0x27)" subcategory=GPIO
     //% block="%pADDR"
     export function pins_gpio_I2C_ADDRESS(pADDR: gpio_eI2C_ADDRESS): number { return pADDR }
+    export enum gpio_eI2C_ADDRESS {
+        GPIO_x27 = 0x27, GPIO_x26 = 0x26, GPIO_x25 = 0x25, GPIO_x24 = 0x24,
+        GPIO_x23 = 0x23, GPIO_x22 = 0x22, GPIO_x21 = 0x21, GPIO_x20 = 0x20
+    }
 
     export enum gpio_eCommandByte { INPUT_PORT = 0x00, OUTPUT_PORT = 0x01, INVERSION = 0x02, CONFIGURATION = 0x03 }
 
@@ -58,11 +60,13 @@ https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
         if (pIO2 & GPIO_IN) { r3 |= 2 ** 2; if (pIO2 & INVERT) { r2 |= 2 ** 2 } }
         if (pIO1 & GPIO_IN) { r3 |= 2 ** 1; if (pIO1 & INVERT) { r2 |= 2 ** 1 } }
         if (pIO0 & GPIO_IN) { r3 |= 2 ** 0; if (pIO0 & INVERT) { r2 |= 2 ** 0 } }
-        basic.showNumber(r2)
+        // basic.showNumber(r2)
         i2cWriteBuffer(pADDR, Buffer.fromArray([gpio_eCommandByte.CONFIGURATION, r3]))
         i2cWriteBuffer(pADDR, Buffer.fromArray([gpio_eCommandByte.INVERSION, r2]))
         //writeRegister(pADDR, eCommandByte.CONFIGURATION, r3)
         //writeRegister(pADDR, eCommandByte.INVERSION, r2)
+
+        gpio_OUT_Buffer[pADDR & 7] = 0
     }
 
 
@@ -72,20 +76,32 @@ https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
 
 
     //% group="GPIO: General-purpose input/output" subcategory=GPIO
-    //% block="I²C %pADDR lese Bit %bit" weight=6
+    //% block="I²C %pADDR lese Bit %ebit" weight=6
     //% pADDR.shadow=pins_gpio_I2C_ADDRESS
-    //% bit.shadow=pins_gpio_Bit
-    export function gpio_readBit(pADDR: number, bit: number): boolean {
-        return (gpio_readINPUT_PORT(pADDR) & 2 ** (bit & 0x07)) != 0
+    //% ebit.shadow=pins_gpio_Bit
+    export function gpio_readBit(pADDR: number, ebit: number): boolean {
+        return (gpio_readByte(pADDR) & 2 ** (ebit & 0x07)) != 0
     }
 
-
+    //% group="GPIO: General-purpose input/output" subcategory=GPIO
+    //% block="I²C %i2c_addr schreibe Bit %ebit %bit" weight=5
+    //% i2c_addr.shadow=pins_gpio_I2C_ADDRESS
+    //% ebit.shadow=pins_gpio_Bit
+    //% bit.shadow=toggleOnOff
+    export function gpio_writeBit(i2c_addr: number, ebit: number, bit: boolean) {
+        if (bit)
+            //gpio_OUT_Buffer[pADDR & 7] &= ~(2 ** (ebit & 0x07))
+            gpio_writeByte(i2c_addr, gpio_OUT_Buffer[i2c_addr & 7] | 2 ** (ebit & 0x07))
+        else
+            //gpio_OUT_Buffer[pADDR & 7] &= ~(2 ** (ebit & 0x07))
+            gpio_writeByte(i2c_addr, gpio_OUT_Buffer[i2c_addr & 7] & ~(2 ** (ebit & 0x07)))
+    }
 
 
     //% group="GPIO: General-purpose input/output" subcategory=GPIO
     //% block="I²C %pADDR lese INPUT Byte" weight=2
     //% pADDR.shadow=pins_gpio_I2C_ADDRESS
-    export function gpio_readINPUT_PORT(pADDR: number): number { // Bitweise AND setzt die OUTPUT Bits auf 0
+    export function gpio_readByte(pADDR: number): number { // Bitweise AND setzt die OUTPUT Bits auf 0
         let bu = pins_i2cWriteReadBuffer(pADDR, Buffer.fromArray([gpio_eCommandByte.INPUT_PORT]), 1)
         if (bu)
             return bu.getUint8(0)
@@ -98,7 +114,8 @@ https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
     //% block="I²C %pADDR schreibe OUTPUT Byte %byte" weight=1
     //% pADDR.shadow=pins_gpio_I2C_ADDRESS
     //% byte.min=0 byte.max=255 byte.defl=1
-    export function gpio_writeOUTPUT_PORT(pADDR: number, byte: number) {
+    export function gpio_writeByte(pADDR: number, byte: number) {
+        gpio_OUT_Buffer[pADDR & 7] = byte
         i2cWriteBuffer(pADDR, Buffer.fromArray([gpio_eCommandByte.OUTPUT_PORT, byte]))
         //writeRegister(pADDR, eCommandByte.OUTPUT_PORT, byte)
     }
