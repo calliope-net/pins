@@ -28,11 +28,11 @@ https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
 
     export enum gpio_eIO { IN = 0b01, IN_inverted = 0b11, OUT = 0b00 }
 
-    //% blockId=pins_gpio_Bit blockHidden=true
+    //% blockId=pins_gpio_pin blockHidden=true
     //% group="SparkFun Qwiic GPIO (I²C 0x20..0x27)" subcategory=GPIO
     //% block="%bit"
-    export function pins_gpio_Bit(bit: gpio_eBit): number { return bit }
-    export enum gpio_eBit { Bit0, Bit1, Bit2, Bit3, Bit4, Bit5, Bit6, Bit7 }
+    export function pins_gpio_pin(pin: gpio_epin): number { return pin }
+    export enum gpio_epin { Pin0, Pin1, Pin2, Pin3, Pin4, Pin5, Pin6, Pin7 }
 
 
     // ========== group="SparkFun Qwiic GPIO (I²C 0x20..0x27)" subcategory=GPIO
@@ -46,7 +46,7 @@ https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
     }
 
     //% group="SparkFun Qwiic GPIO (I²C 0x20..0x27)" subcategory=GPIO
-    //% block="I²C %pADDR Konfiguration | Bit 7 %pIO7 Bit 6 %pIO6 Bit 5 %pIO5 Bit 4 %pIO4 Bit 3 %pIO3 Bit 2 %pIO2 Bit 1 %pIO1 Bit 0 %pIO0" weight=2
+    //% block="I²C %pADDR Konfiguration | Pin 7 %pIO7 Pin 6 %pIO6 Pin 5 %pIO5 Pin 4 %pIO4 Pin 3 %pIO3 Pin 2 %pIO2 Pin 1 %pIO1 Pin 0 %pIO0" weight=2
     //% pADDR.shadow=pins_gpio_I2C_ADDRESS
     // inlineInputMode=inline
     export function gpio_setMode(pADDR: number, pIO7: gpio_eIO, pIO6: gpio_eIO, pIO5: gpio_eIO, pIO4: gpio_eIO, pIO3: gpio_eIO, pIO2: gpio_eIO, pIO1: gpio_eIO, pIO0: gpio_eIO) {
@@ -76,30 +76,30 @@ https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
 
 
     //% group="GPIO: General-purpose input/output" subcategory=GPIO
-    //% block="I²C %pADDR lese Bit %ebit" weight=6
+    //% block="I²C %pADDR lese %pin" weight=6
     //% pADDR.shadow=pins_gpio_I2C_ADDRESS
-    //% ebit.shadow=pins_gpio_Bit
-    export function gpio_readBit(pADDR: number, ebit: number): boolean {
-        return (gpio_readByte(pADDR) & 2 ** (ebit & 0x07)) != 0
+    //% pin.shadow=pins_gpio_pin
+    export function gpio_readBit(pADDR: number, pin: number): boolean {
+        return (gpio_readByte(pADDR) & 2 ** (pin & 0x07)) != 0
     }
 
     //% group="GPIO: General-purpose input/output" subcategory=GPIO
-    //% block="I²C %i2c_addr schreibe Bit %ebit %bit" weight=5
+    //% block="I²C %i2c_addr schreibe %pin %bit" weight=5
     //% i2c_addr.shadow=pins_gpio_I2C_ADDRESS
-    //% ebit.shadow=pins_gpio_Bit
+    //% pin.shadow=pins_gpio_pin
     //% bit.shadow=toggleOnOff
-    export function gpio_writeBit(i2c_addr: number, ebit: number, bit: boolean) {
+    export function gpio_writeBit(i2c_addr: number, pin: number, bit: boolean) {
         if (bit)
             //gpio_OUT_Buffer[pADDR & 7] &= ~(2 ** (ebit & 0x07))
-            gpio_writeByte(i2c_addr, gpio_OUT_Buffer[i2c_addr & 7] | 2 ** (ebit & 0x07))
+            gpio_writeByte(i2c_addr, gpio_OUT_Buffer[i2c_addr & 7] | 2 ** (pin & 0x07))
         else
             //gpio_OUT_Buffer[pADDR & 7] &= ~(2 ** (ebit & 0x07))
-            gpio_writeByte(i2c_addr, gpio_OUT_Buffer[i2c_addr & 7] & ~(2 ** (ebit & 0x07)))
+            gpio_writeByte(i2c_addr, gpio_OUT_Buffer[i2c_addr & 7] & ~(2 ** (pin & 0x07)))
     }
 
 
     //% group="GPIO: General-purpose input/output" subcategory=GPIO
-    //% block="I²C %pADDR lese INPUT Byte" weight=2
+    //% block="I²C %pADDR lese Byte" weight=2
     //% pADDR.shadow=pins_gpio_I2C_ADDRESS
     export function gpio_readByte(pADDR: number): number { // Bitweise AND setzt die OUTPUT Bits auf 0
         let bu = pins_i2cWriteReadBuffer(pADDR, Buffer.fromArray([gpio_eCommandByte.INPUT_PORT]), 1)
@@ -111,7 +111,7 @@ https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
     }
 
     //% group="GPIO: General-purpose input/output" subcategory=GPIO
-    //% block="I²C %pADDR schreibe OUTPUT Byte %byte" weight=1
+    //% block="I²C %pADDR schreibe Byte %byte" weight=1
     //% pADDR.shadow=pins_gpio_I2C_ADDRESS
     //% byte.min=0 byte.max=255 byte.defl=1
     export function gpio_writeByte(pADDR: number, byte: number) {
