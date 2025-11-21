@@ -16,7 +16,8 @@
         "keyboards.ts",
         "joystick.ts",
         "voice.ts",
-        "rtc.ts"
+        "rtc.ts",
+        "gpio.ts"
     ],
     "testFiles": [
         "test.ts"
