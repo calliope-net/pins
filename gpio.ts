@@ -99,7 +99,7 @@ https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
 
 
     //% group="GPIO: General-purpose input/output" subcategory=GPIO
-    //% block="I²C %i2c_addr lese Byte" weight=2
+    //% block="I²C %i2c_addr lese INPUT Byte" weight=2
     //% i2c_addr.shadow=pins_gpio_I2C_ADDRESS
     export function gpio_readByte(i2c_addr: number): number { // Bitweise AND setzt die OUTPUT Bits auf 0
         let bu = pins_i2cWriteReadBuffer(i2c_addr, Buffer.fromArray([gpio_eCommandByte.INPUT_PORT]), 1)
