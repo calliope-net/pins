@@ -84,7 +84,7 @@ https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
     }
 
     //% group="GPIO: General-purpose input/output" subcategory=GPIO
-    //% block="I²C %i2c_addr schreibe %pin %bit" weight=5
+    //% block="I²C %i2c_addr schalte %pin %bit" weight=5
     //% i2c_addr.shadow=pins_gpio_I2C_ADDRESS
     //% pin.shadow=pins_gpio_pin
     //% bit.shadow=toggleOnOff
