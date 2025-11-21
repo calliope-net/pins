@@ -42,6 +42,11 @@ namespace pins { // functions.ts
 
     // ========== group="Mathematik" subcategory=Funktionen
 
+    //% blockId=pins_hex4
+    //% group="Mathematik" subcategory=Funktionen weight=8
+    //% block="%x0"
+    export function hex4(x0: eHEX4bit) { return (x0 & 0xF) }
+
     //% blockId=pins_hex44
     //% group="Mathematik" subcategory=Funktionen weight=8
     //% block="%x1 %x0"
@@ -118,11 +123,11 @@ namespace pins { // functions.ts
         x9 = 0x9,
         //% block="A"
         xA = 0xA,
-        //% block="B"
+        //% block="b"
         xB = 0xB,
         //% block="C"
         xC = 0xC,
-        //% block="D"
+        //% block="d"
         xD = 0xD,
         //% block="E"
         xE = 0xE,
