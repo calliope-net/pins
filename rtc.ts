@@ -80,7 +80,7 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
     export enum rtc_e25LED { Datum, Zeit }
 
     //% group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr"
-    //% block="Binär Uhr (25 LED Matrix) %p25LED" weight=4
+    //% block="zeige %p25LED binär in 25 LED Matrix" weight=4
     export function Anzeige25LED(p25LED: rtc_e25LED) {
         if (rtc_Buffer && p25LED == rtc_e25LED.Datum) {
             plot25LED(0, rtc_get_int(rtc_eRegister.Tag))        // x=0 Days 0..31
