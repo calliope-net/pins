@@ -20,14 +20,14 @@ und gibt mit voice_read_cmdid() die ID zurück
     }
 
     //% blockId=pins_voice_eRegister blockHidden=true
-    //% group="Gravity: Voice Recognition Sensor" subcategory="Spracherkennung"
+    //% group="Voice Recognition Sensor (I²C 0x64)" subcategory="Spracherkennung"
     //% block="%pRegister"
     export function pins_voice_eRegister(pRegister: voice_eRegister): number { return pRegister }
 
 
     // ========== group="Gravity: Voice Recognition Sensor" subcategory="Spracherkennung"
 
-    //% group="Gravity: Voice Recognition Sensor" subcategory="Spracherkennung"
+    //% group="Voice Recognition Sensor (I²C 0x64)" subcategory="Spracherkennung"
     //% block="Kommando ID" weight=7
     export function voice_read_cmdid(): number { // repeat=true muss angegeben werden
         if (pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_eRegister.CMDID]), true) == 0)
@@ -38,14 +38,22 @@ und gibt mit voice_read_cmdid() die ID zurück
         //return bu[0]
     }
 
-    //% group="Gravity: Voice Recognition Sensor" subcategory="Spracherkennung"
+    //% group="Voice Recognition Sensor (I²C 0x64)" subcategory="Spracherkennung"
     //% block="spiele Antwort ID %id" weight=5
     export function voice_play_cmdid(id: number) {
         pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_eRegister.PLAY_CMDID, id]))
     }
 
 
+
     // ========== group="Konfiguration" subcategory="Spracherkennung"
+
+    //% group="Konfiguration" subcategory="Spracherkennung"
+    //% block="Voice Sensor angeschlossen" weight=8
+    export function voice_connected(): boolean {
+        let bu = pins_i2cWriteReadBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_eRegister.WAKE_TIME]), 1)
+        return bu ? true : false
+    }
 
     //% group="Konfiguration" subcategory="Spracherkennung"
     //% block="Wachzeit %sekunden Sekunden" weight=7
@@ -69,7 +77,7 @@ und gibt mit voice_read_cmdid() die ID zurück
     // reg.min=2 reg.max=6
     //% reg.shadow=pins_voice_eRegister reg.defl=pins.voice_eRegister.WAKE_TIME
     export function voice_register(reg: number) {
-        if (between(reg, voice_eRegister.CMDID, voice_eRegister.WAKE_TIME)) {
+        if (between(reg, voice_eRegister.CMDID, voice_eRegister.WAKE_TIME)) { // 2..6
             let bu = pins_i2cWriteReadBuffer(voice_I2C_ADDRESS, Buffer.fromArray([reg]), 1)
             if (bu)
                 return bu.getUint8(0)
