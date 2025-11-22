@@ -57,15 +57,15 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
         if (rtc_Buffer)
             switch (format) {
                 case rtc_eFormat.ddMMyy:
-                    return (rtc_Buffer[3] >> 4) + (rtc_Buffer[3] & 0x0F) + "." + (rtc_Buffer[5] >> 4) + (rtc_Buffer[5] & 0x0F) + "." + (rtc_Buffer[6] >> 4) + (rtc_Buffer[6] & 0x0F)
+                    return "" + (rtc_Buffer[3] >> 4) + (rtc_Buffer[3] & 0x0F) + "." + (rtc_Buffer[5] >> 4) + (rtc_Buffer[5] & 0x0F) + "." + (rtc_Buffer[6] >> 4) + (rtc_Buffer[6] & 0x0F)
                 case rtc_eFormat.ddMM20yy:
-                    return (rtc_Buffer[3] >> 4) + (rtc_Buffer[3] & 0x0F) + "." + (rtc_Buffer[5] >> 4) + (rtc_Buffer[5] & 0x0F) + ".20" + (rtc_Buffer[6] >> 4) + (rtc_Buffer[6] & 0x0F)
+                    return "" + (rtc_Buffer[3] >> 4) + (rtc_Buffer[3] & 0x0F) + "." + (rtc_Buffer[5] >> 4) + (rtc_Buffer[5] & 0x0F) + ".20" + (rtc_Buffer[6] >> 4) + (rtc_Buffer[6] & 0x0F)
                 case rtc_eFormat.ddd:  //wd_string = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'][int(RTC_BUFFER[4])]
                     return ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', '-7'][rtc_Buffer[4] & 0x07]
                 case rtc_eFormat.hhmm:
-                    return (rtc_Buffer[2] >> 4) + (rtc_Buffer[2] & 0x0F) + ":" + (rtc_Buffer[1] >> 4) + (rtc_Buffer[1] & 0x0F) + ":" + (rtc_Buffer[0] >> 4) + (rtc_Buffer[0] & 0x0F)
+                    return "" + (rtc_Buffer[2] >> 4) + (rtc_Buffer[2] & 0x0F) + ":" + (rtc_Buffer[1] >> 4) + (rtc_Buffer[1] & 0x0F)
                 case rtc_eFormat.hhmss:
-                    return (rtc_Buffer[2] >> 4) + (rtc_Buffer[2] & 0x0F) + ":" + (rtc_Buffer[1] >> 4) + (rtc_Buffer[1] & 0x0F)
+                    return "" + (rtc_Buffer[2] >> 4) + (rtc_Buffer[2] & 0x0F) + ":" + (rtc_Buffer[1] >> 4) + (rtc_Buffer[1] & 0x0F) + ":" + (rtc_Buffer[0] >> 4) + (rtc_Buffer[0] & 0x0F)
                 case rtc_eFormat.yyMMddHHmmss:
                     // iso_string = str(RTC_BUFFER[6] >> 4) + str(RTC_BUFFER[6] & 0x0F) + str(RTC_BUFFER[5] >> 4) + str(RTC_BUFFER[5] & 0x0F) + str(RTC_BUFFER[3] >> 4) + str(RTC_BUFFER[3] & 0x0F) + str(RTC_BUFFER[2] >> 4) + str(RTC_BUFFER[2] & 0x0F) + str(RTC_BUFFER[1] >> 4) + str(RTC_BUFFER[1] & 0x0F) + str(RTC_BUFFER[0] >> 4) + str(RTC_BUFFER[0] & 0x0F)
                     return "" + (rtc_Buffer[6] >> 4) + (rtc_Buffer[6] & 0x0F) + (rtc_Buffer[5] >> 4) + (rtc_Buffer[5] & 0x0F) + (rtc_Buffer[3] >> 4) + (rtc_Buffer[3] & 0x0F) + (rtc_Buffer[2] >> 4) + (rtc_Buffer[2] & 0x0F) + (rtc_Buffer[1] >> 4) + (rtc_Buffer[1] & 0x0F) + (rtc_Buffer[0] >> 4) + (rtc_Buffer[0] & 0x0F)
