@@ -77,36 +77,29 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
     }
 
 
-    export enum rtc_e25LED { Datum, Zeit }
+    export enum rtc_e25led {
+        //% block="Zeit Hmmss"
+        Zeit,
+        //% block="Datum wdMyy"
+        Datum
+    }
 
     //% group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr"
     //% block="zeige %p25LED binär in 25 LED Matrix" weight=4
-    export function Anzeige25LED(p25LED: rtc_e25LED) {
-        if (rtc_Buffer && p25LED == rtc_e25LED.Datum) {
-            plot25LED(0, rtc_get_int(rtc_eRegister.Tag))        // x=0 Days 0..31
-            plot25LED(1, rtc_get_int(rtc_eRegister.Wochentag))  // x=1 Weekday 0..6
-            plot25LED(2, rtc_get_int(rtc_eRegister.Monat))      // x=2 Months 1..12
-            plot25LED(3, rtc_Buffer[rtc_eRegister.Jahr] >> 4)   // x=3 Years Zehner 00..90
-            plot25LED(4, rtc_Buffer[rtc_eRegister.Jahr] & 0x0F) // x=4 Years Einer 0..9
-
-            /*    plot25LED(0, i2c.BIN(getByte(eRegister.Days, eFormat.DEC))) // x=0 Days
-               plot25LED(1, []) // x=1 unplot
-               plot25LED(2, i2c.BIN(getByte(eRegister.Months, eFormat.DEC))) // x=2 Months
-               plot25LED(3, i2c.BIN(getByte(eRegister.Years, eFormat.DEC) >> 5)) // x=3 Years 32..99
-               plot25LED(4, i2c.BIN(getByte(eRegister.Years, eFormat.DEC))) // x=4 Years 00..31 */
-        }
-        else if (rtc_Buffer && p25LED == rtc_e25LED.Zeit) {
+    export function rtc_25led(p25led: rtc_e25led) {
+        if (rtc_Buffer && p25led == rtc_e25led.Zeit) {
             plot25LED(0, rtc_get_int(rtc_eRegister.Stunde))         // Stunde 0..23
             plot25LED(1, rtc_Buffer[rtc_eRegister.Minute] >> 4)     // Minute 00..50
             plot25LED(2, rtc_Buffer[rtc_eRegister.Minute] & 0x0F)   // Minute 0..9
             plot25LED(3, rtc_Buffer[rtc_eRegister.Sekunde] >> 4)    // Stunde 00..20
             plot25LED(4, rtc_Buffer[rtc_eRegister.Sekunde] & 0x0F)  // Stunde 0..9
-
-            /*   plot25LED(0, i2c.BIN(getByte(eRegister.Hours, eFormat.DEC)))
-              plot25LED(1, i2c.BIN(getByte(eRegister.Minutes, eFormat.zehner)))
-              plot25LED(2, i2c.BIN(getByte(eRegister.Minutes, eFormat.einer)))
-              plot25LED(3, i2c.BIN(getByte(eRegister.Seconds, eFormat.zehner)))
-              plot25LED(4, i2c.BIN(getByte(eRegister.Seconds, eFormat.einer))) */
+        }
+        else if (rtc_Buffer && p25led == rtc_e25led.Datum) {
+            plot25LED(0, rtc_get_int(rtc_eRegister.Wochentag))  // x=1 Weekday 0..6
+            plot25LED(1, rtc_get_int(rtc_eRegister.Tag))        // x=0 Days 0..31
+            plot25LED(2, rtc_get_int(rtc_eRegister.Monat))      // x=2 Months 1..12
+            plot25LED(3, rtc_Buffer[rtc_eRegister.Jahr] >> 4)   // x=3 Years Zehner 00..90
+            plot25LED(4, rtc_Buffer[rtc_eRegister.Jahr] & 0x0F) // x=4 Years Einer 0..9
         }
     }
 
@@ -142,15 +135,15 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
             rtc_key_string += key_char
         else if ((key_char == '#' || key_code == 13) && rtc_key_string.length == 4) {
             //rtc_write(int(key_string[1], 10), int(key_string[2 : 4], 10))
-            rtc_set_string(rtc_key_string)
             rtc_key_string += '#'
+            rtc_set_string(rtc_key_string)
         }
         return rtc_key_string
     }
 
     //% group="Uhr stellen *rdd# (* Register 2 Ziffern #)" subcategory="RTC Uhr"
     //% block="Uhr stellen 5 Zeichen %key_string" weight=7
-    export function rtc_set_string(key_string: string) { // *259 (1) register (2-3) byte dezimal
+    export function rtc_set_string(key_string: string) { // *259# (1) register (2-3) byte dezimal
         if (key_string && key_string.length >= 4 && key_string.charAt(0) == "*" && !Number.isNaN(parseInt(key_string.substr(1, 3), 10)))
             rtc_write_control(parseInt(key_string.charAt(1), 10) + 4, rtc_convert_byte(parseInt(key_string.substr(2, 2), 10), rtc_eFormat_BCD.bcd))
     }
