@@ -115,9 +115,18 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
 
 
     //% group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr"
-    //% block="Buffer (7 Byte) [s,m,H,d,w,M,y] im Format BCD" weight=2
+    //% block="Buffer (7 Byte) [s,m,H,d,w,M,y] im Format BCD" weight=3
     export function rtc_get_array(): Buffer {
         return rtc_Buffer
+    }
+
+    //% group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr"
+    //% block="oscillator stop" weight=2
+    export function rtc_oscillator_stop(): boolean {
+        if (rtc_Buffer)
+            return (rtc_Buffer[0] & 0x80) != 0
+        else
+            return false
     }
 
 
@@ -155,6 +164,7 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
 
     //% group="Uhr stellen *rdd# (* Register 2 Ziffern #)" subcategory="RTC Uhr"
     //% block="Uhr stellen 5 Zeichen %key_string" weight=7
+    //% key_string.defl="*000#"
     export function rtc_set_string(key_string: string) { // *259 (1) register (2-3) byte dezimal
         if (key_string && key_string.length >= 4 && key_string.charAt(0) == "*" && !Number.isNaN(parseInt(key_string.substr(1, 3), 10)))
             rtc_write_control(parseInt(key_string.charAt(1), 10) + 4, rtc_convert_byte(parseInt(key_string.substr(2, 2), 10), rtc_eFormat_BCD.bcd))
