@@ -3,26 +3,6 @@ namespace pins { // keyboards.ts
 
 
 
-    // ========== group="M5Stack Card Keyboard 0x5E" subcategory="Tastaturen"
-
-    const i2cCardKb_x5F = 0x5F
-
-    //% group="M5Stack Card Keyboard 50 Tasten (I²C: 0x5E)" subcategory="Tastaturen"
-    //% block="I²C Card Keyboard Ereignis auslösen %on" weight=3
-    //% on.shadow=toggleOnOff
-    export function raiseKeyboardEvent(on: boolean) {
-        // https://docs.m5stack.com/en/unit/cardkb_1.1
-        if (on && onKeyboardEventHandler) {
-
-            let buffer = pins.i2cReadBuffer(i2cCardKb_x5F, 1)
-
-            let charCode = buffer[0]
-            if (charCode > 0)
-                onKeyboardEventHandler(charCode, String.fromCharCode(charCode), (charCode >= 32 && charCode <= 127))
-        }
-    }
-
-
 
     // ========== Qwiic Keypad 12 button
 
@@ -40,7 +20,33 @@ namespace pins { // keyboards.ts
     }
 
     //% group="Qwiic Keypad 12 Tasten (I²C: 0x4B)" subcategory="Tastaturen"
-    //% block="I²C Qwiic Keypad Ereignis auslösen %on" weight=5
+    //% block="Keypad angeschlossen" weight=8
+    export function keypadConnected() {
+        if (n_i2cKeypadConnected === undefined)
+            keypad_read()
+        return n_i2cKeypadConnected
+    }
+
+    //% group="Qwiic Keypad 12 Tasten (I²C: 0x4B)" subcategory="Tastaturen"
+    //% block="Keypad Zeichencode" weight=6
+    export function keypad_read() {
+        let charCode = 0
+        if (n_i2cKeypadConnected || n_i2cKeypadConnected === undefined) {
+            n_i2cKeypadConnected = pins_i2cWriteBuffer(i2cKeypad_x4B, Buffer.fromArray([eKeypadRegisters.KEYPAD_UPDATE_FIFO, 1]), n_i2cKeypadConnected) == 0
+
+            if (n_i2cKeypadConnected) {
+                let bu = pins_i2cWriteReadBuffer(i2cKeypad_x4B, Buffer.fromArray([eKeypadRegisters.KEYPAD_BUTTON]), 1)
+                basic.pause(50) // 25 ms is good, more is better
+                if (bu)
+                    charCode = bu[0]
+            }
+        }
+        return charCode
+    }
+
+
+    //% group="Qwiic Keypad 12 Tasten (I²C: 0x4B)" subcategory="Tastaturen"
+    //% block="Qwiic Keypad Ereignis auslösen %on" weight=5
     //% on.shadow=toggleOnOff
     export function raiseKeypadEvent(on: boolean) {
         // https://learn.sparkfun.com/tutorials/qwiic-keypad-hookup-guide/hardware-overview
@@ -61,11 +67,28 @@ namespace pins { // keyboards.ts
         }
     }
 
-    //% group="Qwiic Keypad 12 Tasten (I²C: 0x4B)" subcategory="Tastaturen"
-    //% block="Qwiic Keypad angeschlossen" weight=3
-    export function keypadConnected() {
-        return n_i2cKeypadConnected // kann undefined sein
+
+
+
+    // ========== group="M5Stack Card Keyboard 0x5E" subcategory="Tastaturen"
+
+    const i2cCardKb_x5F = 0x5F
+
+    //% group="M5Stack Card Keyboard 50 Tasten (I²C: 0x5E)" subcategory="Tastaturen"
+    //% block="Card Keyboard Ereignis auslösen %on" weight=3
+    //% on.shadow=toggleOnOff
+    export function raiseKeyboardEvent(on: boolean) {
+        // https://docs.m5stack.com/en/unit/cardkb_1.1
+        if (on && onKeyboardEventHandler) {
+
+            let buffer = pins.i2cReadBuffer(i2cCardKb_x5F, 1)
+
+            let charCode = buffer[0]
+            if (charCode > 0)
+                onKeyboardEventHandler(charCode, String.fromCharCode(charCode), (charCode >= 32 && charCode <= 127))
+        }
     }
+
 
 
     // ========== group="Tastatur Ereignis" alle Tastaturen
