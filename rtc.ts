@@ -41,12 +41,16 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
         ddMMyy,
         //% block="Datum dd.MM.20yy"
         ddMM20yy,
+        //% block="Datum dd.MM"
+        ddMM,
         //% block="Wochentag ddd"
         ddd,
         //% block="Zeit HH:mm"
         hhmm,
         //% block="Zeit HH:mm:ss"
         hhmss,
+        //% block="Zeit mm:ss"
+        mmss,
         //% block="yyMMddHHmmss"
         yyMMddHHmmss
     }
@@ -60,12 +64,18 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
                     return "" + (rtc_Buffer[3] >> 4) + (rtc_Buffer[3] & 0x0F) + "." + (rtc_Buffer[5] >> 4) + (rtc_Buffer[5] & 0x0F) + "." + (rtc_Buffer[6] >> 4) + (rtc_Buffer[6] & 0x0F)
                 case rtc_eFormat.ddMM20yy:
                     return "" + (rtc_Buffer[3] >> 4) + (rtc_Buffer[3] & 0x0F) + "." + (rtc_Buffer[5] >> 4) + (rtc_Buffer[5] & 0x0F) + ".20" + (rtc_Buffer[6] >> 4) + (rtc_Buffer[6] & 0x0F)
+                case rtc_eFormat.ddMM:
+                    return "" + (rtc_Buffer[3] >> 4) + (rtc_Buffer[3] & 0x0F) + "." + (rtc_Buffer[5] >> 4) + (rtc_Buffer[5] & 0x0F)
+
                 case rtc_eFormat.ddd:  //wd_string = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'][int(RTC_BUFFER[4])]
                     return ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', '-7'][rtc_Buffer[4] & 0x07]
                 case rtc_eFormat.hhmm:
                     return "" + (rtc_Buffer[2] >> 4) + (rtc_Buffer[2] & 0x0F) + ":" + (rtc_Buffer[1] >> 4) + (rtc_Buffer[1] & 0x0F)
                 case rtc_eFormat.hhmss:
                     return "" + (rtc_Buffer[2] >> 4) + (rtc_Buffer[2] & 0x0F) + ":" + (rtc_Buffer[1] >> 4) + (rtc_Buffer[1] & 0x0F) + ":" + (rtc_Buffer[0] >> 4) + (rtc_Buffer[0] & 0x0F)
+                case rtc_eFormat.mmss:
+                    return "" + (rtc_Buffer[1] >> 4) + (rtc_Buffer[1] & 0x0F) + ":" + (rtc_Buffer[0] >> 4) + (rtc_Buffer[0] & 0x0F)
+
                 case rtc_eFormat.yyMMddHHmmss:
                     // iso_string = str(RTC_BUFFER[6] >> 4) + str(RTC_BUFFER[6] & 0x0F) + str(RTC_BUFFER[5] >> 4) + str(RTC_BUFFER[5] & 0x0F) + str(RTC_BUFFER[3] >> 4) + str(RTC_BUFFER[3] & 0x0F) + str(RTC_BUFFER[2] >> 4) + str(RTC_BUFFER[2] & 0x0F) + str(RTC_BUFFER[1] >> 4) + str(RTC_BUFFER[1] & 0x0F) + str(RTC_BUFFER[0] >> 4) + str(RTC_BUFFER[0] & 0x0F)
                     return "" + (rtc_Buffer[6] >> 4) + (rtc_Buffer[6] & 0x0F) + (rtc_Buffer[5] >> 4) + (rtc_Buffer[5] & 0x0F) + (rtc_Buffer[3] >> 4) + (rtc_Buffer[3] & 0x0F) + (rtc_Buffer[2] >> 4) + (rtc_Buffer[2] & 0x0F) + (rtc_Buffer[1] >> 4) + (rtc_Buffer[1] & 0x0F) + (rtc_Buffer[0] >> 4) + (rtc_Buffer[0] & 0x0F)
@@ -134,16 +144,18 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
         else if (key_code >= 48 && key_code <= 57 && rtc_key_string.length > 0 && rtc_key_string.length < 4)
             rtc_key_string += key_char
         else if ((key_char == '#' || key_code == 13) && rtc_key_string.length == 4) {
-            //rtc_write(int(key_string[1], 10), int(key_string[2 : 4], 10))
-            rtc_key_string += '#'
             rtc_set_string(rtc_key_string)
+            rtc_key_string = ""
         }
+        else if (key_char == '#' || key_code == 13)
+            rtc_key_string = ""
+
         return rtc_key_string
     }
 
     //% group="Uhr stellen *rdd# (* Register 2 Ziffern #)" subcategory="RTC Uhr"
     //% block="Uhr stellen 5 Zeichen %key_string" weight=7
-    export function rtc_set_string(key_string: string) { // *259# (1) register (2-3) byte dezimal
+    export function rtc_set_string(key_string: string) { // *259 (1) register (2-3) byte dezimal
         if (key_string && key_string.length >= 4 && key_string.charAt(0) == "*" && !Number.isNaN(parseInt(key_string.substr(1, 3), 10)))
             rtc_write_control(parseInt(key_string.charAt(1), 10) + 4, rtc_convert_byte(parseInt(key_string.substr(2, 2), 10), rtc_eFormat_BCD.bcd))
     }
