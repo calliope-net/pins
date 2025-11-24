@@ -68,7 +68,7 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
                     return "" + (rtc_Buffer[3] >> 4) + (rtc_Buffer[3] & 0x0F) + "." + (rtc_Buffer[5] >> 4) + (rtc_Buffer[5] & 0x0F)
 
                 case rtc_eFormat.ddd:  //wd_string = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'][int(RTC_BUFFER[4])]
-                    return ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', '-7'][rtc_Buffer[4] & 0x07]
+                    return ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', '-7'].get(rtc_Buffer[4] & 0x07)
                 case rtc_eFormat.hhmm:
                     return "" + (rtc_Buffer[2] >> 4) + (rtc_Buffer[2] & 0x0F) + ":" + (rtc_Buffer[1] >> 4) + (rtc_Buffer[1] & 0x0F)
                 case rtc_eFormat.hhmss:
