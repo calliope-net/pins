@@ -93,7 +93,8 @@ und gibt mit voice_read_cmdid() die ID zurück
     //% group="Kommandos 0..142 und 200..208" subcategory="Spracherkennung"
     //% block="Kommando ID %id als Text" weight=5
     export function voice_command_text(id: number) {
-        if (id >= 0 && id <= 142)
+        // Calliope v2 erlaubt nur Array Längen bis 32 Elemente
+        if (id >= 0 && id <= 31) // && id <= 142
             return [
                 // Wake-up words	1..2
                 '0', // 0
@@ -117,8 +118,11 @@ und gibt mit voice_read_cmdid() die ID zurück
                 'Turn right ninety degrees',
                 'Turn right forty-five degrees',
                 'Turn right thirty degrees', // 30
-                'Shift down a gear',
-                'Line tracking mode',
+                'Shift down a gear' // 31
+            ].get(id)
+        else if (id >= 32 && id <= 63)
+            return [
+                'Line tracking mode', // 32-32 = 0
                 'Light tracking mode',
                 'Bluetooth mode',
                 'Obstacle avoidance mode', // 35
@@ -149,8 +153,11 @@ und gibt mit voice_read_cmdid() die ID zurück
                 'Display number eight', // 60
                 'Display number nine',
                 'Display smiley face',
-                'Display crying face',
-                'Display heart',
+                'Display crying face' // 63-32 = 31
+            ].get(id - 32)
+        else if (id >= 64 && id <= 95)
+            return [
+                'Display heart', // 64-64 = 0
                 'Turn off dot matrix', // 65
                 'Read current posture',
                 'Read ambient light',
@@ -181,8 +188,11 @@ und gibt mit voice_read_cmdid() die ID zurück
                 'Play music',
                 'Stop playing',
                 'The last track',
-                'The next track', // 95
-                'Repeat this track',
+                'The next track' // 95-64 = 31
+            ].get(id - 64)
+        else if (id >= 96 && id <= 127)
+            return [
+                'Repeat this track', // 96-96 = 0
                 'Volume up',
                 'Volume down',
                 'Change volume to maximum',
@@ -213,8 +223,11 @@ und gibt mit voice_read_cmdid() die ID zurück
                 'Turn on ac',
                 'Turn off ac', // 125
                 'Increase temperature',
-                'Decrease temperature',
-                'Cool mode',
+                'Decrease temperature' // 127-96 = 31
+            ].get(id - 96)
+        else if (id >= 128 && id <= 142)
+            return [
+                'Cool mode', // 128-128 = 0
                 'Heat mode',
                 'Auto mode', // 130
                 'Dry mode',
@@ -228,8 +241,8 @@ und gibt mit voice_read_cmdid() die ID zurück
                 'Open curtain',
                 'Close curtain', // 140
                 'Open the door',
-                'Close the door' // 142
-            ].get(id)
+                'Close the door' // 142-128 = 14
+            ].get(id - 128)
         else if (id >= 200 && id <= 208)
             return [
                 // Learning - related commands 200..208
