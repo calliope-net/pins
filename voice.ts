@@ -103,9 +103,17 @@ und gibt mit voice_read_cmdid() die ID zurück
                 '3',
                 '4',
                 // Commands for learning 5..21 A..Q
-                "A", // 5
-                "B", "C", "D", "E", "F", // 10
-                "G", "H", "I", "J", "K", // 15
+                "Stop", // 5
+                "vorwärts",
+                "rückwärts",
+                "nach links",
+                "nach rechts",
+                "links vor", // 10
+                "links zurück",
+                "rechts vor",
+                "rechts zurück",
+                "links drehen",
+                "rechts drehen", // 15
                 "L", "M", "N", "O", "P", // 20
                 "Q", // 21
                 // Fixed Command Words 22..142
