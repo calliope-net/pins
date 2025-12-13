@@ -356,27 +356,27 @@ und gibt mit voice_read_cmdid() die ID zurück
         W130 = 130,
         //% block="Dry mode"
         W131 = 131,
-        //% blockId="voiceRecognition_W132" block="Fan mode"
+        //% block="Fan mode"
         W132 = 132,
-        //% blockId="voiceRecognition_W133" block="Enable blowing up and down"
+        //% block="Enable blowing up and down"
         W133 = 133,
-        //% blockId="voiceRecognition_W134" block="Disable blowing up and down"
+        //% block="Disable blowing up and down"
         W134 = 134,
-        //% blockId="voiceRecognition_W135" block="Enable blowing right and left"
+        //% block="Enable blowing right and left"
         W135 = 135,
-        //% blockId="voiceRecognition_W136" block="Disable blowing right and left"
+        //% block="Disable blowing right and left"
         W136 = 136,
-        //% blockId="voiceRecognition_W137" block="Open the window"
+        //% block="Open the window"
         W137 = 137,
-        //% blockId="voiceRecognition_W138" block="Close the window"
+        //% block="Close the window"
         W138 = 138,
-        //% blockId="voiceRecognition_W139" block="Open curtain"
+        //% block="Open curtain"
         W139 = 139,
-        //% blockId="voiceRecognition_W140" block="Close curtain"
+        //% block="Close curtain"
         W140 = 140,
-        //% blockId="voiceRecognition_W141" block="Open the door"
+        //% block="Open the door"
         W141 = 141,
-        //% blockId="voiceRecognition_W142" block="Close the door"
+        //% block="Close the door"
         W142 = 142
     }
 
