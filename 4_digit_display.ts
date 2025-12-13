@@ -12,7 +12,7 @@ namespace pins {/* 4_digit_display.ts
 
     // ========== group="Grove - 4-Digit Display TM1637" subcategory="4-Digit Displays"
 
-    //% group="Grove - 4-Digit Display TM1637" subcategory="4-Digit Displays"
+    //% group="Grove - 4-Digit Display TM1637" subcategory="4-Digit Displays" color=#9F79EE
     //% block="Display hinzu fügen an CLK %clkPin DIO %dataPin" weight=9
     //% clkPin.shadow=pins_DigitalPin dataPin.shadow=pins_DigitalPin
     //% clkPin.defl=DigitalPin.C16 dataPin.defl=DigitalPin.C17
@@ -27,7 +27,7 @@ namespace pins {/* 4_digit_display.ts
         zeigeText("FEdCbA9876543210")
     }
 
-    //% group="Grove - 4-Digit Display TM1637" subcategory="4-Digit Displays"
+    //% group="Grove - 4-Digit Display TM1637" subcategory="4-Digit Displays" color=#9F79EE
     //% block="Displays löschen || Helligkeit %helligkeit" weight=8
     //% helligkeit.min=0 helligkeit.max=7
     export function clearDisplays(helligkeit?: number) {
@@ -38,14 +38,14 @@ namespace pins {/* 4_digit_display.ts
         }
     }
 
-    //% group="Grove - 4-Digit Display TM1637" subcategory="4-Digit Displays"
+    //% group="Grove - 4-Digit Display TM1637" subcategory="4-Digit Displays" color=#9F79EE
     //% block="zeige Zahl %zahl" weight=5
     export function zeigeZahl(zahl: number) {
         clearDisplays()
         zeigeText(zahl.toString())
     }
 
-    //% group="Grove - 4-Digit Display TM1637" subcategory="4-Digit Displays"
+    //% group="Grove - 4-Digit Display TM1637" subcategory="4-Digit Displays" color=#9F79EE
     //% block="zeige Doppelpunkt %on || auf Display %displayIndex" weight=4
     //% on.shadow=toggleOnOff 
     //% displayIndex.min=0 displayIndex.max=3 displayIndex.defl=0
@@ -59,9 +59,9 @@ namespace pins {/* 4_digit_display.ts
 
 
 
-    // ========== group="Zeichen 0123456789AbCdEF hHLPU +-°" subcategory="4-Digit Displays"
+    // ========== group="Zeichen 0123456789AbCdEF hHLPU +-°" subcategory="4-Digit Displays" color=#9F79EE
 
-    //% group="Zeichen 0123456789AbCdEF hHLPU +-°" subcategory="4-Digit Displays"
+    //% group="Zeichen 0123456789AbCdEF hHLPU +-°" subcategory="4-Digit Displays" color=#9F79EE
     //% block="zeige Text %hex_string || von rechts %stelle Länge %len Ziffern" weight=9
     //% len.min=-8 len.max=8
     export function zeigeText(hex_string: string, stelle?: number, len?: number) {
@@ -109,7 +109,7 @@ namespace pins {/* 4_digit_display.ts
         }
     }
 
-    //% group="Zeichen 0123456789AbCdEF hHLPU +-°" subcategory="4-Digit Displays"
+    //% group="Zeichen 0123456789AbCdEF hHLPU +-°" subcategory="4-Digit Displays" color=#9F79EE
     //% block="Zahl %n → Text || Kommastellen %kommastellen" weight=6
     //% kommastellen.min=0 kommastellen.max=4
     export function toText(n: number, kommastellen?: number): string {
@@ -125,7 +125,7 @@ namespace pins {/* 4_digit_display.ts
         return t.replace(".", ",")
     }
 
-    //% group="Zeichen 0123456789AbCdEF hHLPU +-°" subcategory="4-Digit Displays"
+    //% group="Zeichen 0123456789AbCdEF hHLPU +-°" subcategory="4-Digit Displays" color=#9F79EE
     //% block="Zahl %n → HEX || %h" weight=5
     //% h.defl=h
     export function toHex(n: number, h?: string): string {
@@ -140,7 +140,7 @@ namespace pins {/* 4_digit_display.ts
             return hex
     }
 
-    //% group="Zeichen 0123456789AbCdEF hHLPU +-°" subcategory="4-Digit Displays"
+    //% group="Zeichen 0123456789AbCdEF hHLPU +-°" subcategory="4-Digit Displays" color=#9F79EE
     //% block="Zahl %n → BIN || %b" weight=4
     //% b.defl=b
     export function toBin(n: number, b?: string): string {
@@ -159,7 +159,7 @@ namespace pins {/* 4_digit_display.ts
 
     // ========== group="7 Segmente :gfedcba | Ziffer 0 rechts" subcategory="4-Digit Displays"
 
-    //% group="7 Segmente :gfedcba | Ziffer 0 rechts" subcategory="4-Digit Displays"
+    //% group="7 Segmente :gfedcba | Ziffer 0 rechts" subcategory="4-Digit Displays" color=#9F79EE
     //% block="7 Segment %seg_array" weight=7
     export function zeige7SegmentArray(seg_array: number[]) {
         if (seg_array) {
@@ -169,7 +169,7 @@ namespace pins {/* 4_digit_display.ts
         }
     }
 
-    //% group="7 Segmente :gfedcba | Ziffer 0 rechts" subcategory="4-Digit Displays"
+    //% group="7 Segmente :gfedcba | Ziffer 0 rechts" subcategory="4-Digit Displays" color=#9F79EE
     //% block="7 Segment Byte %seg_byte Ziffer %stelle ←3210" weight=6
     //% stelle.min=0 stelle.max=15
     export function zeige7SegmentByte(seg_byte: number, stelle: number) {
