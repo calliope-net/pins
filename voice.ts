@@ -377,29 +377,49 @@ und gibt mit voice_read_cmdid() die ID zurück
         //% block="Open the door"
         W141 = 141,
         //% block="Close the door"
-        W142 = 142
-    }
+        W142 = 142,
 
-    export enum voice_LearningRelatedCommands {
-        //% blockId="voiceRecognition_W200" block="Learning wake word"
+
+        //% block="200 Learning wake word"
         W200 = 200,
-        //% blockId="voiceRecognition_W201" block="Learning command word"
+        //% block="201 Learning command word"
         W201 = 201,
-        //% blockId="voiceRecognition_W202" block="Re-learn"
+        //% block="202 Re-learn"
         W202 = 202,
-        //% blockId="voiceRecognition_W203" block="Exit learning"
+        //% block="203 Exit learning"
         W203 = 203,
-        //% blockId="voiceRecognition_W204" block="I want to delete"
+        //% block="204 I want to delete"
         W204 = 204,
-        //% blockId="voiceRecognition_W205" block="Delete wake word"
+        //% block="205 Delete wake word"
         W205 = 205,
-        //% blockId="voiceRecognition_W206" block="Delete command word"
+        //% block="206 Delete command word"
         W206 = 206,
-        //% blockId="voiceRecognition_W207" block="Exit deleting"
+        //% block="207 Exit deleting"
         W207 = 207,
-        //% blockId="voiceRecognition_W208" block="Delete all"
+        //% block="208 Delete all"
         W208 = 208
     }
+
+   /*  export enum voice_LearningRelatedCommands {
+        //% block="Learning wake word"
+        W200 = 200,
+        //% block="Learning command word"
+        W201 = 201,
+        //% block="Re-learn"
+        W202 = 202,
+        //% block="Exit learning"
+        W203 = 203,
+        //% block="I want to delete"
+        W204 = 204,
+        //% block="Delete wake word"
+        W205 = 205,
+        //% block="Delete command word"
+        W206 = 206,
+        //% block="Exit deleting"
+        W207 = 207,
+        //% block="Delete all"
+        W208 = 208
+    } */
 
 
 
