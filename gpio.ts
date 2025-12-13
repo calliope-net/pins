@@ -11,7 +11,7 @@ https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
     const gpio_OUT_Buffer: Buffer = Buffer.create(8) // index [i2c_addr & 7]
 
     //% blockId=pins_gpio_I2C_ADDRESS blockHidden=true
-    //% group="SparkFun Qwiic GPIO (I²C 0x20..0x27)" subcategory=GPIO
+    //% group="SparkFun Qwiic GPIO (I²C 0x20..0x27)" subcategory=GPIO color=#7F0000
     //% block="%pADDR"
     export function pins_gpio_I2C_ADDRESS(pADDR: gpio_eI2C_ADDRESS): number { return pADDR }
     export enum gpio_eI2C_ADDRESS {
@@ -29,7 +29,7 @@ https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
     export enum gpio_eIO { IN = 0b01, IN_inverted = 0b11, OUT = 0b00 }
 
     //% blockId=pins_gpio_pin blockHidden=true
-    //% group="SparkFun Qwiic GPIO (I²C 0x20..0x27)" subcategory=GPIO
+    //% group="SparkFun Qwiic GPIO (I²C 0x20..0x27)" subcategory=GPIO color=#7F0000
     //% block="%bit"
     export function pins_gpio_pin(pin: gpio_epin): number { return pin }
     export enum gpio_epin { Pin0, Pin1, Pin2, Pin3, Pin4, Pin5, Pin6, Pin7 }
@@ -37,7 +37,7 @@ https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
 
     // ========== group="SparkFun Qwiic GPIO (I²C 0x20..0x27)" subcategory=GPIO
 
-    //% group="SparkFun Qwiic GPIO (I²C 0x20..0x27)" subcategory=GPIO
+    //% group="SparkFun Qwiic GPIO (I²C 0x20..0x27)" subcategory=GPIO color=#7F0000
     //% block="I²C %i2c_addr angeschlossen" weight=6
     //% i2c_addr.shadow=pins_gpio_I2C_ADDRESS
     export function gpio_connected(i2c_addr: number): boolean {
@@ -45,7 +45,7 @@ https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
         return bu ? true : false
     }
 
-    //% group="SparkFun Qwiic GPIO (I²C 0x20..0x27)" subcategory=GPIO
+    //% group="SparkFun Qwiic GPIO (I²C 0x20..0x27)" subcategory=GPIO color=#7F0000
     //% block="I²C %i2c_addr Konfiguration | Pin 7 %pIO7 Pin 6 %pIO6 Pin 5 %pIO5 Pin 4 %pIO4 Pin 3 %pIO3 Pin 2 %pIO2 Pin 1 %pIO1 Pin 0 %pIO0" weight=2
     //% i2c_addr.shadow=pins_gpio_I2C_ADDRESS
     // inlineInputMode=inline
@@ -75,7 +75,7 @@ https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
 
 
 
-    //% group="GPIO: General-purpose input/output" subcategory=GPIO
+    //% group="GPIO: General-purpose input/output" subcategory=GPIO color=#7F0000
     //% block="I²C %i2c_addr lese %pin" weight=6
     //% i2c_addr.shadow=pins_gpio_I2C_ADDRESS
     //% pin.shadow=pins_gpio_pin
@@ -83,7 +83,7 @@ https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
         return (gpio_readByte(i2c_addr) & 2 ** (pin & 0x07)) != 0
     }
 
-    //% group="GPIO: General-purpose input/output" subcategory=GPIO
+    //% group="GPIO: General-purpose input/output" subcategory=GPIO color=#7F0000
     //% block="I²C %i2c_addr schalte %pin %bit" weight=5
     //% i2c_addr.shadow=pins_gpio_I2C_ADDRESS
     //% pin.shadow=pins_gpio_pin
@@ -98,7 +98,7 @@ https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
     }
 
 
-    //% group="GPIO: General-purpose input/output" subcategory=GPIO
+    //% group="GPIO: General-purpose input/output" subcategory=GPIO color=#7F0000
     //% block="I²C %i2c_addr lese INPUT Byte" weight=2
     //% i2c_addr.shadow=pins_gpio_I2C_ADDRESS
     export function gpio_readByte(i2c_addr: number): number { // Bitweise AND setzt die OUTPUT Bits auf 0
@@ -110,7 +110,7 @@ https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
         // return readRegister(pADDR, eCommandByte.INPUT_PORT) & readRegister(pADDR, eCommandByte.CONFIGURATION)
     }
 
-    //% group="GPIO: General-purpose input/output" subcategory=GPIO
+    //% group="GPIO: General-purpose input/output" subcategory=GPIO color=#7F0000
     //% block="I²C %i2c_addr schreibe Byte %byte" weight=1
     //% i2c_addr.shadow=pins_gpio_I2C_ADDRESS
     //% byte.min=0 byte.max=255 byte.defl=1
@@ -124,7 +124,7 @@ https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
 
     // ========== 7-Segment Anzeige an Port (7-0) (.GFEDCBA)
 
-    //% group="7-Segment Anzeige an Port (7-0) (.GFEDCBA)" subcategory=GPIO
+    //% group="7-Segment Anzeige an Port (7-0) (.GFEDCBA)" subcategory=GPIO color=#7F0000
     //% block="wandle %hexZiffer um in 7-Segment || Punkt %punkt"
     //% hexZiffer.min=0 hexZiffer.max=15
     //% hexZiffer.shadow=pins_hex4

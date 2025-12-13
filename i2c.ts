@@ -147,7 +147,7 @@ namespace pins { // i2c.ts
 
     // ========== group="I²C" subcategory=I²C
 
-    //% group="I²C Write / Read" subcategory=I²C
+    //% group="I²C Write / Read" subcategory=I²C color=#007FFF
     //% block="i2cWriteBuffer I²C %i2cAdresse Buffer %buf || repeat %repeat" weight=9
     //% i2cAdresse.shadow=pins_i2cAdressen
     //% repeat.shadow=toggleYesNo
@@ -155,7 +155,7 @@ namespace pins { // i2c.ts
         return pins.i2cWriteBuffer(i2cAdresse, buf, repeat)
     }
 
-    //% group="I²C Write / Read" subcategory=I²C
+    //% group="I²C Write / Read" subcategory=I²C color=#007FFF
     //% block="i2cReadBuffer I²C %i2cAdresse size %size || repeat %repeat" weight=8
     //% i2cAdresse.shadow=pins_i2cAdressen
     //% size.min=1 size.max=128 size.defl=1
@@ -164,7 +164,7 @@ namespace pins { // i2c.ts
         return pins.i2cReadBuffer(i2cAdresse, size, repeat)
     }
 
-    //% group="I²C Write / Read" subcategory=I²C
+    //% group="I²C Write / Read" subcategory=I²C color=#007FFF
     //% block="i2cWriteReadBuffer I²C %i2cAdresse Buffer %buf size %size" weight=7
     //% i2cAdresse.shadow=pins_i2cAdressen
     export function pins_i2cWriteReadBuffer(i2cAdresse: number, buf: Buffer, size: number) {
@@ -177,7 +177,7 @@ namespace pins { // i2c.ts
 
 
     //% blockId=pins_i2cAdressen
-    //% group="I²C Adressen Liste" subcategory=I²C
+    //% group="I²C Adressen Liste" subcategory=I²C color=#007FFF
     //% block="%i2cAdresse"
     //% blockSetVariable=i2cAdresse
     export function pins_i2cAdressen(i2cAdresse: ei2cAdressen): number {
@@ -185,7 +185,7 @@ namespace pins { // i2c.ts
     }
 
 
-    //% group="sammelt gültige I²C-Adressen in Array" subcategory=I²C
+    //% group="sammelt gültige I²C-Adressen in Array" subcategory=I²C color=#007FFF
     //% block="I²C-Scan von %von_i2cAdresse bis %bis_i2cAdresse Pause %ms ms"
     //% von_i2cAdresse.shadow=pins_i2cAdressen
     //% bis_i2cAdresse.shadow=pins_i2cAdressen bis_i2cAdresse.defl=pins.ei2cAdressen.x7F
@@ -219,7 +219,7 @@ namespace pins { // i2c.ts
     }
 
 
-    //% group="sammelt gültige I²C-Adressen in HEX-String" subcategory=I²C
+    //% group="sammelt gültige I²C-Adressen in HEX-String" subcategory=I²C color=#007FFF
     //% block="I²C-Scan von %von_i2cAdresse bis %bis_i2cAdresse Pause %ms ms"
     //% von_i2cAdresse.shadow=pins_i2cAdressen
     //% bis_i2cAdresse.shadow=pins_i2cAdressen bis_i2cAdresse.defl=pins.ei2cAdressen.x7F
