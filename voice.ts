@@ -7,6 +7,7 @@ und gibt mit voice_read_cmdid() die ID zurück
 */
 
     const voice_I2C_ADDRESS = 0x64
+    const voice_EEPROM_I2C_ADDRESS = 0x50
     // let voice_I2C_connected: boolean = undefined
     /*
     const voice_DF2301Q_I2C_REG_CMDID = 0x02
@@ -88,186 +89,8 @@ und gibt mit voice_read_cmdid() die ID zurück
     }
 
 
-    // ========== group="Kommandos" subcategory="Spracherkennung"
 
-    //% group="Kommandos 0..142 und 200..208" subcategory="Spracherkennung"
-    //% block="Kommando ID %id als Text" weight=5
-    export function voice_command_text(id: number) {
-        // Calliope v2 erlaubt nur Array Längen bis 32 Elemente
-        if (id >= 0 && id <= 31) // && id <= 142
-            return [
-                // Wake-up words	1..2
-                '0', // 0
-                'Wake-up words for learning',
-                'Hello robot',
-                '3',
-                '4',
-                // Commands for learning 5..21 A..Q
-                "stop", // 5
-                "vorwärts",
-                "rückwärts",
-                "nach links",
-                "nach rechts",
-                "links vor", // 10
-                "links zurück",
-                "rechts vor",
-                "rechts zurück",
-                "links drehen",
-                "rechts drehen", // 15
-                "L", "M", "N", "O", "P", // 20
-                "Q", // 21
-                // Fixed Command Words 22..142
-                'Go forward',
-                'Retreat',
-                'Park a car',
-                'Turn left ninety degrees', // 25
-                'Turn left forty-five degrees',
-                'Turn left thirty degrees',
-                'Turn right ninety degrees',
-                'Turn right forty-five degrees',
-                'Turn right thirty degrees', // 30
-                'Shift down a gear' // 31
-            ].get(id)
-        else if (id >= 32 && id <= 63)
-            return [
-                'Line tracking mode', // 32-32 = 0
-                'Light tracking mode',
-                'Bluetooth mode',
-                'Obstacle avoidance mode', // 35
-                'Face recognition',
-                'Object tracking',
-                'Object recognition',
-                'Line tracking',
-                'Color recognition', // 40
-                'Tag recognition',
-                'Object sorting',
-                'Qr code recognition',
-                'General settings',
-                'Clear screen', // 45
-                'Learn once',
-                'Forget',
-                'Load model',
-                'Save model',
-                'Take photos and save them', // 50
-                'Save and return',
-                'Display number zero',
-                'Display number one',
-                'Display number two',
-                'Display number three', // 55
-                'Display number four',
-                'Display number five',
-                'Display number six',
-                'Display number seven',
-                'Display number eight', // 60
-                'Display number nine',
-                'Display smiley face',
-                'Display crying face' // 63-32 = 31
-            ].get(id - 32)
-        else if (id >= 64 && id <= 95)
-            return [
-                'Display heart', // 64-64 = 0
-                'Turn off dot matrix', // 65
-                'Read current posture',
-                'Read ambient light',
-                'Read compass',
-                'Read temperature',
-                'Read acceleration', // 70
-                'Reading sound intensity',
-                'Calibrate electronic gyroscope',
-                'Turn on the camera',
-                'Turn off the camera',
-                'Turn on the fan', // 75
-                'Turn off the fan',
-                'Turn fan speed to gear one',
-                'Turn fan speed to gear two',
-                'Turn fan speed to gear three',
-                'Start oscillating', // 80
-                'Stop oscillating',
-                'Reset',
-                'Set servo to ten degrees',
-                'Set servo to thirty degrees',
-                'Set servo to forty-five degrees', // 85
-                'Set servo to sixty degrees',
-                'Set servo to ninety degrees',
-                'Turn on the buzzer',
-                'Turn off the buzzer',
-                'Turn on the speaker', // 90
-                'Turn off the speaker',
-                'Play music',
-                'Stop playing',
-                'The last track',
-                'The next track' // 95-64 = 31
-            ].get(id - 64)
-        else if (id >= 96 && id <= 127)
-            return [
-                'Repeat this track', // 96-96 = 0
-                'Volume up',
-                'Volume down',
-                'Change volume to maximum',
-                'Change volume to minimum', // 100
-                'Change volume to medium',
-                'Play poem',
-                'Turn on the light',
-                'Turn off the light',
-                'Brighten the light', // 105
-                'Dim the light',
-                'Adjust brightness to maximum',
-                'Adjust brightness to minimum',
-                'Increase color temperature',
-                'Decrease color temperature', // 110
-                'Adjust color temperature to maximum',
-                'Adjust color temperature to minimum',
-                'Daylight mode',
-                'Moonlight mode',
-                'Color mode', // 115
-                'Set to red',
-                'Set to orange',
-                'Set to yellow',
-                'Set to green',
-                'Set to cyan', // 120
-                'Set to blue',
-                'Set to purple',
-                'Set to white',
-                'Turn on ac',
-                'Turn off ac', // 125
-                'Increase temperature',
-                'Decrease temperature' // 127-96 = 31
-            ].get(id - 96)
-        else if (id >= 128 && id <= 142)
-            return [
-                'Cool mode', // 128-128 = 0
-                'Heat mode',
-                'Auto mode', // 130
-                'Dry mode',
-                'Fan mode',
-                'Enable blowing up & down',
-                'Disable blowing up & down',
-                'Enable blowing right & left', // 135
-                'Disable blowing right & left',
-                'Open the window',
-                'Close the window',
-                'Open curtain',
-                'Close curtain', // 140
-                'Open the door',
-                'Close the door' // 142-128 = 14
-            ].get(id - 128)
-        else if (id >= 200 && id <= 208)
-            return [
-                // Learning - related commands 200..208
-                'Learning wake word	', // 200
-                'Learning command word',
-                'Re-learn',
-                'Exit learning',
-                'I want to delete',
-                'Delete wake word', // 205
-                'Delete command word',
-                'Exit deleting',
-                'Delete all' // 208
-            ].get(id - 200)
-        else
-            return ""
-    }
-
+    // ========== group="Kommandos 5..142 und 200..208" subcategory="Spracherkennung"
 
     //% blockId=pins_voice_command_enum
     //% group="Kommandos 5..142 und 200..208" subcategory="Spracherkennung"
@@ -576,6 +399,205 @@ und gibt mit voice_read_cmdid() die ID zurück
         W207 = 207,
         //% blockId="voiceRecognition_W208" block="Delete all"
         W208 = 208
+    }
+
+
+
+    // ========== group="Kommandos 0..142 und 200..208" subcategory="Spracherkennung"
+
+    //% group="Kommandos 0..142 und 200..208" subcategory="Spracherkennung"
+    //% block="Kommando ID %id als Text" weight=5
+    export function voice_command_text(id: number) {
+        // Calliope v2 erlaubt nur Array Längen bis 32 Elemente
+        if (id >= 0 && id <= 31) // && id <= 142
+            return [
+                // Wake-up words	1..2
+                '0', // 0
+                'Wake-up words for learning',
+                'Hello robot',
+                '3',
+                '4',
+                // Commands for learning 5..21 A..Q
+                "stop", // 5
+                "vorwärts",
+                "rückwärts",
+                "nach links",
+                "nach rechts",
+                "links vor", // 10
+                "links zurück",
+                "rechts vor",
+                "rechts zurück",
+                "links drehen",
+                "rechts drehen", // 15
+                "L", "M", "N", "O", "P", // 20
+                "Q", // 21
+                // Fixed Command Words 22..142
+                'Go forward',
+                'Retreat',
+                'Park a car',
+                'Turn left ninety degrees', // 25
+                'Turn left forty-five degrees',
+                'Turn left thirty degrees',
+                'Turn right ninety degrees',
+                'Turn right forty-five degrees',
+                'Turn right thirty degrees', // 30
+                'Shift down a gear' // 31
+            ].get(id)
+        else if (id >= 32 && id <= 63)
+            return [
+                'Line tracking mode', // 32-32 = 0
+                'Light tracking mode',
+                'Bluetooth mode',
+                'Obstacle avoidance mode', // 35
+                'Face recognition',
+                'Object tracking',
+                'Object recognition',
+                'Line tracking',
+                'Color recognition', // 40
+                'Tag recognition',
+                'Object sorting',
+                'Qr code recognition',
+                'General settings',
+                'Clear screen', // 45
+                'Learn once',
+                'Forget',
+                'Load model',
+                'Save model',
+                'Take photos and save them', // 50
+                'Save and return',
+                'Display number zero',
+                'Display number one',
+                'Display number two',
+                'Display number three', // 55
+                'Display number four',
+                'Display number five',
+                'Display number six',
+                'Display number seven',
+                'Display number eight', // 60
+                'Display number nine',
+                'Display smiley face',
+                'Display crying face' // 63-32 = 31
+            ].get(id - 32)
+        else if (id >= 64 && id <= 95)
+            return [
+                'Display heart', // 64-64 = 0
+                'Turn off dot matrix', // 65
+                'Read current posture',
+                'Read ambient light',
+                'Read compass',
+                'Read temperature',
+                'Read acceleration', // 70
+                'Reading sound intensity',
+                'Calibrate electronic gyroscope',
+                'Turn on the camera',
+                'Turn off the camera',
+                'Turn on the fan', // 75
+                'Turn off the fan',
+                'Turn fan speed to gear one',
+                'Turn fan speed to gear two',
+                'Turn fan speed to gear three',
+                'Start oscillating', // 80
+                'Stop oscillating',
+                'Reset',
+                'Set servo to ten degrees',
+                'Set servo to thirty degrees',
+                'Set servo to forty-five degrees', // 85
+                'Set servo to sixty degrees',
+                'Set servo to ninety degrees',
+                'Turn on the buzzer',
+                'Turn off the buzzer',
+                'Turn on the speaker', // 90
+                'Turn off the speaker',
+                'Play music',
+                'Stop playing',
+                'The last track',
+                'The next track' // 95-64 = 31
+            ].get(id - 64)
+        else if (id >= 96 && id <= 127)
+            return [
+                'Repeat this track', // 96-96 = 0
+                'Volume up',
+                'Volume down',
+                'Change volume to maximum',
+                'Change volume to minimum', // 100
+                'Change volume to medium',
+                'Play poem',
+                'Turn on the light',
+                'Turn off the light',
+                'Brighten the light', // 105
+                'Dim the light',
+                'Adjust brightness to maximum',
+                'Adjust brightness to minimum',
+                'Increase color temperature',
+                'Decrease color temperature', // 110
+                'Adjust color temperature to maximum',
+                'Adjust color temperature to minimum',
+                'Daylight mode',
+                'Moonlight mode',
+                'Color mode', // 115
+                'Set to red',
+                'Set to orange',
+                'Set to yellow',
+                'Set to green',
+                'Set to cyan', // 120
+                'Set to blue',
+                'Set to purple',
+                'Set to white',
+                'Turn on ac',
+                'Turn off ac', // 125
+                'Increase temperature',
+                'Decrease temperature' // 127-96 = 31
+            ].get(id - 96)
+        else if (id >= 128 && id <= 142)
+            return [
+                'Cool mode', // 128-128 = 0
+                'Heat mode',
+                'Auto mode', // 130
+                'Dry mode',
+                'Fan mode',
+                'Enable blowing up & down',
+                'Disable blowing up & down',
+                'Enable blowing right & left', // 135
+                'Disable blowing right & left',
+                'Open the window',
+                'Close the window',
+                'Open curtain',
+                'Close curtain', // 140
+                'Open the door',
+                'Close the door' // 142-128 = 14
+            ].get(id - 128)
+        else if (id >= 200 && id <= 208)
+            return [
+                // Learning - related commands 200..208
+                'Learning wake word	', // 200
+                'Learning command word',
+                'Re-learn',
+                'Exit learning',
+                'I want to delete',
+                'Delete wake word', // 205
+                'Delete command word',
+                'Exit deleting',
+                'Delete all' // 208
+            ].get(id - 200)
+        else
+            return ""
+    }
+
+
+    //% group="Kommandos 0..142 und 200..208" subcategory="Spracherkennung"
+    //% block="Kommando ID %id aus EEPROM" weight=3
+    export function voice_command_text_eeprom(id: number) {
+        const eeprom_startadresse = 0xDD00
+        if (id >= 200 && id <= 208)
+            id -= 57
+        let bu = Buffer.create(2) // EEPROM Startadresse 16 Bit
+        bu.setNumber(NumberFormat.UInt16BE, 0, eeprom_startadresse + (id >> 2))
+        bu = pins_i2cWriteReadBuffer(voice_EEPROM_I2C_ADDRESS, bu, 128)
+        let csv_list = bu.toString().split(";")
+        if (csv_list.length >= 4)
+            return csv_list[id & 3]
+        else
+            return ""
     }
 
 
