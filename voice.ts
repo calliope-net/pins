@@ -264,97 +264,97 @@ und gibt mit voice_read_cmdid() die ID zurück
         W84 = 84,
         //% block="Set servo to forty-five degrees"
         W85 = 85,
-        //% blockId="voiceRecognition_W86" block="Set servo to sixty degrees"
+        //% block="Set servo to sixty degrees"
         W86 = 86,
-        //% blockId="voiceRecognition_W87" block="Set servo to ninety degrees"
+        //% block="Set servo to ninety degrees"
         W87 = 87,
-        //% blockId="voiceRecognition_W88" block="Turn on the buzzer"
+        //% block="Turn on the buzzer"
         W88 = 88,
-        //% blockId="voiceRecognition_W89" block="Turn off the buzzer"
+        //% block="Turn off the buzzer"
         W89 = 89,
-        //% blockId="voiceRecognition_W90" block="Turn on the speaker"
+        //% block="Turn on the speaker"
         W90 = 90,
-        //% blockId="voiceRecognition_W91" block="Turn off the speaker"
+        //% block="Turn off the speaker"
         W91 = 91,
-        //% blockId="voiceRecognition_W92" block="Play music"
+        //% block="Play music"
         W92 = 92,
-        //% blockId="voiceRecognition_W93" block="Stop playing"
+        //% block="Stop playing"
         W93 = 93,
-        //% blockId="voiceRecognition_W94" block="The last track"
+        //% block="The last track"
         W94 = 94,
-        //% blockId="voiceRecognition_W95" block="The next track"
+        //% block="The next track"
         W95 = 95,
-        //% blockId="voiceRecognition_W96" block="Repeat this track"
+        //% block="Repeat this track"
         W96 = 96,
-        //% blockId="voiceRecognition_W97" block="Volume up"
+        //% block="Volume up"
         W97 = 97,
-        //% blockId="voiceRecognition_W98" block="Volume down"
+        //% block="Volume down"
         W98 = 98,
-        //% blockId="voiceRecognition_W99" block="Change volume to maximum"
+        //% block="Change volume to maximum"
         W99 = 99,
-        //% blockId="voiceRecognition_W100" block="Change volume to minimum"
+        //% block="Change volume to minimum"
         W100 = 100,
-        //% blockId="voiceRecognition_W101" block="Change volume to medium"
+        //% block="Change volume to medium"
         W101 = 101,
-        //% blockId="voiceRecognition_W102" block="Play poem"
+        //% block="Play poem"
         W102 = 102,
-        //% blockId="voiceRecognition_W103" block="Turn on the light"
+        //% block="Turn on the light"
         W103 = 103,
-        //% blockId="voiceRecognition_W104" block="Turn off the light"
+        //% block="Turn off the light"
         W104 = 104,
-        //% blockId="voiceRecognition_W105" block="Brighten the light"
+        //% block="Brighten the light"
         W105 = 105,
-        //% blockId="voiceRecognition_W106" block="Dim the light"
+        //% block="Dim the light"
         W106 = 106,
-        //% blockId="voiceRecognition_W107" block="Adjust brightness to maximum"
+        //% block="Adjust brightness to maximum"
         W107 = 107,
-        //% blockId="voiceRecognition_W108" block="Adjust brightness to minimum"
+        //% block="Adjust brightness to minimum"
         W108 = 108,
-        //% blockId="voiceRecognition_W109" block="Increase color temperature"
+        //% block="Increase color temperature"
         W109 = 109,
-        //% blockId="voiceRecognition_W110" block="Decrease color temperature"
+        //% block="Decrease color temperature"
         W110 = 110,
-        //% blockId="voiceRecognition_W111" block="Adjust color temperature to maximum"
+        //% block="Adjust color temperature to maximum"
         W111 = 111,
-        //% blockId="voiceRecognition_W112" block="Adjust color temperature to minimum"
+        //% block="Adjust color temperature to minimum"
         W112 = 112,
-        //% blockId="voiceRecognition_W113" block="Daylight mode"
+        //% block="Daylight mode"
         W113 = 113,
-        //% blockId="voiceRecognition_W114" block="Moonlight mode"
+        //% block="Moonlight mode"
         W114 = 114,
-        //% blockId="voiceRecognition_W115" block="Color mode"
+        //% block="Color mode"
         W115 = 115,
-        //% blockId="voiceRecognition_W116" block="Set to red"
+        //% block="Set to red"
         W116 = 116,
-        //% blockId="voiceRecognition_W117" block="Set to orange"
+        //% block="Set to orange"
         W117 = 117,
-        //% blockId="voiceRecognition_W118" block="Set to yellow"
+        //% block="Set to yellow"
         W118 = 118,
-        //% blockId="voiceRecognition_W119" block="Set to green"
+        //% block="Set to green"
         W119 = 119,
-        //% blockId="voiceRecognition_W120" block="Set to cyan"
+        //% block="Set to cyan"
         W120 = 120,
-        //% blockId="voiceRecognition_W121" block="Set to blue"
+        //% block="Set to blue"
         W121 = 121,
-        //% blockId="voiceRecognition_W122" block="Set to purple"
+        //% block="Set to purple"
         W122 = 122,
-        //% blockId="voiceRecognition_W123" block="Set to white"
+        //% block="Set to white"
         W123 = 123,
-        //% blockId="voiceRecognition_W124" block="Turn on ac"
+        //% block="Turn on ac"
         W124 = 124,
-        //% blockId="voiceRecognition_W125" block="Turn off ac"
+        //% block="Turn off ac"
         W125 = 125,
-        //% blockId="voiceRecognition_W126" block="Increase temperature"
+        //% block="Increase temperature"
         W126 = 126,
-        //% blockId="voiceRecognition_W127" block="Decrease temperature"
+        //% block="Decrease temperature"
         W127 = 127,
-        //% blockId="voiceRecognition_W128" block="Cool mode"
+        //% block="Cool mode"
         W128 = 128,
-        //% blockId="voiceRecognition_W129" block="Heat mode"
+        //% block="Heat mode"
         W129 = 129,
-        //% blockId="voiceRecognition_W130" block="Auto mode"
+        //% block="Auto mode"
         W130 = 130,
-        //% blockId="voiceRecognition_W131" block="Dry mode"
+        //% block="Dry mode"
         W131 = 131,
         //% blockId="voiceRecognition_W132" block="Fan mode"
         W132 = 132,
