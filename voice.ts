@@ -103,7 +103,7 @@ und gibt mit voice_read_cmdid() die ID zurück
                 '3',
                 '4',
                 // Commands for learning 5..21 A..Q
-                "Stop", // 5
+                "stop", // 5
                 "vorwärts",
                 "rückwärts",
                 "nach links",
@@ -277,27 +277,27 @@ und gibt mit voice_read_cmdid() die ID zurück
     }
 
     export enum voice_FixedCommandWords {
-        //% block="5 A"
+        //% block="5 stop"
         W5 = 5,
-        //% block="6 B"
+        //% block="6 vorwärts"
         W6 = 6,
-        //% block="7 C"
+        //% block="7 rückwärts"
         W7 = 7,
-        //% block="8 D"
+        //% block="8 nach links"
         W8 = 8,
-        //% block="9 E"
+        //% block="9 nach rechts"
         W9 = 9,
-        //% block="10 F"
+        //% block="10 links vor"
         W10 = 10,
-        //% block="11 G"
+        //% block="11 links zurück"
         W11 = 11,
-        //% block="12 H"
+        //% block="12 rechts vor"
         W12 = 12,
-        //% block="13 I"
+        //% block="13 rechts zurück"
         W13 = 13,
-        //% block="14 J"
+        //% block="14 links drehen"
         W14 = 14,
-        //% block="15 K"
+        //% block="15 rechts drehen"
         W15 = 15,
         //% block="16 L"
         W16 = 16,
