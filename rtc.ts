@@ -16,7 +16,7 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
 
     // ========== group="Real Time Clock PCF85063TP" subcategory="RTC Uhr"
 
-    //% group="Real Time Clock PCF85063TP (I²C 0x51)" subcategory="RTC Uhr"
+    //% group="Real Time Clock PCF85063TP (I²C 0x51)" subcategory="RTC Uhr" color=#007FBF
     //% block="Datum und Zeit einlesen" weight=9
     export function rtc_read() {
         rtc_Buffer = pins_i2cWriteReadBuffer(rtc_I2C_ADDRESS, Buffer.fromArray([4]), 7)
@@ -25,7 +25,7 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
 
     // ========== group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr"
 
-    //% group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr"
+    //% group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr" color=#007FBF
     //% block="%register als Zahl" weight=8
     //% register.min=0 register.max=6
     //% register.shadow=pins_rtc_eRegister
@@ -55,7 +55,7 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
         yyMMddHHmmss
     }
 
-    //% group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr"
+    //% group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr" color=#007FBF
     //% block="%format" weight=6
     export function rtc_get_string(format: rtc_eFormat): string {
         if (rtc_Buffer)
@@ -94,7 +94,7 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
         Datum
     }
 
-    //% group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr"
+    //% group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr" color=#007FBF
     //% block="zeige %p25LED binär in 25 LED Matrix" weight=4
     export function rtc_25led(p25led: rtc_e25led) {
         if (rtc_Buffer && p25led == rtc_e25led.Zeit) {
@@ -114,13 +114,13 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
     }
 
 
-    //% group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr"
+    //% group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr" color=#007FBF
     //% block="Buffer (7 Byte) [s,m,H,d,w,M,y] im Format BCD" weight=3
     export function rtc_get_array(): Buffer {
         return rtc_Buffer
     }
 
-    //% group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr"
+    //% group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr" color=#007FBF
     //% block="oscillator stop" weight=2
     export function rtc_oscillator_stop(): boolean {
         if (rtc_Buffer)
@@ -135,7 +135,7 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
 
     let rtc_key_string = ""
 
-    //% group="Uhr stellen *rdd# (* Register 2 Ziffern #)" subcategory="RTC Uhr"
+    //% group="Uhr stellen *rdd# (* Register 2 Ziffern #)" subcategory="RTC Uhr" color=#007FBF
     //% block="Uhr stellen 1 Zeichencode %key_code" weight=9
     export function rtc_set_key(key_code: number) {
         /*
@@ -162,7 +162,7 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
         return rtc_key_string
     }
 
-    //% group="Uhr stellen *rdd# (* Register 2 Ziffern #)" subcategory="RTC Uhr"
+    //% group="Uhr stellen *rdd# (* Register 2 Ziffern #)" subcategory="RTC Uhr" color=#007FBF
     //% block="Uhr stellen 5 Zeichen %key_string" weight=7
     //% key_string.defl="*000#"
     export function rtc_set_string(key_string: string) { // *259 (1) register (2-3) byte dezimal
@@ -174,7 +174,7 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
 
     // ========== group="RTC Register" subcategory="RTC Uhr"
 
-    //% group="RTC Register" subcategory="RTC Uhr"
+    //% group="RTC Register" subcategory="RTC Uhr" color=#007FBF
     //% block="RTC angeschlossen" weight=9
     export function rtc_connected(): boolean {
         if (!rtc_Buffer)
@@ -187,13 +187,13 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
         Sekunde = 4, Minute = 5, Stunde = 6, Tag = 7, Wochentag = 8, Monat = 9, Jahr = 10
     }
 
-    //% group="RTC Register" subcategory="RTC Uhr"
+    //% group="RTC Register" subcategory="RTC Uhr" color=#007FBF
     //% block="read RTC Register %register" weight=7
     export function rtc_read_control(register: rtc_eControl): number {
         return pins_i2cWriteReadBuffer(rtc_I2C_ADDRESS, Buffer.fromArray([register]), 1).getUint8(0)
     }
 
-    //% group="RTC Register" subcategory="RTC Uhr"
+    //% group="RTC Register" subcategory="RTC Uhr" color=#007FBF
     //% block="write RTC Register %register Byte %byte" weight=6
     //% register.defl=pins.rtc_eControl.Control_2 byte.defl=6
     export function rtc_write_control(register: rtc_eControl, byte: number) { // defl: CLKOUT=1Hz
@@ -211,7 +211,7 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
         bcd
     }
 
-    //% group="RTC Register" subcategory="RTC Uhr"
+    //% group="RTC Register" subcategory="RTC Uhr" color=#007FBF
     //% block="convert Byte %byte %format" weight=5
     //% byte.min=0 byte.max=255
     export function rtc_convert_byte(byte: number, format: rtc_eFormat_BCD): number {
@@ -254,7 +254,7 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
     }
 
     //% blockId=pins_rtc_eRegister blockHidden=true
-    //% group="Real Time Clock PCF85063TP" subcategory="RTC Uhr"
+    //% group="Real Time Clock PCF85063TP" subcategory="RTC Uhr" color=#007FBF
     //% block="%pRegister"
     export function pins_rtc_eRegister(pRegister: rtc_eRegister): number { return pRegister }
 

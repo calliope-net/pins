@@ -19,7 +19,7 @@ namespace pins { // keyboards.ts
         // KEYPAD_CHANGE_ADDRESS = 0x07
     }
 
-    //% group="Qwiic Keypad 12 Tasten (I²C: 0x4B)" subcategory="Tastaturen"
+    //% group="Qwiic Keypad 12 Tasten (I²C: 0x4B)" subcategory="Tastaturen" color=#BF007F
     //% block="Keypad angeschlossen" weight=8
     export function keypadConnected() {
         if (n_i2cKeypadConnected === undefined)
@@ -27,7 +27,7 @@ namespace pins { // keyboards.ts
         return n_i2cKeypadConnected
     }
 
-    //% group="Qwiic Keypad 12 Tasten (I²C: 0x4B)" subcategory="Tastaturen"
+    //% group="Qwiic Keypad 12 Tasten (I²C: 0x4B)" subcategory="Tastaturen" color=#BF007F
     //% block="Keypad Zeichencode" weight=6
     export function keypad_read() {
         let charCode = 0
@@ -45,7 +45,7 @@ namespace pins { // keyboards.ts
     }
 
 
-    //% group="Qwiic Keypad 12 Tasten (I²C: 0x4B)" subcategory="Tastaturen"
+    //% group="Qwiic Keypad 12 Tasten (I²C: 0x4B)" subcategory="Tastaturen" color=#BF007F
     //% block="Qwiic Keypad Ereignis auslösen %on" weight=5
     //% on.shadow=toggleOnOff
     export function raiseKeypadEvent(on: boolean) {
@@ -74,7 +74,7 @@ namespace pins { // keyboards.ts
 
     const i2cCardKb_x5F = 0x5F
 
-    //% group="M5Stack Card Keyboard 50 Tasten (I²C: 0x5E)" subcategory="Tastaturen"
+    //% group="M5Stack Card Keyboard 50 Tasten (I²C: 0x5E)" subcategory="Tastaturen" color=#BF007F
     //% block="Card Keyboard Ereignis auslösen %on" weight=3
     //% on.shadow=toggleOnOff
     export function raiseKeyboardEvent(on: boolean) {
@@ -95,7 +95,7 @@ namespace pins { // keyboards.ts
 
     let onKeyboardEventHandler: (zeichenCode: number, zeichenText: string, isASCII: boolean) => void
 
-    //% group="Tastatur Ereignis" subcategory="Tastaturen"
+    //% group="Tastatur Ereignis" subcategory="Tastaturen" color=#BF007F
     //% block="wenn Taste gedrückt war" weight=2
     //% draggableParameters=reporter
     export function onKeyboardEvent(cb: (zeichenCode: number, zeichenText: string, isASCII: boolean) => void) {

@@ -24,7 +24,7 @@ Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
 
     // ========== group="in jeder Schleife aufrufen" subcategory="Joystick"
 
-    //% group="in jeder Schleife aufrufen" subcategory="Joystick"
+    //% group="in jeder Schleife aufrufen" subcategory="Joystick" color=#BF3F7F
     //% block="Joystick einlesen"
     export function read_joystick() {
         if (q_i2c_joystick_connected !== false) { // undefined oder true
@@ -46,7 +46,7 @@ Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
 
     // ========== group="Joystick Position 0 .. 128 .. 255" subcategory="Joystick"
 
-    //% group="Joystick Position 0 .. 128 .. 255" subcategory="Joystick"
+    //% group="Joystick Position 0 .. 128 .. 255" subcategory="Joystick" color=#BF3F7F
     //% block="Joystick x || Stop bei 128 ±%nullstelle" weight=4
     //% nullstelle.defl=6
     export function get_x(nullstelle?: number) {
@@ -56,7 +56,7 @@ Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
             return q_x
     }
 
-    //% group="Joystick Position 0 .. 128 .. 255" subcategory="Joystick"
+    //% group="Joystick Position 0 .. 128 .. 255" subcategory="Joystick" color=#BF3F7F
     //% block="Joystick y || Stop bei 128 ± %nullstelle" weight=3
     //% nullstelle.defl=6
     export function get_y(nullstelle?: number) {
@@ -70,11 +70,11 @@ Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
 
     // ========== group="Joystick Button" subcategory="Joystick"
 
-    //% group="Joystick Button" subcategory="Joystick"
+    //% group="Joystick Button" subcategory="Joystick" color=#BF3F7F
     //% block="Button ist gedrückt" weight=3
     export function get_button_position() { return q_button_position }
 
-    //% group="Joystick Button" subcategory="Joystick"
+    //% group="Joystick Button" subcategory="Joystick" color=#BF3F7F
     //% block="Button an/aus" weight=2
     export function get_button_on_off() { return q_button_on_off }
 
@@ -82,7 +82,7 @@ Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
 
     // ========== group="Qwiic Joystick (I²C 0x20)" subcategory="Joystick"
 
-    //% group="Qwiic Joystick (I²C 0x20)" subcategory="Joystick"
+    //% group="Qwiic Joystick (I²C 0x20)" subcategory="Joystick" color=#BF3F7F
     //% block="Joystick angeschlossen"
     export function joystick_connected() {
         if (q_i2c_joystick_connected)
@@ -99,7 +99,7 @@ Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
 
     // ========== group="Raupensteuerung -1 .. 0 .. +1" subcategory="Joystick"
 
-    //% group="Raupensteuerung 0..128..255 | -MAX..0..+MAX" subcategory="Joystick"
+    //% group="Raupensteuerung 0..128..255 | -MAX..0..+MAX" subcategory="Joystick" color=#BF3F7F
     //% block="Raupensteuerung [ml,mr] || PWM_MAX %pwm_max"
     export function raupensteuerung(pwm_max?: number): number[] {
         // 0 .. 128 .. 255 -> -1 .. 0 .. +1
