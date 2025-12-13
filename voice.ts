@@ -591,7 +591,7 @@ und gibt mit voice_read_cmdid() die ID zurück
         if (id >= 200 && id <= 208)
             id -= 57
         let bu = Buffer.create(2) // EEPROM Startadresse 16 Bit
-        bu.setNumber(NumberFormat.UInt16BE, 0, eeprom_startadresse + (id >> 2))
+        bu.setNumber(NumberFormat.UInt16BE, 0, eeprom_startadresse + (id >> 2) * 128)
         bu = pins_i2cWriteReadBuffer(voice_EEPROM_I2C_ADDRESS, bu, 128)
         let csv_list = bu.toString().split(";")
         if (csv_list.length >= 4)
