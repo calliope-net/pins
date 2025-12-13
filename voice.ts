@@ -28,7 +28,7 @@ und gibt mit voice_read_cmdid() die ID zurück
 
     // ========== group="Gravity: Voice Recognition Sensor" subcategory="Spracherkennung"
 
-    //% group="Voice Recognition Sensor (I²C 0x64)" subcategory="Spracherkennung"
+    //% group="Voice Recognition Sensor (I²C 0x64)" subcategory="Spracherkennung" color=#1ABC9C
     //% block="Kommando ID" weight=7
     export function voice_read_cmdid(): number { // repeat=true muss angegeben werden
         if (pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_eRegister.CMDID]), true) == 0)
@@ -584,7 +584,7 @@ und gibt mit voice_read_cmdid() die ID zurück
     }
 
 
-    //% group="Kommandos 0..142 und 200..208" subcategory="Spracherkennung"
+    //% group="Kommandos 0..142 und 200..208" subcategory="Spracherkennung" color=#1ABC9C
     //% block="Kommando ID %id aus EEPROM" weight=3
     export function voice_command_text_eeprom(id: number) {
         const eeprom_startadresse = 0xDD00
