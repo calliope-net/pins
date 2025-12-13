@@ -140,129 +140,129 @@ und gibt mit voice_read_cmdid() die ID zurück
         W22 = 22,
         //% block="23 Retreat"
         W23 = 23,
-        //% blockId="voiceRecognition_W24" block="Park a car"
+        //% block="Park a car"
         W24 = 24,
-        //% blockId="voiceRecognition_W25" block="Turn left ninety degrees"
+        //% block="Turn left ninety degrees"
         W25 = 25,
-        //% blockId="voiceRecognition_W26" block="Turn left forty-five degrees"
+        //% block="Turn left forty-five degrees"
         W26 = 26,
-        //% blockId="voiceRecognition_W27" block="Turn left thirty degrees"
+        //% block="Turn left thirty degrees"
         W27 = 27,
-        //% blockId="voiceRecognition_W28" block="Turn right ninety degrees"
+        //% block="Turn right ninety degrees"
         W28 = 28,
-        //% blockId="voiceRecognition_W29" block="Turn right forty-five degrees"
+        //% block="Turn right forty-five degrees"
         W29 = 29,
-        //% blockId="voiceRecognition_W30" block="Turn right thirty degrees"
+        //% block="Turn right thirty degrees"
         W30 = 30,
-        //% blockId="voiceRecognition_W31" block="Shift down a gear"
+        //% block="Shift down a gear"
         W31 = 31,
-        //% blockId="voiceRecognition_W32" block="Line tracking mode"
+        //% block="Line tracking mode"
         W32 = 32,
-        //% blockId="voiceRecognition_W33" block="Light tracking mode"
+        //% block="Light tracking mode"
         W33 = 33,
-        //% blockId="voiceRecognition_W34" block="Bluetooth mode"
+        //% block="Bluetooth mode"
         W34 = 34,
-        //% blockId="voiceRecognition_W35" block="Obstacle avoidance mode"
+        //% block="Obstacle avoidance mode"
         W35 = 35,
-        //% blockId="voiceRecognition_W36" block="Face recognition"
+        //% block="Face recognition"
         W36 = 36,
-        //% blockId="voiceRecognition_W37" block="Object tracking"
+        //% block="Object tracking"
         W37 = 37,
-        //% blockId="voiceRecognition_W38" block="Object recognition"
+        //% block="Object recognition"
         W38 = 38,
-        //% blockId="voiceRecognition_W39" block="Line tracking"
+        //% block="Line tracking"
         W39 = 39,
-        //% blockId="voiceRecognition_W40" block="Color recognition"
+        //% block="Color recognition"
         W40 = 40,
-        //% blockId="voiceRecognition_W41" block="Tag recognition"
+        //% block="Tag recognition"
         W41 = 41,
-        //% blockId="voiceRecognition_W42" block="Object sorting"
+        //% block="Object sorting"
         W42 = 42,
-        //% blockId="voiceRecognition_W43" block="Qr code recognition"
+        //% block="Qr code recognition"
         W43 = 43,
-        //% blockId="voiceRecognition_W44" block="General settings"
+        //% block="General settings"
         W44 = 44,
-        //% blockId="voiceRecognition_W45" block="Clear screen"
+        //% block="Clear screen"
         W45 = 45,
-        //% blockId="voiceRecognition_W46" block="Learn once"
+        //% block="Learn once"
         W46 = 46,
-        //% blockId="voiceRecognition_W47" block="Forget"
+        //% block="Forget"
         W47 = 47,
-        //% blockId="voiceRecognition_W48" block="Load model"
+        //% block="Load model"
         W48 = 48,
-        //% blockId="voiceRecognition_W49" block="Save model"
+        //% block="Save model"
         W49 = 49,
-        //% blockId="voiceRecognition_W50" block="Take photos and save them"
+        //% block="Take photos and save them"
         W50 = 50,
-        //% blockId="voiceRecognition_W51" block="Save and return"
+        //% block="Save and return"
         W51 = 51,
-        //% blockId="voiceRecognition_W52" block="Display number zero"
+        //% block="Display number zero"
         W52 = 52,
-        //% blockId="voiceRecognition_W53" block="Display number one"
+        //% block="Display number one"
         W53 = 53,
-        //% blockId="voiceRecognition_W54" block="Display number two"
+        //% block="Display number two"
         W54 = 54,
-        //% blockId="voiceRecognition_W55" block="Display number three"
+        //% block="Display number three"
         W55 = 55,
-        //% blockId="voiceRecognition_W56" block="Display number four"
+        //% block="Display number four"
         W56 = 56,
-        //% blockId="voiceRecognition_W57" block="Display number five"
+        //% block="Display number five"
         W57 = 57,
-        //% blockId="voiceRecognition_W58" block="Display number six"
+        //% block="Display number six"
         W58 = 58,
-        //% blockId="voiceRecognition_W59" block="Display number seven"
+        //% block="Display number seven"
         W59 = 59,
-        //% blockId="voiceRecognition_W60" block="Display number eight"
+        //% block="Display number eight"
         W60 = 60,
-        //% blockId="voiceRecognition_W61" block="Display number nine"
+        //% block="Display number nine"
         W61 = 61,
-        //% blockId="voiceRecognition_W62" block="Display smiley face"
+        //% block="Display smiley face"
         W62 = 62,
-        //% blockId="voiceRecognition_W63" block="Display crying face"
+        //% block="Display crying face"
         W63 = 63,
-        //% blockId="voiceRecognition_W64" block="Display heart"
+        //% block="Display heart"
         W64 = 64,
-        //% blockId="voiceRecognition_W65" block="Turn off dot matrix"
+        //% block="Turn off dot matrix"
         W65 = 65,
-        //% blockId="voiceRecognition_W66" block="Read current posture"
+        //% block="Read current posture"
         W66 = 66,
-        //% blockId="voiceRecognition_W67" block="Read ambient light"
+        //% block="Read ambient light"
         W67 = 67,
-        //% blockId="voiceRecognition_W68" block="Read compass"
+        //% block="Read compass"
         W68 = 68,
-        //% blockId="voiceRecognition_W69" block="Read temperature"
+        //% block="Read temperature"
         W69 = 69,
-        //% blockId="voiceRecognition_W70" block="Read acceleration"
+        //% block="Read acceleration"
         W70 = 70,
-        //% blockId="voiceRecognition_W71" block="Reading sound intensity"
+        //% block="Reading sound intensity"
         W71 = 71,
-        //% blockId="voiceRecognition_W72" block="Calibrate electronic gyroscope"
+        //% block="Calibrate electronic gyroscope"
         W72 = 72,
-        //% blockId="voiceRecognition_W73" block="Turn on the camera"
+        //% block="Turn on the camera"
         W73 = 73,
-        //% blockId="voiceRecognition_W74" block="Turn off the camera"
+        //% block="Turn off the camera"
         W74 = 74,
-        //% blockId="voiceRecognition_W75" block="Turn on the fan"
+        //% block="Turn on the fan"
         W75 = 75,
-        //% blockId="voiceRecognition_W76" block="Turn off the fan"
+        //% block="Turn off the fan"
         W76 = 76,
-        //% blockId="voiceRecognition_W77" block="Turn fan speed to gear one"
+        //% block="Turn fan speed to gear one"
         W77 = 77,
-        //% blockId="voiceRecognition_W78" block="Turn fan speed to gear two"
+        //% block="Turn fan speed to gear two"
         W78 = 78,
-        //% blockId="voiceRecognition_W79" block="Turn fan speed to gear three"
+        //% block="Turn fan speed to gear three"
         W79 = 79,
-        //% blockId="voiceRecognition_W80" block="Start oscillating"
+        //% block="Start oscillating"
         W80 = 80,
-        //% blockId="voiceRecognition_W81" block="Stop oscillating"
+        //% block="Stop oscillating"
         W81 = 81,
-        //% blockId="voiceRecognition_W82" block="Reset"
+        //% block="Reset"
         W82 = 82,
-        //% blockId="voiceRecognition_W83" block="Set servo to ten degrees"
+        //% block="Set servo to ten degrees"
         W83 = 83,
-        //% blockId="voiceRecognition_W84" block="Set servo to thirty degrees"
+        //% block="Set servo to thirty degrees"
         W84 = 84,
-        //% blockId="voiceRecognition_W85" block="Set servo to forty-five degrees"
+        //% block="Set servo to forty-five degrees"
         W85 = 85,
         //% blockId="voiceRecognition_W86" block="Set servo to sixty degrees"
         W86 = 86,
