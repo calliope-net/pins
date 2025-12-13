@@ -94,12 +94,19 @@ und gibt mit voice_read_cmdid() die ID zurück
 
     //% blockId=pins_voice_command_enum
     //% group="Kommandos 5..142 und 200..208" subcategory="Spracherkennung"
-    //% block="Kommando ID %e" weight=5
+    //% block="%e" weight=5
     export function voice_command_enum(e: voice_FixedCommandWords) {
         return e
     }
 
     export enum voice_FixedCommandWords {
+        //% block="Kommando ID 0"
+        W0 = 0,
+        //% block="1 Wake-up words for learning"
+        W1 = 1,
+        //% block="2 Hello robot"
+        W2 = 2,
+
         //% block="5 stop"
         W5 = 5,
         //% block="6 vorwärts"
@@ -400,26 +407,26 @@ und gibt mit voice_read_cmdid() die ID zurück
         W208 = 208
     }
 
-   /*  export enum voice_LearningRelatedCommands {
-        //% block="Learning wake word"
-        W200 = 200,
-        //% block="Learning command word"
-        W201 = 201,
-        //% block="Re-learn"
-        W202 = 202,
-        //% block="Exit learning"
-        W203 = 203,
-        //% block="I want to delete"
-        W204 = 204,
-        //% block="Delete wake word"
-        W205 = 205,
-        //% block="Delete command word"
-        W206 = 206,
-        //% block="Exit deleting"
-        W207 = 207,
-        //% block="Delete all"
-        W208 = 208
-    } */
+    /*  export enum voice_LearningRelatedCommands {
+         //% block="Learning wake word"
+         W200 = 200,
+         //% block="Learning command word"
+         W201 = 201,
+         //% block="Re-learn"
+         W202 = 202,
+         //% block="Exit learning"
+         W203 = 203,
+         //% block="I want to delete"
+         W204 = 204,
+         //% block="Delete wake word"
+         W205 = 205,
+         //% block="Delete command word"
+         W206 = 206,
+         //% block="Exit deleting"
+         W207 = 207,
+         //% block="Delete all"
+         W208 = 208
+     } */
 
 
 
@@ -605,7 +612,8 @@ und gibt mit voice_read_cmdid() die ID zurück
 
 
     //% group="Kommandos 0..142 und 200..208" subcategory="Spracherkennung" color=#1ABC9C
-    //% block="Kommando ID %id aus EEPROM" weight=3
+    //% block="%id Text aus EEPROM" weight=3
+    //% id.shadow=pins_voice_command_enum
     export function voice_command_text_eeprom(id: number) {
         const eeprom_startadresse = 0xDD00
         if (id >= 200 && id <= 208)
