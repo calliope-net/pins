@@ -21,7 +21,7 @@ und gibt mit voice_read_cmdid() die ID zurück
     }
 
     //% blockId=pins_voice_eRegister blockHidden=true
-    //% group="Voice Recognition Sensor (I²C 0x64)" subcategory="Spracherkennung"
+    //% group="Voice Recognition Sensor (I²C 0x64)" subcategory="Spracherkennung" color=#1ABC9C
     //% block="%pRegister"
     export function pins_voice_eRegister(pRegister: voice_eRegister): number { return pRegister }
 
@@ -39,8 +39,9 @@ und gibt mit voice_read_cmdid() die ID zurück
         //return bu[0]
     }
 
-    //% group="Voice Recognition Sensor (I²C 0x64)" subcategory="Spracherkennung"
+    //% group="Voice Recognition Sensor (I²C 0x64)" subcategory="Spracherkennung" color=#1ABC9C
     //% block="spiele Antwort ID %id" weight=5
+    //% id.shadow=pins_voice_command_enum
     export function voice_play_cmdid(id: number) {
         pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_eRegister.PLAY_CMDID, id]))
     }
@@ -49,21 +50,21 @@ und gibt mit voice_read_cmdid() die ID zurück
 
     // ========== group="Konfiguration" subcategory="Spracherkennung"
 
-    //% group="Konfiguration" subcategory="Spracherkennung"
+    //% group="Konfiguration" subcategory="Spracherkennung" color=#1ABC9C
     //% block="Voice Sensor angeschlossen" weight=8
     export function voice_connected(): boolean {
         let bu = pins_i2cWriteReadBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_eRegister.WAKE_TIME]), 1)
         return bu ? true : false
     }
 
-    //% group="Konfiguration" subcategory="Spracherkennung"
+    //% group="Konfiguration" subcategory="Spracherkennung" color=#1ABC9C
     //% block="Wachzeit %sekunden Sekunden" weight=7
     //% sekunden.min=5 sekunden.max=60 sekunden.defl=15
     export function voice_waketime(sekunden: number) {
         pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_eRegister.WAKE_TIME, sekunden]))
     }
 
-    //% group="Konfiguration" subcategory="Spracherkennung"
+    //% group="Konfiguration" subcategory="Spracherkennung" color=#1ABC9C
     //% block="Lautsprecher %on || Lautstärke %volume" weight=5
     //% on.shadow=toggleOnOff
     //% volume.min=5 volume.max=15
@@ -73,7 +74,7 @@ und gibt mit voice_read_cmdid() die ID zurück
             pins_i2cWriteBuffer(voice_I2C_ADDRESS, Buffer.fromArray([voice_eRegister.SET_VOLUME, volume]))
     }
 
-    //% group="Konfiguration" subcategory="Spracherkennung"
+    //% group="Konfiguration" subcategory="Spracherkennung" color=#1ABC9C
     //% block="Register %reg (2..6) lesen" weight=3
     // reg.min=2 reg.max=6
     //% reg.shadow=pins_voice_eRegister reg.defl=pins.voice_eRegister.WAKE_TIME
@@ -93,7 +94,7 @@ und gibt mit voice_read_cmdid() die ID zurück
     // ========== group="Kommandos 5..142 und 200..208" subcategory="Spracherkennung"
 
     //% blockId=pins_voice_command_enum
-    //% group="Kommandos 5..142 und 200..208" subcategory="Spracherkennung"
+    //% group="Kommandos 5..142 und 200..208" subcategory="Spracherkennung" color=#1ABC9C
     //% block="%e" weight=5
     export function voice_command_enum(e: voice_FixedCommandWords) {
         return e
@@ -432,7 +433,7 @@ und gibt mit voice_read_cmdid() die ID zurück
 
     // ========== group="Kommandos 0..142 und 200..208" subcategory="Spracherkennung"
 
-    //% group="Kommandos 0..142 und 200..208" subcategory="Spracherkennung"
+    //% group="Kommandos 0..142 und 200..208" subcategory="Spracherkennung" color=#1ABC9C deprecated=1
     //% block="Kommando ID %id als Text" weight=5
     export function voice_command_text(id: number) {
         // Calliope v2 erlaubt nur Array Längen bis 32 Elemente
@@ -607,12 +608,21 @@ und gibt mit voice_read_cmdid() die ID zurück
                 'Delete all' // 208
             ].get(id - 200)
         else
-            return ""
+            return id.toString()
     }
 
 
+/* 
+Im EEPROM ab Adresse DD00 (56.576) stehen pro Page (128 Byte) 4 Kommando-Texte durch Semikolon getrennt: Text 0;Text 1;Text2;Text 3;FFFFFF
+übrige Bytes bis zur Länge 128 sind nicht progrmmiert (EEPROM FF)
+Kommando 0..142 = 143 + 200..208 = 9 Summe 143+9 = 152
+152 / 4 = 38 Pages je 128 Byte = 4864 Byte = 0x1300
+EEPROM Adressbereich DD00..EFFF für Voice Kommandos
+ab F000 (1K) stehen die Z 9001 Zeichen gedreht; ab F400 (1K) Pseudografik
+ab F800 (1K) ASCII Zeichen; ab FC00 Umlaute und Sonderzeichen
+*/
     //% group="Kommandos 0..142 und 200..208" subcategory="Spracherkennung" color=#1ABC9C
-    //% block="%id Text aus EEPROM" weight=3
+    //% block="Text aus EEPROM %id" weight=3
     //% id.shadow=pins_voice_command_enum
     export function voice_command_text_eeprom(id: number) {
         const eeprom_startadresse = 0xDD00
