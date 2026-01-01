@@ -66,6 +66,14 @@ Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
             return q_y
     }
 
+    //% group="Joystick Position 0 .. 128 .. 255" subcategory="Joystick" color=#BF3F7F
+    //% block="%j * %prozent \\%" weight=2
+    //% j.min=0 j.max=255 j.defl=128
+    //% prozent.min=10 prozent.max=100 prozent.defl=50
+    export function joystick_prozent(j: number, prozent: number) {
+        return Math.idiv((j - 128) * prozent, 100) + 128
+    }
+
 
 
     // ========== group="Joystick Button" subcategory="Joystick"
