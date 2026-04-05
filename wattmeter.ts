@@ -57,6 +57,7 @@ Code anhand der Python library und Datenblätter neu programmiert von Lutz Elßn
 
     //% group="Wattmeter (I²C 0x45)" subcategory="Wattmeter" color=#002F5F
     //% block="Wattmeter Reset || %i2c_addr Calibration %calibration_value"
+    //% i2c_addr.defl=wattmeter_i2c_addr.x45
     //% calibration_value.defl=4096
     export function wattmeter_reset(i2c_addr?: wattmeter_i2c_addr, calibration_value?: number) {
         if (write_register_16bit(i2c_addr, wattmater_register.REG_CONFIG, INA219_CONFIG_RESET) == 0)
@@ -71,7 +72,8 @@ Code anhand der Python library und Datenblätter neu programmiert von Lutz Elßn
     // ========== group="Messwerte lesen"
 
     //% group="Messwerte lesen" subcategory="Wattmeter" color=#002F5F
-    //% block="Spannung U in V || %i2c_addr" weight=8
+    //% block="Spannung U in V || %i2c_addr " weight=8
+    //% i2c_addr.defl=wattmeter_i2c_addr.x45
     export function get_bus_voltage_V(i2c_addr?: wattmeter_i2c_addr): number { // get the BusVoltage （Voltage of IN- to GND)
         // die letzten 3 Bit 2-1-0 gehören nicht zum Messwert | - | CNVR | OVF
         let bu = read_register_16bit(i2c_addr, wattmater_register.REG_BUSVOLTAGE)
@@ -82,7 +84,8 @@ Code anhand der Python library und Datenblätter neu programmiert von Lutz Elßn
     }
 
     //% group="Messwerte lesen" subcategory="Wattmeter" color=#002F5F
-    //% block="Strom I in mA || %i2c_addr" weight=7
+    //% block="Strom I in mA || %i2c_addr " weight=7
+    //% i2c_addr.defl=wattmeter_i2c_addr.x45
     export function get_current_mA(i2c_addr?: wattmeter_i2c_addr): number { // get the Current(Current flows across IN+ and IN-)
         let bu = read_register_16bit(i2c_addr, wattmater_register.REG_CURRENT)
         if (bu)
@@ -93,7 +96,8 @@ Code anhand der Python library und Datenblätter neu programmiert von Lutz Elßn
     }
 
     //% group="Messwerte lesen" subcategory="Wattmeter" color=#002F5F
-    //% block="Leistung P=U*I in mW || %i2c_addr" weight=6
+    //% block="Leistung P=U*I in mW || %i2c_addr " weight=6
+    //% i2c_addr.defl=wattmeter_i2c_addr.x45
     export function get_power_mW(i2c_addr?: wattmeter_i2c_addr): number { // get the Current(Current flows across IN+ and IN-)
         let bu = read_register_16bit(i2c_addr, wattmater_register.REG_POWER)
         if (bu)
@@ -104,7 +108,8 @@ Code anhand der Python library und Datenblätter neu programmiert von Lutz Elßn
     }
 
     //% group="Messwerte lesen" subcategory="Wattmeter" color=#002F5F
-    //% block="Shunt Spannung U in mV || %i2c_addr" weight=4
+    //% block="Shunt Spannung U in mV || %i2c_addr " weight=4
+    //% i2c_addr.defl=wattmeter_i2c_addr.x45
     export function get_shunt_voltage_mV(i2c_addr?: wattmeter_i2c_addr): number { // get the ShuntVoltage （Voltage of the sampling resistor, IN+ to NI-)
         let bu = read_register_16bit(i2c_addr, wattmater_register.REG_SHUNTVOLTAGE)
         if (bu)
