@@ -38,10 +38,12 @@ If you don't have a regulated power supply nor a DC electronic load on the hand,
 
 Code anhand der Python library und Datenblätter neu programmiert von Lutz Elßner im August, September 2023
 */ {
-    const q_i2c_wattmeter_x45 = 0x45
-    let q_i2c_wattmeter_connected: boolean // undefined
+    export enum wattmeter_i2c_addr { x45 = 0x45, x40 = 0x40, x41 = 0x41, x44 = 0x44 }
 
-    export enum eRegister {
+    // const q_i2c_wattmeter_x45 = 0x45
+    // let q_i2c_wattmeter_connected: boolean // undefined
+
+    enum wattmater_register {
         REG_CONFIG = 0x00,          // Config register
         REG_SHUNTVOLTAGE = 0x01,    // Shunt Voltage Register
         REG_BUSVOLTAGE = 0x02,      // Bus Voltage Register
@@ -54,17 +56,13 @@ Code anhand der Python library und Datenblätter neu programmiert von Lutz Elßn
 
 
     //% group="Wattmeter (I²C 0x45)" subcategory="Wattmeter" color=#002F5F
-    //% block="Wattmeter Reset || Calibration %calibration_value"
+    //% block="Wattmeter Reset || %i2c_addr Calibration %calibration_value"
     //% calibration_value.defl=4096
-    export function wattmeter_reset(calibration_value?: number) {
-        //n_i2cCheck = (ck ? true : false) // optionaler boolean Parameter kann undefined sein
-        //n_i2cError = 0 // Reset Fehlercode
-
-        write_register(eRegister.REG_CONFIG, INA219_CONFIG_RESET) // 0x8000
-        write_register(eRegister.REG_CALIBRATION, calibration_value)
-
-        //writeCONFIGURATION(pADDR, 0x8000)
-        //writeCALIBRATION(pADDR, calibration_value)
+    export function wattmeter_reset(i2c_addr?: wattmeter_i2c_addr, calibration_value?: number) {
+        if (write_register_16bit(i2c_addr, wattmater_register.REG_CONFIG, INA219_CONFIG_RESET) == 0)
+            write_register_16bit(i2c_addr, wattmater_register.REG_CALIBRATION, calibration_value)
+        else
+            basic.showString(pins.toHex(i2c_addr, "x")) // bei Fehler I²C Adresse anzeigen
     }
 
 
@@ -73,23 +71,20 @@ Code anhand der Python library und Datenblätter neu programmiert von Lutz Elßn
     // ========== group="Messwerte lesen"
 
     //% group="Messwerte lesen" subcategory="Wattmeter" color=#002F5F
-    //% block="Spannung U in V" weight=8
-    export function get_bus_voltage_V(): number { // get the BusVoltage （Voltage of IN- to GND)
-        //return (read_ina_reg(pADDR, eRegister.REG_BUSVOLTAGE) >> 1) * 0.001            // py   0.001/2=0.0005
-
-        // die letzten 3 Bit 2-1-0 gehögen nicht zum Messwert | - | CNVR | OVF
-        let bu = read_register(eRegister.REG_BUSVOLTAGE)
+    //% block="Spannung U in V || %i2c_addr" weight=8
+    export function get_bus_voltage_V(i2c_addr?: wattmeter_i2c_addr): number { // get the BusVoltage （Voltage of IN- to GND)
+        // die letzten 3 Bit 2-1-0 gehören nicht zum Messwert | - | CNVR | OVF
+        let bu = read_register_16bit(i2c_addr, wattmater_register.REG_BUSVOLTAGE)
         if (bu)
             return (bu.getNumber(NumberFormat.UInt16BE, 0) >> 3) * 0.004    // cpp  0.004/8=0.0005
-        //  return (read_Register_UInt16BE(pADDR, eRegister.REG_BUSVOLTAGE) >> 3) * 0.004    // cpp  0.004/8=0.0005
         else
             return NaN
     }
 
     //% group="Messwerte lesen" subcategory="Wattmeter" color=#002F5F
-    //% block="Strom I in mA" weight=7
-    export function get_current_mA(): number { // get the Current(Current flows across IN+ and IN-)
-        let bu = read_register(eRegister.REG_CURRENT)
+    //% block="Strom I in mA || %i2c_addr" weight=7
+    export function get_current_mA(i2c_addr?: wattmeter_i2c_addr): number { // get the Current(Current flows across IN+ and IN-)
+        let bu = read_register_16bit(i2c_addr, wattmater_register.REG_CURRENT)
         if (bu)
             return bu.getNumber(NumberFormat.Int16BE, 0)
         // return read_Register_mit_Vorzeichen_Int16BE(pADDR, eRegister.REG_CURRENT)
@@ -98,9 +93,9 @@ Code anhand der Python library und Datenblätter neu programmiert von Lutz Elßn
     }
 
     //% group="Messwerte lesen" subcategory="Wattmeter" color=#002F5F
-    //% block="Leistung P=U*I in mW" weight=6
-    export function get_power_mW(): number { // get the Current(Current flows across IN+ and IN-)
-        let bu = read_register(eRegister.REG_POWER)
+    //% block="Leistung P=U*I in mW || %i2c_addr" weight=6
+    export function get_power_mW(i2c_addr?: wattmeter_i2c_addr): number { // get the Current(Current flows across IN+ and IN-)
+        let bu = read_register_16bit(i2c_addr, wattmater_register.REG_POWER)
         if (bu)
             return bu.getNumber(NumberFormat.Int16BE, 0) * 20
         // return read_Register_mit_Vorzeichen_Int16BE(pADDR, eRegister.REG_POWER) * 20
@@ -109,9 +104,9 @@ Code anhand der Python library und Datenblätter neu programmiert von Lutz Elßn
     }
 
     //% group="Messwerte lesen" subcategory="Wattmeter" color=#002F5F
-    //% block="Shunt Spannung U in mV" weight=4
-    export function get_shunt_voltage_mV(): number { // get the ShuntVoltage （Voltage of the sampling resistor, IN+ to NI-)
-        let bu = read_register(eRegister.REG_SHUNTVOLTAGE)
+    //% block="Shunt Spannung U in mV || %i2c_addr" weight=4
+    export function get_shunt_voltage_mV(i2c_addr?: wattmeter_i2c_addr): number { // get the ShuntVoltage （Voltage of the sampling resistor, IN+ to NI-)
+        let bu = read_register_16bit(i2c_addr, wattmater_register.REG_SHUNTVOLTAGE)
         if (bu)
             return bu.getNumber(NumberFormat.Int16BE, 0)
         // return read_Register_mit_Vorzeichen_Int16BE(pADDR, eRegister.REG_SHUNTVOLTAGE)  // py
@@ -124,19 +119,19 @@ Code anhand der Python library und Datenblätter neu programmiert von Lutz Elßn
 
     // ========== private
 
-    function read_register(register: eRegister): Buffer { // return: Buffer 2 Byte
+    function read_register_16bit(i2c_addr: wattmeter_i2c_addr, register: wattmater_register): Buffer { // return: Buffer 2 Byte
         //let bu = Buffer.create(1)
         //bu.setUint8(0, register)
-        return pins_i2cWriteReadBuffer(q_i2c_wattmeter_x45, Buffer.fromArray([register]), 2)
+        return pins_i2cWriteReadBuffer(i2c_addr, Buffer.fromArray([register]), 2)
         //i2cWriteBuffer(q_i2c_wattmeter_x45, bu, true)
         //return i2cReadBuffer(q_i2c_wattmeter_x45, 2)
     }
 
-    function write_register(register: eRegister, value: number) { // value: uint16_t
+    function write_register_16bit(i2c_addr: wattmeter_i2c_addr, register: wattmater_register, value: number) { // value: uint16_t
         let bu = Buffer.create(3)
         bu.setUint8(0, register)
         bu.setNumber(NumberFormat.UInt16BE, 1, value)
-        pins_i2cWriteBuffer(q_i2c_wattmeter_x45, bu)
+        return pins_i2cWriteBuffer(i2c_addr, bu)
     }
 
 
