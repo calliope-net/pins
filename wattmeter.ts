@@ -78,8 +78,12 @@ Code anhand der Python library und Datenblätter neu programmiert von Lutz Elßn
         //return (read_ina_reg(pADDR, eRegister.REG_BUSVOLTAGE) >> 1) * 0.001            // py   0.001/2=0.0005
 
         // die letzten 3 Bit 2-1-0 gehögen nicht zum Messwert | - | CNVR | OVF
-        return (read_register(eRegister.REG_BUSVOLTAGE).getNumber(NumberFormat.UInt16BE, 0) >> 3) * 0.004    // cpp  0.004/8=0.0005
+        let bu = read_register(eRegister.REG_BUSVOLTAGE)
+        if (bu)
+            return (bu.getNumber(NumberFormat.UInt16BE, 0) >> 3) * 0.004    // cpp  0.004/8=0.0005
         //  return (read_Register_UInt16BE(pADDR, eRegister.REG_BUSVOLTAGE) >> 3) * 0.004    // cpp  0.004/8=0.0005
+        else
+            return NaN
     }
 
     //% group="Messwerte lesen" subcategory="Wattmeter" color=#002F5F
@@ -90,24 +94,30 @@ Code anhand der Python library und Datenblätter neu programmiert von Lutz Elßn
             return bu.getNumber(NumberFormat.Int16BE, 0)
         // return read_Register_mit_Vorzeichen_Int16BE(pADDR, eRegister.REG_CURRENT)
         else
-            return 0
+            return NaN
     }
 
     //% group="Messwerte lesen" subcategory="Wattmeter" color=#002F5F
     //% block="Leistung P=U*I in mW" weight=6
     export function get_power_mW(): number { // get the Current(Current flows across IN+ and IN-)
-        return read_register(eRegister.REG_POWER).getNumber(NumberFormat.Int16BE, 0) * 20
+        let bu = read_register(eRegister.REG_POWER)
+        if (bu)
+            return bu.getNumber(NumberFormat.Int16BE, 0) * 20
         // return read_Register_mit_Vorzeichen_Int16BE(pADDR, eRegister.REG_POWER) * 20
+        else
+            return NaN
     }
 
     //% group="Messwerte lesen" subcategory="Wattmeter" color=#002F5F
     //% block="Shunt Spannung U in mV" weight=4
     export function get_shunt_voltage_mV(): number { // get the ShuntVoltage （Voltage of the sampling resistor, IN+ to NI-)
-        return read_register(eRegister.REG_SHUNTVOLTAGE).getNumber(NumberFormat.Int16BE, 0)
+        let bu = read_register(eRegister.REG_SHUNTVOLTAGE)
+        if (bu)
+            return bu.getNumber(NumberFormat.Int16BE, 0)
         // return read_Register_mit_Vorzeichen_Int16BE(pADDR, eRegister.REG_SHUNTVOLTAGE)  // py
+        else
+            return NaN
     }
-
-
 
 
 
