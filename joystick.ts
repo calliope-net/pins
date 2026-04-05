@@ -22,6 +22,23 @@ Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
     let q_button_on_off = false
 
 
+    // ========== group="Qwiic Joystick (I²C 0x20)" subcategory="Joystick"
+
+    //% group="Qwiic Joystick (I²C 0x20)" subcategory="Joystick" color=#BF3F7F
+    //% block="Joystick angeschlossen"
+    export function joystick_connected() {
+        if (q_i2c_joystick_connected)
+            return true
+        else if (q_i2c_joystick_connected === undefined) { // nicht false
+            q_i2c_joystick_connected = pins_i2cWriteBuffer(q_i2c_joystick_x20, Buffer.fromArray([0])) == 0
+            if (q_i2c_joystick_connected)
+                pins_i2cReadBuffer(q_i2c_joystick_x20, 1) // liest ID, aber wertet nicht aus
+        }
+        return q_i2c_joystick_connected
+    }
+
+
+
     // ========== group="in jeder Schleife aufrufen" subcategory="Joystick"
 
     //% group="in jeder Schleife aufrufen" subcategory="Joystick" color=#BF3F7F
@@ -86,22 +103,6 @@ Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
     //% block="Button an/aus" weight=2
     export function get_button_on_off() { return q_button_on_off }
 
-
-
-    // ========== group="Qwiic Joystick (I²C 0x20)" subcategory="Joystick"
-
-    //% group="Qwiic Joystick (I²C 0x20)" subcategory="Joystick" color=#BF3F7F
-    //% block="Joystick angeschlossen"
-    export function joystick_connected() {
-        if (q_i2c_joystick_connected)
-            return true
-        else if (q_i2c_joystick_connected === undefined) { // nicht false
-            q_i2c_joystick_connected = pins_i2cWriteBuffer(q_i2c_joystick_x20, Buffer.fromArray([0])) == 0
-            if (q_i2c_joystick_connected)
-                pins_i2cReadBuffer(q_i2c_joystick_x20, 1) // liest ID, aber wertet nicht aus
-        }
-        return q_i2c_joystick_connected
-    }
 
 
 

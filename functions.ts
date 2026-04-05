@@ -76,8 +76,8 @@ namespace pins { // functions.ts
     // ========== group="25 LED Matrix" subcategory=Funktionen
 
     //% group="25 LED Matrix" subcategory=Funktionen color=#004FCF
-    //% block="25 LED x→0..3 %x y↑0..31 %n" weight=5
-    //% x.min=0 x.max=4 y.min=0 y.max=31
+    //% block="25 LED x→0..4 %x n↑0..31 %n" weight=5
+    //% x.min=0 x.max=4 n.min=0 n.max=31
     export function plot25LED(x: number, n: number) {
         if (between(x, 0, 4)) {
             if ((n & 1) == 1) { led.plot(x, 4) } else { led.unplot(x, 4) }
