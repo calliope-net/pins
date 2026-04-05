@@ -74,7 +74,7 @@ Code anhand der Python library und Datenblätter neu programmiert von Lutz Elßn
 
     //% group="Messwerte lesen" subcategory="Wattmeter" color=#002F5F
     //% block="Spannung U in V" weight=8
-    export function get_bus_voltage_V() { // get the BusVoltage （Voltage of IN- to GND)
+    export function get_bus_voltage_V(): number { // get the BusVoltage （Voltage of IN- to GND)
         //return (read_ina_reg(pADDR, eRegister.REG_BUSVOLTAGE) >> 1) * 0.001            // py   0.001/2=0.0005
 
         // die letzten 3 Bit 2-1-0 gehögen nicht zum Messwert | - | CNVR | OVF
@@ -84,21 +84,25 @@ Code anhand der Python library und Datenblätter neu programmiert von Lutz Elßn
 
     //% group="Messwerte lesen" subcategory="Wattmeter" color=#002F5F
     //% block="Strom I in mA" weight=7
-    export function get_current_mA() { // get the Current(Current flows across IN+ and IN-)
-        return read_register(eRegister.REG_CURRENT).getNumber(NumberFormat.Int16BE, 0)
+    export function get_current_mA(): number { // get the Current(Current flows across IN+ and IN-)
+        let bu = read_register(eRegister.REG_CURRENT)
+        if (bu)
+            return bu.getNumber(NumberFormat.Int16BE, 0)
         // return read_Register_mit_Vorzeichen_Int16BE(pADDR, eRegister.REG_CURRENT)
+        else
+            return 0
     }
 
     //% group="Messwerte lesen" subcategory="Wattmeter" color=#002F5F
     //% block="Leistung P=U*I in mW" weight=6
-    export function get_power_mW() { // get the Current(Current flows across IN+ and IN-)
+    export function get_power_mW(): number { // get the Current(Current flows across IN+ and IN-)
         return read_register(eRegister.REG_POWER).getNumber(NumberFormat.Int16BE, 0) * 20
         // return read_Register_mit_Vorzeichen_Int16BE(pADDR, eRegister.REG_POWER) * 20
     }
 
     //% group="Messwerte lesen" subcategory="Wattmeter" color=#002F5F
     //% block="Shunt Spannung U in mV" weight=4
-    export function get_shunt_voltage_mV() { // get the ShuntVoltage （Voltage of the sampling resistor, IN+ to NI-)
+    export function get_shunt_voltage_mV(): number { // get the ShuntVoltage （Voltage of the sampling resistor, IN+ to NI-)
         return read_register(eRegister.REG_SHUNTVOLTAGE).getNumber(NumberFormat.Int16BE, 0)
         // return read_Register_mit_Vorzeichen_Int16BE(pADDR, eRegister.REG_SHUNTVOLTAGE)  // py
     }
