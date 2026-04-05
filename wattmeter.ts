@@ -56,7 +56,7 @@ Code anhand der Python library und Datenblätter neu programmiert von Lutz Elßn
     //% group="Wattmeter (I²C 0x45)" subcategory="Wattmeter" color=#002F5F
     //% block="Wattmeter Reset || Calibration %calibration_value"
     //% calibration_value.defl=4096
-    export function wattmeter_reset(pADDR: number, calibration_value?: number) {
+    export function wattmeter_reset(calibration_value?: number) {
         //n_i2cCheck = (ck ? true : false) // optionaler boolean Parameter kann undefined sein
         //n_i2cError = 0 // Reset Fehlercode
 
@@ -110,11 +110,12 @@ Code anhand der Python library und Datenblätter neu programmiert von Lutz Elßn
 
     // ========== private
 
-    function read_register(register: eRegister): Buffer { // return: Buffer
-        let bu = Buffer.create(1)
-        bu.setUint8(0, register)
-        i2cWriteBuffer(q_i2c_wattmeter_x45, bu, true)
-        return i2cReadBuffer(q_i2c_wattmeter_x45, 2)
+    function read_register(register: eRegister): Buffer { // return: Buffer 2 Byte
+        //let bu = Buffer.create(1)
+        //bu.setUint8(0, register)
+        return pins_i2cWriteReadBuffer(q_i2c_wattmeter_x45, Buffer.fromArray([register]), 2)
+        //i2cWriteBuffer(q_i2c_wattmeter_x45, bu, true)
+        //return i2cReadBuffer(q_i2c_wattmeter_x45, 2)
     }
 
     function write_register(register: eRegister, value: number) { // value: uint16_t
