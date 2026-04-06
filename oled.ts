@@ -107,8 +107,23 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
         bu.setUint8(offset++, 0xAF)  // Set display ON (0xAE sleep mode)
 
         i2cWriteBuffer(bu)
-        control.waitMicros(100000) // 100ms Delay Recommended
+        // control.waitMicros(100000)
+        basic.pause(100) // 100ms Delay Recommended
+
+        oled_clear()
     }
+
+
+
+    export function oled_clear(from_page = 0, to_page = 15) {
+        from_page = Math.constrain(from_page, 0, q_oled_pages - 1)
+        to_page = Math.constrain(to_page, from_page, q_oled_pages - 1)
+        for (let page = from_page; page <= to_page; page++) { // löscht eine Zeile
+            oled_text(page, 0, "                ")
+        }
+    }
+
+
 
 
     //% group="Text" color="#007FFF" subcategory="OLED"
@@ -118,20 +133,20 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     export function oled_text(row: number, col: number, text: any) {
         if (between(row, 0, q_oled_pages - 1) && between(col, 0, 15)) {
             let txt = convertToText(text).substr(0, 16)
-            let bu = Buffer.create(cOffset + cx)
+            let bu = Buffer.create(cOffset + txt.length * 8)
             bu.fill(0)
             // der Anfang vom Buffer 0..6 wird initialisiert und ändert sich nicht mehr; Daten ab Offset 7..135
             // Cursor Positionierung an den Anfang jeder Page
-            bu.setUint8(0, eCONTROL.x80_1Com) // CONTROL+1Command
-            bu.setUint8(1, 0xB0 | row & 0x0F) // page number 0-7 B0-B7 - beim 128x128 Display 0x0F
+            bu[0] = eCONTROL.x80_1Com // CONTROL+1Command
+            bu[1] = 0xB0 | row & 0x0F // page number 0-7 B0-B7 - beim 128x128 Display 0x0F
             // x (Spalte) 7 Bit 0..127 ist immer 0
-            bu.setUint8(2, eCONTROL.x80_1Com) // CONTROL+1Command
-            bu.setUint8(3, 0x00) // lower start column address 0x00-0x0F 4 Bit
-            bu.setUint8(4, eCONTROL.x80_1Com) // CONTROL+1Command
-            bu.setUint8(5, 0x10) // upper start column address 0x10-0x17 3 Bit
+            bu[2] = eCONTROL.x80_1Com // CONTROL+1Command
+            bu[3] = (col * 8) & 0x0F  // lower start column address 0x00-0x0F 4 Bit
+            bu[4] = eCONTROL.x80_1Com // CONTROL+1Command
+            bu[5] = 0x10 | (col * 8) >> 4 // bu.setUint8(5, 0x10) // upper start column address 0x10-0x17 3 Bit
 
             // nach 0x40 folgen die Daten
-            bu.setUint8(6, eCONTROL.x40_Data) // CONTROL Byte 0x40: Display Data
+            bu[6] = eCONTROL.x40_Data // CONTROL Byte 0x40: Display Data
 
             for (let j = 0; j < txt.length; j++) {
                 bu.write(cOffset + j * 8,
@@ -147,41 +162,37 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     // ========== private
 
     function get5x8char(char_code: number): string { // return 5 Byte String
-        //let string5: string = "\xFF\xFF\xFF\xFF\xFF"
-
         if (between(char_code, 0x20, 0x7F)) {
             switch (char_code & 0xF0) { // 16 string-Elemente je 8 Byte = 128
                 case 0x20:
                     return "\x00\x00\x00\x00\x00\x00\x5F\x00\x00\x00\x00\x07\x00\x07\x00\x14\x7F\x14\x7F\x14\x24\x2A\x7F\x2A\x12\x23\x13\x08\x64\x62\x36\x49\x55\x22\x50\x00\x05\x03\x00\x00\x1C\x22\x41\x00\x00\x41\x22\x1C\x00\x00\x08\x2A\x1C\x2A\x08\x08\x08\x3E\x08\x08\xA0\x60\x00\x00\x00\x08\x08\x08\x08\x08\x60\x60\x00\x00\x00\x20\x10\x08\x04\x02".substr((char_code & 0x0F) * 5, 5)
-                //                            (  " "               , "!"               , """               , "#"               , "$"               , "%"               , "&"               , "'"               , "("               , ")"               , "*"               , "+"               , ","               , "-"               , "."               , "/"               )
+                //         (  " "               , "!"               , """               , "#"               , "$"               , "%"               , "&"               , "'"               , "("               , ")"               , "*"               , "+"               , ","               , "-"               , "."               , "/"               )
                 case 0x30:
-                    return ("\x3E\x51\x49\x45\x3E\x00\x42\x7F\x40\x00\x62\x51\x49\x49\x46\x22\x41\x49\x49\x36\x18\x14\x12\x7F\x10\x27\x45\x45\x45\x39\x3C\x4A\x49\x49\x30\x01\x71\x09\x05\x03\x36\x49\x49\x49\x36\x06\x49\x49\x29\x1E\x00\x36\x36\x00\x00\x00\xAC\x6C\x00\x00\x08\x14\x22\x41\x00\x14\x14\x14\x14\x14\x41\x22\x14\x08\x00\x02\x01\x51\x09\x06".substr((char_code & 0x0F) * 5, 5))
-                //                        (  "0"               , "1"               , "2"               , "3"               , "4"               , "5"               , "6"               , "7"               , "8"               , "9"               , ":"               , ";"               , "<"               , "="               , ">"               , "?"               )
+                    return "\x3E\x51\x49\x45\x3E\x00\x42\x7F\x40\x00\x62\x51\x49\x49\x46\x22\x41\x49\x49\x36\x18\x14\x12\x7F\x10\x27\x45\x45\x45\x39\x3C\x4A\x49\x49\x30\x01\x71\x09\x05\x03\x36\x49\x49\x49\x36\x06\x49\x49\x29\x1E\x00\x36\x36\x00\x00\x00\xAC\x6C\x00\x00\x08\x14\x22\x41\x00\x14\x14\x14\x14\x14\x41\x22\x14\x08\x00\x02\x01\x51\x09\x06".substr((char_code & 0x0F) * 5, 5)
+                //         (  "0"               , "1"               , "2"               , "3"               , "4"               , "5"               , "6"               , "7"               , "8"               , "9"               , ":"               , ";"               , "<"               , "="               , ">"               , "?"               )
                 case 0x40:
-                    return ("\x32\x49\x79\x41\x3E\x7E\x09\x09\x09\x7E\x7F\x49\x49\x49\x36\x3E\x41\x41\x41\x22\x7F\x41\x41\x22\x1C\x7F\x49\x49\x49\x41\x7F\x09\x09\x09\x01\x3E\x41\x41\x51\x72\x7F\x08\x08\x08\x7F\x41\x7F\x41\x00\x00\x20\x40\x41\x3F\x01\x7F\x08\x14\x22\x41\x7F\x40\x40\x40\x40\x7F\x02\x0C\x02\x7F\x7F\x04\x08\x10\x7F\x3E\x41\x41\x41\x3E".substr((char_code & 0x0F) * 5, 5))
-                //                        (  "@"               , "A"               , "B"               , "C"               , "D"               , "E"               , "F"               , "G"               , "H"               , "I"               , "J"               , "K"               , "L"               , "M"               , "N"               , "O"               )
+                    return "\x32\x49\x79\x41\x3E\x7E\x09\x09\x09\x7E\x7F\x49\x49\x49\x36\x3E\x41\x41\x41\x22\x7F\x41\x41\x22\x1C\x7F\x49\x49\x49\x41\x7F\x09\x09\x09\x01\x3E\x41\x41\x51\x72\x7F\x08\x08\x08\x7F\x41\x7F\x41\x00\x00\x20\x40\x41\x3F\x01\x7F\x08\x14\x22\x41\x7F\x40\x40\x40\x40\x7F\x02\x0C\x02\x7F\x7F\x04\x08\x10\x7F\x3E\x41\x41\x41\x3E".substr((char_code & 0x0F) * 5, 5)
+                //         (  "@"               , "A"               , "B"               , "C"               , "D"               , "E"               , "F"               , "G"               , "H"               , "I"               , "J"               , "K"               , "L"               , "M"               , "N"               , "O"               )
                 case 0x50:
-                    return ("\x7F\x09\x09\x09\x06\x3E\x41\x51\x21\x5E\x7F\x09\x19\x29\x46\x26\x49\x49\x49\x32\x01\x01\x7F\x01\x01\x3F\x40\x40\x40\x3F\x1F\x20\x40\x20\x1F\x3F\x40\x38\x40\x3F\x63\x14\x08\x14\x63\x03\x04\x78\x04\x03\x61\x51\x49\x45\x43\x7F\x41\x41\x00\x00\x02\x04\x08\x10\x20\x41\x41\x7F\x00\x00\x04\x02\x01\x02\x04\x80\x80\x80\x80\x80".substr((char_code & 0x0F) * 5, 5))
-                //                        (  "P"               , "Q"               , "R"               , "S"               , "T"               , "U"               , "V"               , "W"               , "X"               , "Y"               , "Z"               , "["               , "\"               , "]"               , "^"               , "_"               )
+                    return "\x7F\x09\x09\x09\x06\x3E\x41\x51\x21\x5E\x7F\x09\x19\x29\x46\x26\x49\x49\x49\x32\x01\x01\x7F\x01\x01\x3F\x40\x40\x40\x3F\x1F\x20\x40\x20\x1F\x3F\x40\x38\x40\x3F\x63\x14\x08\x14\x63\x03\x04\x78\x04\x03\x61\x51\x49\x45\x43\x7F\x41\x41\x00\x00\x02\x04\x08\x10\x20\x41\x41\x7F\x00\x00\x04\x02\x01\x02\x04\x80\x80\x80\x80\x80".substr((char_code & 0x0F) * 5, 5)
+                //         (  "P"               , "Q"               , "R"               , "S"               , "T"               , "U"               , "V"               , "W"               , "X"               , "Y"               , "Z"               , "["               , "\"               , "]"               , "^"               , "_"               )
                 case 0x60:
-                    return ("\x01\x02\x04\x00\x00\x20\x54\x54\x54\x78\x7F\x48\x44\x44\x38\x38\x44\x44\x28\x00\x38\x44\x44\x48\x7F\x38\x54\x54\x54\x18\x08\x7E\x09\x02\x00\x18\xA4\xA4\xA4\x7C\x7F\x08\x04\x04\x78\x00\x7D\x00\x00\x00\x80\x84\x7D\x00\x00\x7F\x10\x28\x44\x00\x41\x7F\x40\x00\x00\x7C\x04\x18\x04\x78\x7C\x08\x04\x7C\x00\x38\x44\x44\x38\x00".substr((char_code & 0x0F) * 5, 5))
-                //                        (  "`"               , "a"               , "b"               , "c"               , "d"               , "e"               , "f"               ,"g"                , "h"               , "i"               , "j"               , "k"               , "l"               , "m"               , "n"               , "o"               )
+                    return "\x01\x02\x04\x00\x00\x20\x54\x54\x54\x78\x7F\x48\x44\x44\x38\x38\x44\x44\x28\x00\x38\x44\x44\x48\x7F\x38\x54\x54\x54\x18\x08\x7E\x09\x02\x00\x18\xA4\xA4\xA4\x7C\x7F\x08\x04\x04\x78\x00\x7D\x00\x00\x00\x80\x84\x7D\x00\x00\x7F\x10\x28\x44\x00\x41\x7F\x40\x00\x00\x7C\x04\x18\x04\x78\x7C\x08\x04\x7C\x00\x38\x44\x44\x38\x00".substr((char_code & 0x0F) * 5, 5)
+                //         (  "`"               , "a"               , "b"               , "c"               , "d"               , "e"               , "f"               ,"g"                , "h"               , "i"               , "j"               , "k"               , "l"               , "m"               , "n"               , "o"               )
                 case 0x70:
-                    return ("\xFC\x24\x24\x18\x00\x18\x24\x24\xFC\x00\x00\x7C\x08\x04\x00\x48\x54\x54\x24\x00\x04\x7F\x44\x00\x00\x3C\x40\x40\x7C\x00\x1C\x20\x40\x20\x1C\x3C\x40\x30\x40\x3C\x44\x28\x10\x28\x44\x1C\xA0\xA0\x7C\x00\x44\x64\x54\x4C\x44\x08\x36\x41\x00\x00\x00\x7F\x00\x00\x00\x41\x36\x08\x00\x00\x02\x01\x01\x02\x01\xFF\xFF\xFF\xFF\xFF".substr((char_code & 0x0F) * 5, 5))
-                //                        (  "p"               , "q"               , "r"               , "s"               , "t"               , "u"               , "v"               ,"w"                , "x"               , "y"               , "z"               , "{"               , "|"               , "}"               , "~"               , 127               )
+                    return "\xFC\x24\x24\x18\x00\x18\x24\x24\xFC\x00\x00\x7C\x08\x04\x00\x48\x54\x54\x24\x00\x04\x7F\x44\x00\x00\x3C\x40\x40\x7C\x00\x1C\x20\x40\x20\x1C\x3C\x40\x30\x40\x3C\x44\x28\x10\x28\x44\x1C\xA0\xA0\x7C\x00\x44\x64\x54\x4C\x44\x08\x36\x41\x00\x00\x00\x7F\x00\x00\x00\x41\x36\x08\x00\x00\x02\x01\x01\x02\x01\xFF\xFF\xFF\xFF\xFF".substr((char_code & 0x0F) * 5, 5)
+                //         (  "p"               , "q"               , "r"               , "s"               , "t"               , "u"               , "v"               ,"w"                , "x"               , "y"               , "z"               , "{"               , "|"               , "}"               , "~"               , 127               )
                 default:
-                    return ("\xFF\xFF\xFF\xFF\xFF")
+                    return "\xFF\xFF\xFF\xFF\xFF"
             }
         } else {
-            //let b = Buffer.fromUTF8("\xFF\xFF\xFF\xFF\xFF")
             let s = "ÄÖÜäöüß€°"
             for (let j = 0; j < s.length; j++) {
                 if (s.charCodeAt(j) == char_code)
-                    return ("\x7D\x0A\x09\x0A\x7D\x3D\x42\x41\x42\x3D\x3D\x40\x40\x40\x3D\x21\x54\x54\x55\x78\x39\x44\x44\x39\x00\x3D\x40\x40\x7D\x00\xFE\x09\x49\x36\x00\x14\x3E\x55\x55\x41\x02\x05\x02\x00\x00".substr(j * 5, 5))
-                //                        (  "Ä"               , "Ö"               , "Ü"               , "ä"               , "ö"               , "ü"               , "ß"               , "@"               , "°"               )
+                    return "\x7D\x0A\x09\x0A\x7D\x3D\x42\x41\x42\x3D\x3D\x40\x40\x40\x3D\x21\x54\x54\x55\x78\x39\x44\x44\x39\x00\x3D\x40\x40\x7D\x00\xFE\x09\x49\x36\x00\x14\x3E\x55\x55\x41\x02\x05\x02\x00\x00".substr(j * 5, 5)
+                //         (  "Ä"               , "Ö"               , "Ü"               , "ä"               , "ö"               , "ü"               , "ß"               , "@"               , "°"               )
             }
-            return ("\xFF\x81\x81\x81\xFF")
-            // return image5x8fromString("\xFF\xFF\xFF\xFF\xFF")
+            return "\xFF\x81\x81\x81\xFF"
         }
     }
 
