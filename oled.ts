@@ -117,8 +117,28 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     //% text.shadow="pins_text"
     export function oled_text(row: number, col: number, text: any) {
         if (between(row, 0, q_oled_pages - 1) && between(col, 0, 15)) {
-            let txt = convertToText(text)
+            let txt = convertToText(text).substr(0, 16)
+            let bu = Buffer.create(cOffset + cx)
+            bu.fill(0)
+            // der Anfang vom Buffer 0..6 wird initialisiert und ändert sich nicht mehr; Daten ab Offset 7..135
+            // Cursor Positionierung an den Anfang jeder Page
+            bu.setUint8(0, eCONTROL.x80_1Com) // CONTROL+1Command
+            bu.setUint8(1, 0xB0 | row & 0x0F) // page number 0-7 B0-B7 - beim 128x128 Display 0x0F
+            // x (Spalte) 7 Bit 0..127 ist immer 0
+            bu.setUint8(2, eCONTROL.x80_1Com) // CONTROL+1Command
+            bu.setUint8(3, 0x00) // lower start column address 0x00-0x0F 4 Bit
+            bu.setUint8(4, eCONTROL.x80_1Com) // CONTROL+1Command
+            bu.setUint8(5, 0x10) // upper start column address 0x10-0x17 3 Bit
 
+            // nach 0x40 folgen die Daten
+            bu.setUint8(6, eCONTROL.x40_Data) // CONTROL Byte 0x40: Display Data
+
+            for (let j = 0; j < txt.length; j++) {
+                bu.write(cOffset + j * 8,
+                    Buffer.fromUTF8(get5x8char(txt.charCodeAt(j)))
+                )
+            }
+            i2cWriteBuffer(bu)
         }
     }
 
