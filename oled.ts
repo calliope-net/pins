@@ -12,13 +12,15 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
 
 */ {
     export enum oled_i2c_addr { x3C = 0x3C, x3D = 0x3D }
-    let q_i2c_oled = oled_i2c_addr.x3C
+    let q_oled_i2c = oled_i2c_addr.x3C
+
 
     // OLED Display (SH1107) kann nur I²C Write; keine i2cRead-Funktion erforderlich
     function i2cWriteBuffer(buffer: Buffer, repeat: boolean = false) {
-        if (pins.i2cWriteBuffer(q_i2c_oled, buffer, repeat) != 0)
-            basic.showString(toHex(q_i2c_oled, "x"))
+        if (pins.i2cWriteBuffer(q_oled_i2c, buffer, repeat) != 0)
+            basic.showString(toHex(q_oled_i2c, "x"))
     }
+
 
     export enum ePages {
         //% block="128x64"
@@ -26,6 +28,7 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
         //% block="128x128"
         y128 = 16
     }
+    let q_oled_pages = ePages.y64
 
     // 6 Bytes zur Cursor Positionierung vor den Daten + 1 Byte 0x40 Display Data
     const cOffset = 7 // Platz am Anfang des Buffer bevor die cx Pixel kommen
@@ -57,7 +60,8 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     //% pFlip.shadow="toggleOnOff"
     //% inlineInputMode=inline
     export function oled_reset(pPages: ePages, pInvert = false, pFlip = false, i2c_addr = oled_i2c_addr.x3C) {
-        q_i2c_oled = i2c_addr
+        q_oled_pages = pPages
+        q_oled_i2c = i2c_addr
         //if (i2c == oled_i2c_addr.x3D) qPages3D = pPages; else qPages3C = pPages
         //if (pI2C) qI2C = pI2C
         let bu: Buffer
@@ -107,7 +111,16 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     }
 
 
+    //% group="Text" color="#007FFF" subcategory="OLED"
+    //% block="Text Zeile %row Spalte %col %text" weight=7
+    //% row.min=0 row.max=15 col.min=0 col.max=15
+    //% text.shadow="pins_text"
+    export function oled_text(row: number, col: number, text: any) {
+        if (between(row, 0, q_oled_pages - 1) && between(col, 0, 15)) {
+            let txt = convertToText(text)
 
+        }
+    }
 
 
 
