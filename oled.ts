@@ -26,11 +26,11 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
         //% block="128x128"
         y128 = 16
     }
-    let q_oled_pages = oled_pages.y64
+    let q_rows = oled_pages.y64
+    const q_cols = 16
 
     // 6 Bytes zur Cursor Positionierung vor den Daten + 1 Byte 0x40 Display Data
     const cOffset = 7 // Platz am Anfang des Buffer bevor die cx Pixel kommen
-
     const cx = 128 // max x Pixel (Bytes von links nach rechts)
 
     // Co Continuation bit(7); D/C# Data/Command Selection bit(6); following by six "0"s
@@ -38,17 +38,17 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     const x00_xCom = 0x00 // im selben Buffer folgen nur Command Bytes ohne CONTROL dazwischen
     const x80_1Com = 0x80 // im selben Buffer nach jedem Command ein neues CONTROL [0x00 | 0x80 | 0x40]
     const x40_Data = 0x40 // im selben Buffer folgen nur Display-Data Bytes ohne CONTROL dazwischen
- 
 
-    // ========== group="Hilfe: calliope-net.github.io/matrix" color="#007FFF"
 
-    //% group="OLED 16x8|16x16 (I²C 0x3C|0x3D)" color="#007FFF" subcategory="OLED"
+    // ========== group="OLED 16x8|16x16 (I²C 0x3C|0x3D)" color="#007FFF" subcategory="OLED Display"
+
+    //% group="OLED 16x8|16x16 (I²C 0x3C|0x3D)" color="#007FFF" subcategory="OLED Display"
     //% block="OLED Reset %pPages || invert %pInvert drehen %pFlip %i2c_addr" weight=9
     //% pInvert.shadow="toggleOnOff"
     //% pFlip.shadow="toggleOnOff"
     //% inlineInputMode=inline
     export function oled_reset(pPages: oled_pages, pInvert = false, pFlip = false, i2c_addr = oled_i2c_addr.x3C) {
-        q_oled_pages = pPages
+        q_rows = pPages
         q_oled_i2c = i2c_addr
         //if (i2c == oled_i2c_addr.x3D) qPages3D = pPages; else qPages3C = pPages
         //if (pI2C) qI2C = pI2C
@@ -103,30 +103,51 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
 
 
 
-    //% group="OLED 16x8|16x16 (I²C 0x3C|0x3D)" color="#007FFF" subcategory="OLED"
+    //% group="OLED 16x8|16x16 (I²C 0x3C|0x3D)" color="#007FFF" subcategory="OLED Display"
     //% block="Display löschen || Zeilen von %from_page bis %to_page" weight=8
     //% from_page.min=0 from_page.max=15 from_page.defl=0
     //% to_page.min=0 to_page.max=15 to_page.defl=15
     //% expandableArgumentMode="toggle"
     export function oled_clear(from_page = 0, to_page = 15) {
-        from_page = Math.constrain(from_page, 0, q_oled_pages - 1)
-        to_page = Math.constrain(to_page, from_page, q_oled_pages - 1)
+        from_page = Math.constrain(from_page, 0, q_rows - 1)
+        to_page = Math.constrain(to_page, from_page, q_rows - 1)
         for (let page = from_page; page <= to_page; page++) { // löscht eine Zeile
-            oled_text(page, 0, "                ")
+            oled_write_text(page, 0, 15, "                ")
         }
     }
 
 
 
+    // ========== group="Text" color="#007FFF" subcategory="OLED Display"
 
-    //% group="Text" color="#007FFF" subcategory="OLED"
-    //% block="Text Zeile %row Spalte %col %text" weight=7
-    //% row.min=0 row.max=15 col.min=0 col.max=15
+    export enum oled_align {
+        //% block="linksbündig"
+        left,
+        //% block="rechtsbündig"
+        right
+    }
+
+    //% group="Text" color="#007FFF" subcategory="OLED Display"
+    //% block="Text Zeile %row von %col bis %end %value || %align" weight=7
+    //% row.min=0 row.max=15 col.min=0 col.max=15 end.min=0 end.max=15 end.defl=15
     //% text.shadow="pins_text"
-    export function oled_text(row: number, col: number, text: any) {
-        if (between(row, 0, q_oled_pages - 1) && between(col, 0, 15)) {
-            let txt = convertToText(text).substr(0, 16)
-            let bu = Buffer.create(cOffset + txt.length * 8)
+    export function oled_write_text(row: number, col: number, end: number, value: any, align?: oled_align) {
+        // if (between(row, 0, q_oled_pages - 1) && between(col, 0, 15)) {
+        let text = convertToText(value) //.substr(0, 16)
+        if (end > q_cols - 1)
+            end = q_cols - 1  // max. Zeilenlänge
+        let len = end - col + 1
+        if (between(row, 0, q_rows - 1) && between(col, 0, q_cols - 1) && between(len, 0, q_cols)) {
+
+            if (text.length > len)
+                text = text.substr(0, len)
+            else if (text.length < len && align == oled_align.right)
+                text = "                ".substr(0, len - text.length) + text
+            else if (text.length < len)
+                text = text + "                ".substr(0, len - text.length)
+
+
+            let bu = Buffer.create(cOffset + text.length * 8)
             bu.fill(0)
             // der Anfang vom Buffer 0..6 wird initialisiert und ändert sich nicht mehr; Daten ab Offset 7..135
             // Cursor Positionierung an den Anfang jeder Page
@@ -141,12 +162,13 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
             // nach 0x40 folgen die Daten
             bu[6] = x40_Data // CONTROL Byte 0x40: Display Data
 
-            for (let j = 0; j < txt.length; j++) {
+            for (let j = 0; j < text.length; j++) {
                 bu.write(cOffset + j * 8,
-                    Buffer.fromUTF8(oled_get5x8char(txt.charCodeAt(j)))
+                    Buffer.fromUTF8(oled_get5x8char(text.charCodeAt(j)))
                 )
             }
             i2c_write_buffer(bu)
+            basic.pause(10)
         }
     }
 
