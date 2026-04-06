@@ -18,7 +18,8 @@
         "voice.ts",
         "rtc.ts",
         "gpio.ts",
-        "wattmeter.ts"
+        "wattmeter.ts",
+        "oled.ts"
     ],
     "testFiles": [
         "test.ts"
