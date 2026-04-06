@@ -14,52 +14,40 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     export enum oled_i2c_addr { x3C = 0x3C, x3D = 0x3D }
     let q_oled_i2c = oled_i2c_addr.x3C
 
-
     // OLED Display (SH1107) kann nur I²C Write; keine i2cRead-Funktion erforderlich
-    function i2cWriteBuffer(buffer: Buffer, repeat: boolean = false) {
+    function i2c_write_buffer(buffer: Buffer, repeat: boolean = false) {
         if (pins.i2cWriteBuffer(q_oled_i2c, buffer, repeat) != 0)
             basic.showString(toHex(q_oled_i2c, "x"))
     }
 
-
-    export enum ePages {
+    export enum oled_pages {
         //% block="128x64"
         y64 = 8,
         //% block="128x128"
         y128 = 16
     }
-    let q_oled_pages = ePages.y64
+    let q_oled_pages = oled_pages.y64
 
     // 6 Bytes zur Cursor Positionierung vor den Daten + 1 Byte 0x40 Display Data
     const cOffset = 7 // Platz am Anfang des Buffer bevor die cx Pixel kommen
 
     const cx = 128 // max x Pixel (Bytes von links nach rechts)
-    let qPages3C = ePages.y64 // Display Höhe (Pages) kann pro I²C Adresse verschieden sein
-    let qPages3D = ePages.y64 // 8 oder 16 Pages
 
-    //let qI2C = eI2C.I2C_x3C
-    //export function qy() { return qMatrix.length * 8 } // max. y Pixel (von oben nach unten)
-
-
-    enum eCONTROL { // Co Continuation bit(7); D/C# Data/Command Selection bit(6); following by six "0"s
-        // CONTROL ist immer das 1. Byte im Buffer
-        x00_xCom = 0x00, // im selben Buffer folgen nur Command Bytes ohne CONTROL dazwischen
-        x80_1Com = 0x80, // im selben Buffer nach jedem Command ein neues CONTROL [0x00 | 0x80 | 0x40]
-        x40_Data = 0x40  // im selben Buffer folgen nur Display-Data Bytes ohne CONTROL dazwischen
-    }
-
-
-
-
+    // Co Continuation bit(7); D/C# Data/Command Selection bit(6); following by six "0"s
+    // CONTROL ist immer das 1. Byte im Buffer
+    const x00_xCom = 0x00 // im selben Buffer folgen nur Command Bytes ohne CONTROL dazwischen
+    const x80_1Com = 0x80 // im selben Buffer nach jedem Command ein neues CONTROL [0x00 | 0x80 | 0x40]
+    const x40_Data = 0x40 // im selben Buffer folgen nur Display-Data Bytes ohne CONTROL dazwischen
+ 
 
     // ========== group="Hilfe: calliope-net.github.io/matrix" color="#007FFF"
 
-    //% group="Hilfe: calliope-net.github.io/matrix" color="#007FFF" subcategory="OLED"
+    //% group="OLED 16x8|16x16 (I²C 0x3C|0x3D)" color="#007FFF" subcategory="OLED"
     //% block="OLED Reset %pPages || invert %pInvert drehen %pFlip %i2c_addr" weight=9
     //% pInvert.shadow="toggleOnOff"
     //% pFlip.shadow="toggleOnOff"
     //% inlineInputMode=inline
-    export function oled_reset(pPages: ePages, pInvert = false, pFlip = false, i2c_addr = oled_i2c_addr.x3C) {
+    export function oled_reset(pPages: oled_pages, pInvert = false, pFlip = false, i2c_addr = oled_i2c_addr.x3C) {
         q_oled_pages = pPages
         q_oled_i2c = i2c_addr
         //if (i2c == oled_i2c_addr.x3D) qPages3D = pPages; else qPages3C = pPages
@@ -95,7 +83,7 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
         // Display initialisieren
         let offset = 0
         bu = Buffer.create(7)   // muss Anzahl der folgenden setUint8 entsprechen
-        bu.setUint8(offset++, eCONTROL.x00_xCom) // CONTROL Byte 0x00: folgende Bytes (im selben Buffer) sind alle command und kein CONTROL
+        bu.setUint8(offset++, x00_xCom) // CONTROL Byte 0x00: folgende Bytes (im selben Buffer) sind alle command und kein CONTROL
 
         bu.setUint8(offset++, 0x8D)  // Set Charge Pump (nur für Yellow&Blue SSD1315 erforderlich)
         bu.setUint8(offset++, 0x14)  //     Charge Pump (0x10 Disable; 0x14 7,5V; 0x94 8,5V; 0x95 9,0V)
@@ -106,7 +94,7 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
         bu.setUint8(offset++, (pInvert ? 0xA7 : 0xA6))  // Set display not inverted / A6 Normal A7 Inverse display
         bu.setUint8(offset++, 0xAF)  // Set display ON (0xAE sleep mode)
 
-        i2cWriteBuffer(bu)
+        i2c_write_buffer(bu)
         // control.waitMicros(100000)
         basic.pause(100) // 100ms Delay Recommended
 
@@ -115,6 +103,11 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
 
 
 
+    //% group="OLED 16x8|16x16 (I²C 0x3C|0x3D)" color="#007FFF" subcategory="OLED"
+    //% block="Display löschen || Zeilen von %from_page bis %to_page" weight=8
+    //% from_page.min=0 from_page.max=15 from_page.defl=0
+    //% to_page.min=0 to_page.max=15 to_page.defl=15
+    //% expandableArgumentMode="toggle"
     export function oled_clear(from_page = 0, to_page = 15) {
         from_page = Math.constrain(from_page, 0, q_oled_pages - 1)
         to_page = Math.constrain(to_page, from_page, q_oled_pages - 1)
@@ -137,23 +130,23 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
             bu.fill(0)
             // der Anfang vom Buffer 0..6 wird initialisiert und ändert sich nicht mehr; Daten ab Offset 7..135
             // Cursor Positionierung an den Anfang jeder Page
-            bu[0] = eCONTROL.x80_1Com // CONTROL+1Command
+            bu[0] = x80_1Com // CONTROL+1Command
             bu[1] = 0xB0 | row & 0x0F // page number 0-7 B0-B7 - beim 128x128 Display 0x0F
             // x (Spalte) 7 Bit 0..127 ist immer 0
-            bu[2] = eCONTROL.x80_1Com // CONTROL+1Command
+            bu[2] = x80_1Com // CONTROL+1Command
             bu[3] = (col * 8) & 0x0F  // lower start column address 0x00-0x0F 4 Bit
-            bu[4] = eCONTROL.x80_1Com // CONTROL+1Command
+            bu[4] = x80_1Com // CONTROL+1Command
             bu[5] = 0x10 | (col * 8) >> 4 // bu.setUint8(5, 0x10) // upper start column address 0x10-0x17 3 Bit
 
             // nach 0x40 folgen die Daten
-            bu[6] = eCONTROL.x40_Data // CONTROL Byte 0x40: Display Data
+            bu[6] = x40_Data // CONTROL Byte 0x40: Display Data
 
             for (let j = 0; j < txt.length; j++) {
                 bu.write(cOffset + j * 8,
-                    Buffer.fromUTF8(get5x8char(txt.charCodeAt(j)))
+                    Buffer.fromUTF8(oled_get5x8char(txt.charCodeAt(j)))
                 )
             }
-            i2cWriteBuffer(bu)
+            i2c_write_buffer(bu)
         }
     }
 
@@ -161,7 +154,7 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
 
     // ========== private
 
-    function get5x8char(char_code: number): string { // return 5 Byte String
+    function oled_get5x8char(char_code: number): string { // return 5 Byte String
         if (between(char_code, 0x20, 0x7F)) {
             switch (char_code & 0xF0) { // 16 string-Elemente je 8 Byte = 128
                 case 0x20:
