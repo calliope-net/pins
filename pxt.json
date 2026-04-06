@@ -13,13 +13,13 @@
         "functions.ts",
         "4_digit_display.ts",
         "i2c.ts",
+        "oled.ts",
         "keyboards.ts",
         "joystick.ts",
         "voice.ts",
         "rtc.ts",
         "gpio.ts",
-        "wattmeter.ts",
-        "oled.ts"
+        "wattmeter.ts"
     ],
     "testFiles": [
         "test.ts"
