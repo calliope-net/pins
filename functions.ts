@@ -72,6 +72,21 @@ namespace pins { // functions.ts
     export function roundWithPrecision(x: number, digits: number) { return Math.roundWithPrecision(x, digits) }
 
 
+    //% group="Mathematik" subcategory=Funktionen color=#004FCF
+    //% block="min %x1 %x2 || Grenzwert %grenzwert" weight=1
+    //% grenzwert.defl=4096
+    export function minx(x1: number, x2: number, grenzwert = 4096) {
+        let d1 = x1 - x2
+        let d2 = (x1 + grenzwert) - x2
+        let d3 = x1 - (x2 + grenzwert)
+        if (Math.abs(d1) <= Math.abs(d2) && Math.abs(d1) <= Math.abs(d3))
+            return d1
+        else if (Math.abs(d2) <= Math.abs(d1) && Math.abs(d2) <= Math.abs(d3))
+            return d2
+        else
+            return d3
+    }
+
 
     // ========== group="25 LED Matrix" subcategory=Funktionen
 
@@ -97,6 +112,8 @@ namespace pins { // functions.ts
               if (y.length > 4 && y.get(4)) { led.plot(x, 0) } else { led.unplot(x, 0) } */
         }
     }
+
+
 
 
     // HEX Parameter
