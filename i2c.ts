@@ -58,6 +58,9 @@ namespace pins { // i2c.ts
         //% block="0x30 Grove - 16x2 LCD (nur v5 RGB Backlight)"
         RGB_16x2_V5 = 0x30, // RGB_16x2_x30 = 0x30, RGB_16x2_x62 = 0x62,
 
+        //% block="0x36 Grove - Magnetic Rotary Position Sensor AS5600"
+        AS5600 = 0x36,
+
         //% block="0x3C Grove - OLED Display 0.96 (SSD1308)"
         OLED_1308_x3C = 0x3C,
 
@@ -90,6 +93,9 @@ namespace pins { // i2c.ts
 
         //% block="0x48 SparkFun Qwiic Keypad - 12 Button"
         Keypad_x4B = 0x4B, Keypad_x4A_Jumper = 0x4A,
+
+        //% block="0x4D UART Modul I2C-SPI SC16IS752"
+        I2C_UART = 0x4D,
 
         //% block="0x50 SparkFun Qwiic EEPROM Breakout - 512Kbit"
         EEPROM_x50 = 0x50, EEPROM_x51 = 0x51, EEPROM_x52 = 0x52, EEPROM_x53 = 0x53,
