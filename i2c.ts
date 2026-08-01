@@ -146,6 +146,12 @@ namespace pins { // i2c.ts
         //% block="0x72 SparkFun 20x4 SerLCD - RGB Backlight (Qwiic)"
         LCD_20x4_x72 = 0x72,
 
+        //% block="0x72 DFRobot Gravity Gesture & Face Detection Sensor"
+        Gesture_x72 = 0x72,
+
+        //% block="0x74 IS31FL3731 16x9 Charlieplexed PWM LED Driver"
+        Charlieplexed_x74 = 0x74,
+
         //% block="0x7F"
         x7F = 0x7F
     }
