@@ -55,7 +55,7 @@ namespace pins { // pins.ts
 
     //% blockId=pins_AnalogPin blockHidden=true
     //% group="Analog"
-    //% block="AnalogPin %pin" weight=1
+    //% block="%pin" weight=1
     export function pins_AnalogPin(pin: AnalogPin) {
         return pin
     }
