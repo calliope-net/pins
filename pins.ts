@@ -46,14 +46,19 @@ namespace pins { // pins.ts
 
     // ========== group="Analog"
 
+    //% group="Analog"
+    //% block="Analog Pin %pin" weight=2
+    //% pin.shadow=pins_AnalogPin
+    export function pinAnalogRead(pin: number) {
+        return pins.analogReadPin(pin)
+    }
+
     //% blockId=pins_AnalogPin blockHidden=true
     //% group="Analog"
     //% block="AnalogPin %pin" weight=1
     export function pins_AnalogPin(pin: AnalogPin) {
         return pin
     }
-
-
 
     // ========== group="Servo"
 
