@@ -75,7 +75,7 @@ namespace pins { // keyboards.ts
     const i2cCardKb_x5F = 0x5F
 
     //% group="M5Stack Card Keyboard 50 Tasten (I²C: 0x5E)" subcategory="Tastaturen" color=#BF007F
-    //% block="Keborard Zeichencode" weight=6
+    //% block="Keyboard Zeichencode" weight=6
     export function keyboard_read() {
         let buffer = pins.i2cReadBuffer(i2cCardKb_x5F, 1)
         return buffer[0]
