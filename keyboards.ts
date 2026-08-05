@@ -75,7 +75,14 @@ namespace pins { // keyboards.ts
     const i2cCardKb_x5F = 0x5F
 
     //% group="M5Stack Card Keyboard 50 Tasten (I²C: 0x5E)" subcategory="Tastaturen" color=#BF007F
-    //% block="Card Keyboard Ereignis auslösen %on" weight=3
+    //% block="Keborard Zeichencode" weight=6
+    export function keyboard_read() {
+        let buffer = pins.i2cReadBuffer(i2cCardKb_x5F, 1)
+        return buffer[0]
+    }
+
+    //% group="M5Stack Card Keyboard 50 Tasten (I²C: 0x5E)" subcategory="Tastaturen" color=#BF007F
+    //% block="Keyboard Ereignis auslösen %on" weight=3
     //% on.shadow=toggleOnOff
     export function raiseKeyboardEvent(on: boolean) {
         // https://docs.m5stack.com/en/unit/cardkb_1.1
