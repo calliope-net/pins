@@ -27,6 +27,12 @@ namespace pins { // functions.ts
     export function between(i0: number, i1: number, i2: number): boolean { return (i0 >= i1 && i0 <= i2) }
 
     //% group="Logik" subcategory=Funktionen color=#004FCF
+    //% block="%b if true %a1 if false %a2" weight=5
+    export function iif(b: boolean, a1: any, a2: any) {
+        return b ? a1 : a2
+    }
+
+    //% group="Logik" subcategory=Funktionen color=#004FCF
     //% block="%variable === undefined" weight=3
     export function isundefined(variable: any): boolean {
         return (variable === undefined)
