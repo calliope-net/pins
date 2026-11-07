@@ -62,7 +62,7 @@ Block **Servo PWM `pin` Winkel** (grad)
 ### ... Funktionen
 > Nützliche Funktionen, für die einfach die Blöcke fehlen.
 
-Block **\\Kommentar** (any)
+Block **//Kommentar** (any)
 * Zur Kommentierung im Programmcode. Hat sonst keine Funktion.
 * Hier können auch Blöcke übergeben werden, deren Rückgabewert nicht benötigt wird.
 
