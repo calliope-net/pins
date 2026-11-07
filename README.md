@@ -3,7 +3,7 @@
   table, th, td {
     border: 2px solid #000000 !important;
     border-collapse: collapse !important;
-    padding: 12px 16px !important; /* Oben/Unten: 12px, Links/Rechts: 16px */
+    padding: 2px 10px !important; /* Oben/Unten: 12px, Links/Rechts: 16px */
   }
 }
 </style>
