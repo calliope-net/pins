@@ -51,14 +51,16 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 Block **RTC angeschlossen** : Boolean
 * Gibt True zurück, wenn das Uhr Modul am I²C Bus erkannt wird.
 
-
-Block **keypad_read** () : Byte
+Block **Keypad Zeichencode** : Byte
 * Gibt 0 zurück wenn keine Taste gedrückt, sonst ASCII-Code der gedrückten Taste.
 
 |Taste|0|1|2|3|4|5|6|7|8|9|*|#
 |---|---|---|---|---|---|---|---|---|---|---|---|---
 |Code|48|49|50|51|52|53|54|55|56|57|42|35
 
+Block **Qwiic Keypad Ereignis auslösen** (on)
+* Kann in einer dauerhaft Schleife ausgerufen werden.
+* *on*=True löst das **Tastatur Ereignis** aus, wenn eine Taste gedrückt wurde.
 
 ##### M5Stack Card Keyboard 50 Tasten (I²C: 0x5E)
 
