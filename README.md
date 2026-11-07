@@ -58,7 +58,7 @@ Block **Datum und Zeit einlesen**
 > <ins>Die folgenden Blöcke lesen nur die interne Variable, nicht die Uhr.</ins>
 
 Block **`0 Sekunde` als Zahl** : Byte
-* gibt als Dezimalzahl zurück:
+* gibt `Auswahl` als Dezimalzahl zurück:
 * Es gibt 7 *Register* 0 bis 6:
   * `0` Sekunde `ss` 00..59
   * `1` Minute `mm` 00..59
@@ -69,7 +69,7 @@ Block **`0 Sekunde` als Zahl** : Byte
   * `6` Jahr `yy` 00..99
 
 Block **`Datum dd.MM.yy`** : String
-* gibt als Text (String) zurück:
+* gibt `Auswahl` als Text (String) zurück:
   * Datum dd.MM.yy
   * Datum dd.MM.20yy
   * Datum dd.MM
