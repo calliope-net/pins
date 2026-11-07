@@ -53,14 +53,19 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 
 Block **Datum und Zeit einlesen**
 * <ins>Muss am Anfang jeder Schleife aufgerufen werden.</ins>
-* Liest 7 Byte in Variable RTC_BUFFER.
+* Liest 7 Byte in eine interne Variable.
 * BCD codiert: 4 Bit pro Ziffer, Bit `7654` Zehner, Bit `3210` Einer, Jahr 2-stellig
 
 > <ins>Die folgenden Blöcke lesen nur die Variable, nicht den I²C-Bus.</ins>
 
-Block **rtc_get** (index) : Byte
-* Liest 1 Byte aus Variable RTC_BUFFER[*index*] zu dezimal konvertiert.
-* `0`Seconds, `1`Minutes, `2`Hours, `3`Days, `4`Weekdays, `5`Months, `6`Years
+Block **(Register) als Zahl** : Byte
+* Liest 1 Byte aus der internen Variable BCD zu dezimal konvertiert.
+* Es gibt 7 *register* 0 bis 6:
+  * `0` Sekunden `ss`
+  * `1` Minuten `mm`
+  * `2` Stunden `HH`
+  * `3` Tage `dd`
+  * `4`Weekdays, `5`Months, `6`Years
 
 Block **rtc_time_string** () : String 8 Zeichen
 * Liest Zeit aus Variable RTC_BUFFER: `HH:mm:ss`.
