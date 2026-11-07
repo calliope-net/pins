@@ -1,3 +1,11 @@
+<style>
+@media print {
+  table, th, td {
+    border: 2px solid #000000 !important;
+    border-collapse: collapse !important;
+  }
+}
+</style>
 
 > Diese Seite bei [https://calliope-net.github.io/pins/](https://calliope-net.github.io/pins/) öffnen
 
