@@ -44,11 +44,16 @@ Block **Digital Pin** (`pin`, on)
 * Schreibt den Pin mit Boolean Parameter *on*. 
 
 Block **Digital Pin** (`pin`) : Boolean
-* Liest *pin* und gibt Boolean zurück.
+* Liest *pin* digital als Boolean.
 
 Block **Analog Pin**(`pin`) : Number
 * *pin* kann als Variable übergeben werden.
 * Liest *pin* analog als Number.
+
+Block **Servo PWM `pin` Winkel** (grad)
+* *pin* kann als Variable übergeben werden.
+* Setzt den (analogen) Servo Pin auf Winkel 45..135 Grad.
+
 
 
 ### ... mehr
