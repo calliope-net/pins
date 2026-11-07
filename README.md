@@ -60,6 +60,16 @@ Block **Servo PWM `pin` Winkel** (grad)
 > Die Blöcke stellen nur die Eigenschaften und Methoden des Objektes Buffer zur Verfügung.
 
 ### ... Funktionen
+> Nützliche Funktionen, für die einfach die Blöcke fehlen.
+
+Block **\\Kommentar** (any)
+* Zur Kommentierung im Programmcode. Hat sonst keine Funktion.
+* Hier können auch Blöcke übergeben werden, deren Rückgabewert nicht benötigt wird.
+
+Block **Simulator** : Boolean
+* Gibt True zurück, wenn der Code im Simulator läuft und False auf dem Calliope.
+
+
 
 ### ... 4-Digit Displays
 
