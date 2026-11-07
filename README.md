@@ -46,10 +46,9 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 #### ... Spracherkennung
 
 #### ... RTC Uhr
-Real Time Clock PCF85063TP (I²C 0x51)\
-[Grove - High Precision RTC (Real Time Clock)](https://wiki.seeedstudio.com/Grove_High_Precision_RTC)
-
 → [de.wikipedia.org/wiki/Echtzeituhr](https://de.wikipedia.org/wiki/Echtzeituhr)
+
+[Grove - High Precision RTC (Real Time Clock PCF85063TP)](https://wiki.seeedstudio.com/Grove_High_Precision_RTC)  (I²C 0x51)
 
 ##### Uhr lesen
 
