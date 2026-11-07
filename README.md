@@ -117,12 +117,14 @@ Block **oscillator stop** : Boolean
 
 ##### Uhr stellen
 
-Block **Uhr stellen 1 Zeichencode** (key_code) : String
+Block **Uhr stellen 1 Zeichencode** (ascii_code) : String
 * Stellt die Uhr mit 5 ASCII Zeichen-Codes von Keypad oder Keyboard.
 * Muss 5 mal mit ASCII Code aufgerufen werden, gibt den zusammengesetzten String zurück.\
-  *1. Zeichen:* `*` neu, *2. Zeichen:* Register `0..6`,\
-  *3. und 4. Zeichen:* 2 Ziffern dezimal `00..59`, *5. Zeichen:* `#` speichern
-* Wenn 5 Zeichen gültig sind, wird mit **rtc_write** das Register geändert.
+  *1. Zeichen:* `*` neu  (ascii_code=42)\
+  *2. Zeichen:* Register `0..6`,\
+  *3. und 4. Zeichen:* 2 Ziffern dezimal `00..59`, \
+  *5. Zeichen:* `#` speichern (ascii_code=35 oder ENTER=13)
+* Wenn 5 Zeichen gültig sind, wird mit dem folgenden Block das Register geändert.
 * Beispiel: `*120#`setzt Minute auf 20; `*401#` Montag; `*000#` Sekunde 0.
 
 Block **Uhr stellen 5 Zeichen** (*000#)
