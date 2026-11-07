@@ -109,7 +109,8 @@ Block **Buffer (7Byte) [s,m,H,d,w,M,y] im Format BCD** : Buffer
 * Gibt die interne Variable (Buffer) zurück. 7 Byte Index=Register `0`..`6`.
 * Jedes Byte ist BCD codiert (binär codierte Dezimalzahl).
 * 4 Bit pro Ziffer, Bit `7654` Zehner, Bit `3210` Einer, Jahr 2-stellig
-* Formel zum Umrechnen: `(rtc_Buffer[register] >> 4) * 10 + (rtc_Buffer[register] & 0x0F)`
+* Formel zum Umrechnen:\
+`(rtc_Buffer[register] >> 4) * 10 + (rtc_Buffer[register] & 0x0F)`
 
 Block **oscillator stop** : Boolean
 * Gibt True zurück, wenn die Uhr neu gestellt werden muss.
@@ -139,7 +140,7 @@ Block **Uhr stellen 5 Zeichen** (*000#)
 
 ##### RTC Register
 
-Block *RTC angeschlossen*** : Boolean
+Block **RTC angeschlossen** : Boolean
 * Gibt True zurück, wenn das Uhr Modul am I²C Bus erkannt wird.
 
 Block **read RTC Register** : Byte\
