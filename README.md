@@ -55,7 +55,7 @@ Block **Servo PWM `pin` Winkel** (grad)
 
 ### ... Buffer
 > Buffer ist ein Array, das nur Bytes speichern kann. Bytearrays werden für jede Datenübertragung gebraucht und hier für I²C benutzt.
-> Die Blöcke stellen nur die Eigenschaften und Methoden des Objektes Buffer - als Blöcke - zur Verfügung.
+> Die Blöcke stellen nur die Eigenschaften und Methoden des Objektes Buffer - als Blöcke - zur Verfügung und werden hier nicht beschrieben.
 
 ### ... Funktionen
 > Nützliche Funktionen, für die einfach die Blöcke fehlen.
