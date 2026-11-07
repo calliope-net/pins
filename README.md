@@ -1,7 +1,11 @@
 
 > Diese Seite bei [https://calliope-net.github.io/pins/](https://calliope-net.github.io/pins/) öffnen
 
-## Als Erweiterung verwenden
+
+\uf140 f140 
+
+
+## Als Erweiterung verwenden 
 
 Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 
