@@ -5,15 +5,24 @@
 
 Die Erweiterung für den vorhandenen Menüpunkt *Pins* enthält Blöcke für viele externe Module gleichzeitig.
 Durch Beschränkung auf Grundfunktionen bleibt die Anzahl der Blöcke übersichtlich.
-Werden mehr Funktionen benötigt, kann zu jedem Modul eine eigene Erweiterung geladen werden.
-
-Folgende Menüpunkte befinden sich unter *Fortgeschritten - Pins*:
-
-![](png/pins.png)
+> Werden mehr Funktionen benötigt, kann zu jedem Modul eine eigene Erweiterung geladen werden.
 
 ## Als Erweiterung verwenden 
 
 Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
+
+* öffne Makecode in der App oder die Webseite [https://makecode.calliope.cc/](https://makecode.calliope.cc/)
+* klicke auf **Neues Projekt** und gib deinem Projekt einen Namen
+* wähle die zu deinem Calliope mini passende Hardware v1, v2 oder v3
+* klicke auf **Erweiterungen**
+* schreibe die folgende **Projekt-URL**:
+* **calliope-net/pins**
+* mit der Tastatur oben in das weiße Feld und klicke auf ENTER
+* klicke auf das Rechteck **pins** (kann von der Tastatur verdeckt sein)
+* jetzt sind unter dem Menüpunkt *Fortgeschritten - Pins* neue Einträge:
+
+![](png/pins.png)
+
 
 * öffne [https://makecode.calliope.cc/](https://makecode.calliope.cc/)
 * klicke auf **Neues Projekt**
