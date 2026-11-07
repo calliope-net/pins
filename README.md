@@ -36,17 +36,17 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 
 ### Pins
 
-#### ... mehr
+### ... mehr
 
-#### ... Buffer
+### ... Buffer
 
-#### ... Funktionen
+### ... Funktionen
 
-#### ... 4-Digit Displays
+### ... 4-Digit Displays
 
-#### ... I²C
+### ... I²C
 
-#### ... OLED Display
+### ... OLED Display
 
 ### ... Tastaturen
 
@@ -73,7 +73,7 @@ Block **Qwiic Keypad Ereignis auslösen** (on)
 * Kann in einer dauerhaft Schleife ausgerufen werden.
 * *on*=True löst das **Tastatur Ereignis** aus, wenn eine Taste gedrückt wurde.
 
-##### M5Stack Card Keyboard 50 Tasten (I²C: 0x5E)
+#### M5Stack Card Keyboard 50 Tasten (I²C: 0x5E)
 → Keyboard: Tastatur →  [de.wikipedia.org/wiki/Tastatur](https://de.wikipedia.org/wiki/Tastatur)\
 → [M5Stack Card Keyboard QWERTY 50-key](https://docs.m5stack.com/en/unit/cardkb_1.1)
 
@@ -84,7 +84,7 @@ Block **Keyboard Ereignis auslösen** (on)
 * Kann in einer dauerhaft Schleife ausgerufen werden.
 * *on*=True löst das **Tastatur Ereignis** aus, wenn eine Taste gedrückt wurde.
 
-##### Tastatur Ereignis
+#### Tastatur Ereignis
 
 Ereignis-Block **wenn Taste gedrückt war** (zeichenCode, zeichenText, isASCII)
 * Wird ausgelöst, wenn oben der Block *auslösen* aufgerufen wird und eine Taste gedrückt war.
@@ -92,11 +92,11 @@ Ereignis-Block **wenn Taste gedrückt war** (zeichenCode, zeichenText, isASCII)
 * *isASCII* ist True, wenn *zeichenCode* 32..127
 
 
-#### ... Joystick
+### ... Joystick
 
-#### ... Spracherkennung
+### ... Spracherkennung
 
-#### ... RTC Uhr
+### ... RTC Uhr
 → [de.wikipedia.org/wiki/Echtzeituhr](https://de.wikipedia.org/wiki/Echtzeituhr)\
 → [Grove - High Precision RTC (Real Time Clock PCF85063TP)](https://wiki.seeedstudio.com/Grove_High_Precision_RTC)  (I²C 0x51)
 
@@ -210,7 +210,7 @@ Block **convert Byte** (byte, `BCD → DEC`)  : Byte
   * BCD Einer
   * DEC → BCD
 
-#### ... GPIO
+### ... GPIO
 
-#### ... Wattmeter
+### ... Wattmeter
 
