@@ -3,6 +3,7 @@
 
 ### Calliope Erweiterung für Pins: viele externe Module programmieren.
 
+![](png/pins.png)
 
 ## Als Erweiterung verwenden 
 
