@@ -23,11 +23,16 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 
 ![](png/pins.png)
 
+## Blöcke und Parameter
 
-* öffne [https://makecode.calliope.cc/](https://makecode.calliope.cc/)
-* klicke auf **Neues Projekt**
-* klicke auf **Erweiterungen** unter dem Zahnrad-Menü
-* nach **https://github.com/calliope-net/pins** suchen und importieren
+#### Pins
+
+#### mehr
+
+
+
+
+
 
 ## Dieses Projekt bearbeiten ![Build status badge](https://github.com/calliope-net/pins/workflows/MakeCode/badge.svg)
 
