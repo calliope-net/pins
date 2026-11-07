@@ -60,7 +60,7 @@ Block **Datum und Zeit einlesen**
 
 Block **(*Register*) als Zahl** : Byte
 * Liest 1 Byte aus der internen Variable BCD zu dezimal konvertiert.
-* Es gibt 7 *register* 0 bis 6:
+* Es gibt 7 *Register* 0 bis 6:
   * `0` Sekunde `ss` 00..59
   * `1` Minute `mm` 00..59
   * `2` Stunde `HH` 00..23
@@ -70,7 +70,7 @@ Block **(*Register*) als Zahl** : Byte
   * `6`Jahr `yy` 00..99
 
 Block **Datum dd.MM.yy** : String
-* Kann als Text (String) zurück geben:
+* gibt als Text (String) zurück:
   * Datum dd.MM.yy
   * Datum dd.MM.20yy
   * Datum dd.MM
