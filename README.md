@@ -61,16 +61,25 @@ Block **Datum und Zeit einlesen**
 Block **(*Register*) als Zahl** : Byte
 * Liest 1 Byte aus der internen Variable BCD zu dezimal konvertiert.
 * Es gibt 7 *register* 0 bis 6:
-  * `0` Sekunde `ss` 0..59
-  * `1` Minute `mm` 0..59
-  * `2` Stunde `HH` 0..23
-  * `3` Tag `dd` 1..31
-  * `4`Wochentag `ddd` So Mo Di Mi Do Fr Sa (0..6)
-  * `5`Monat `MM` 1..12
-  * `6`Jahr `yy` 0..99
+  * `0` Sekunde `ss` 00..59
+  * `1` Minute `mm` 00..59
+  * `2` Stunde `HH` 00..23
+  * `3` Tag `dd` 01..31
+  * `4`Wochentag `ddd` So Mo Di Mi Do Fr Sa (00..06)
+  * `5`Monat `MM` 01..12
+  * `6`Jahr `yy` 00..99
 
-Block **rtc_time_string** () : String 8 Zeichen
-* Liest Zeit aus Variable RTC_BUFFER: `HH:mm:ss`.
+Block **Datum dd.MM.yy** : String
+* Kann als Text (String) zurück geben:
+  * Datum dd.MM.yy
+  * Datum dd.MM.20yy
+  * Datum dd.MM
+  * Wochentag ddd
+  * Zeit HH:mm
+  * Zeit HH:mm:ss
+  * Zeit mm:ss
+  * yyMMddHHmmss
+
 
 Block **rtc_date_string** () : String 10 Zeichen
 * Liest Datum aus Variable RTC_BUFFER: `dd.MM.20yy`.
