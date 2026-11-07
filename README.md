@@ -5,7 +5,7 @@
 
 Die Erweiterung für den vorhandenen Menüpunkt *Pins* enthält Blöcke für viele externe Module gleichzeitig.
 Durch Beschränkung auf Grundfunktionen bleibt die Anzahl der Blöcke übersichtlich.
-> Für mehr Funktionen, gibt es zu jedem Modul eine eigene Erweiterung.
+> Für mehr Funktionen gibt es zu jedem Modul eine eigene Erweiterung.
 
 ## Als Erweiterung verwenden 
 
