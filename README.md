@@ -1,7 +1,7 @@
 
 > Diese Seite bei [https://calliope-net.github.io/pins/](https://calliope-net.github.io/pins/) öffnen
 
-### Calliope Erweiterung für Pins: Displays, Tastaturen und weitere I²C Module mit Blöcken programmieren
+### Calliope Erweiterung für Pins: viele externe Module programmieren.
 
 
 ## Als Erweiterung verwenden 
