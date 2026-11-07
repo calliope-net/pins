@@ -84,22 +84,23 @@ Block **zeige `Zeit Hmmss` binär in 25 LED Matrix**
 
 * Zeigt in den 5 Spalten der LED Matrix Zeit oder Datum an.
 * Von den leuchtenden LEDs die Binärzahlen addieren.
-> `Zeit Hmmss`
 
-0|1|2|3|4|Binärzahl
----|---|---|---|---|---
-H| | | | |2^4=16
-H| |m| |s|2^3=8
-H|m|m|s|s|2^2=4
-H|m|m|s|s|2^1=2
-H|m|m|s|s|2^0=1
-
-> `Datum wdMyy` (Wochentag 0..6, Tag 0..31, Monat 1..12, Jahr Zehner 0_..9_, Jahr Einer _0.._9)
+`Zeit Hmmss`
 
 |0|1|2|3|4|Binärzahl
 |---|---|---|---|---|---
-|.|d| | | |2^4=16
-|.|d| |y|y|2^3=8
+|H| | | | |2^4=16
+|H| |m| |s|2^3=8
+|H|m|m|s|s|2^2=4
+|H|m|m|s|s|2^1=2
+|H|m|m|s|s|2^0=1
+
+`Datum wdMyy` (Wochentag 0..6, Tag 0..31, Monat 1..12, Jahr Zehner 0_..9_, Jahr Einer _0.._9)
+
+|0|1|2|3|4|Binärzahl
+|---|---|---|---|---|---
+| |d| | | |2^4=16
+| |d| |y|y|2^3=8
 |w|d|M|y|y|2^2=4
 |w|d|M|y|y|2^1=2
 |w|d|M|y|y|2^0=1
