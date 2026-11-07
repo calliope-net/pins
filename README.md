@@ -52,10 +52,8 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 
 > Hier kann ein Keypad mit 12 Tasten oder ein Keyboard mit 50 Tasten verwendet werden.
 
-#### Qwiic Keypad 12 Tasten (I²C: 0x4B)
-
-→ Numeric Keypad: Tastatur, Ziffernblock → [en.wikipedia.org/wiki/Keypad](https://en.wikipedia.org/wiki/Keypad)\
-→ [SparkFun Qwiic Keypad - 12 Tasten](https://www.sparkfun.com/products/15290)
+#### [Qwiic Keypad 12 Tasten](https://www.sparkfun.com/products/15290) (I²C: 0x4B)
+→ Numeric Keypad: Tastatur, Ziffernblock → [en.wikipedia.org/wiki/Keypad](https://en.wikipedia.org/wiki/Keypad)
 
 > Keypad speichert mehrere gedrückte Tasten, bei langsamer Abfrage geht nichts verloren.
 
@@ -74,8 +72,7 @@ Block **Qwiic Keypad Ereignis auslösen** (on)
 * *on*=True löst das **Tastatur Ereignis** aus, wenn eine Taste gedrückt wurde.
 
 #### [M5Stack Card Keyboard 50 Tasten](https://docs.m5stack.com/en/unit/cardkb_1.1) (I²C: 0x5E)
-→ Keyboard: Tastatur →  [de.wikipedia.org/wiki/Tastatur](https://de.wikipedia.org/wiki/Tastatur)\
-→ [M5Stack Card Keyboard QWERTY 50-key](https://docs.m5stack.com/en/unit/cardkb_1.1)
+→ Keyboard: Tastatur →  [de.wikipedia.org/wiki/Tastatur](https://de.wikipedia.org/wiki/Tastatur)
 
 Block **Keyboard Zeichencode** : Byte
 * Gibt 0 zurück wenn keine Taste gedrückt, sonst ASCII-Code der gedrückten Taste.
