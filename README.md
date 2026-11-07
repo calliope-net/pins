@@ -146,7 +146,7 @@ Block **read RTC Register** : Byte\
 Block **write RTC Register**
 * Liest oder schreibt ein bestimmtes Register.
 
-Block **convert Byte** : Byte
+Block **convert Byte** (byte, `BCD → DEC`)  : Byte
 * Konvertiert ein Byte von → in:
   * BCD → DEC
   * BCD Zehner
