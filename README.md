@@ -29,6 +29,27 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 
 #### mehr
 
+#### Buffer
+
+#### Funktionen
+
+#### 4-Digit Displays
+
+#### I²C
+
+#### OLED Display
+
+#### Tastaturen
+
+#### Joystick
+
+#### Spracherkennung
+
+#### RTC Uhr
+
+#### GPIO
+
+#### Wattmeter
 
 
 
