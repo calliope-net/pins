@@ -138,6 +138,7 @@ Block **oscillator stop** : Boolean
 
 Block **Uhr stellen 1 Zeichencode** (ascii_code) : String
 * Stellt die Uhr mit 5 ASCII Zeichen-Codes von Keypad oder Keyboard.
+
 |Taste|0|1|2|3|4|5|6|7|8|9|*|#
 |---|---|---|---|---|---|---|---|---|---|---|---|---
 |Code|48|49|50|51|52|53|54|55|56|57|42|35
