@@ -73,7 +73,7 @@ Block **Qwiic Keypad Ereignis auslösen** (on)
 * Kann in einer dauerhaft Schleife ausgerufen werden.
 * *on*=True löst das **Tastatur Ereignis** aus, wenn eine Taste gedrückt wurde.
 
-#### M5Stack Card Keyboard 50 Tasten (I²C: 0x5E)
+#### [M5Stack Card Keyboard 50 Tasten](https://docs.m5stack.com/en/unit/cardkb_1.1) (I²C: 0x5E)
 → Keyboard: Tastatur →  [de.wikipedia.org/wiki/Tastatur](https://de.wikipedia.org/wiki/Tastatur)\
 → [M5Stack Card Keyboard QWERTY 50-key](https://docs.m5stack.com/en/unit/cardkb_1.1)
 
