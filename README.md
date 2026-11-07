@@ -106,7 +106,7 @@ Block **zeige `Zeit Hmmss` binär in 25 LED Matrix**
 Block **Buffer (7Byte) [s,m,H,d,w,M,y] im Format BCD** : Buffer
 
 * Gibt die interne Variable (Buffer) zurück. 7 Byte Index=Register `0`..`6`.
-* Jedes Byte ist BCD codiert (binär codierte Dezimalzahl).
+* Jedes Byte ist BCD codiert (BCD: binär codierte Dezimalzahl).
 * 4 Bit pro Ziffer, Bit `7654` Zehner, Bit `3210` Einer, Jahr 2-stellig
 * Formel zum Umrechnen BCD → DEC:\
 `(rtc_Buffer[register] >> 4) * 10 + (rtc_Buffer[register] & 0x0F)`
