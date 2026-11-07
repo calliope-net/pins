@@ -86,6 +86,15 @@ Block **zeige `Zeit Hmmss` binär in 25 LED Matrix**
   * `Zeit Hmmss`
   * `Datum wdMyy` (Wochentag 0..6, Tag 0..31, Monat 1..12, Jahr Zehner 0_..9_, Jahr Einer _0.._9)
 
+0|1|2|3|4|Wert binär
+---|---|---|---|---|---
+d|m|m|s|s|2^4=16
+d|m|m|s|s|
+d|m|m|s|s|
+d|m|m|s|s|
+d|m|m|s|s|2^0=1
+
+
 Block **rtc_date_string** () : String 10 Zeichen
 * Liest Datum aus Variable RTC_BUFFER: `dd.MM.20yy`.
 
