@@ -112,8 +112,8 @@ Block **Keyboard Ereignis auslösen** (on)
 
 Ereignis-Block **wenn Taste gedrückt war** (zeichenCode, zeichenText, isASCII)
 * Wird ausgelöst, wenn oben der Block *auslösen* aufgerufen wird und eine Taste gedrückt war.
-* Übergibt das Zeichen als ASCII-Code, Text-Zeichen (char)
-* *isASCII* ist True, wenn *zeichenCode* 32..127
+* Übergibt das Zeichen als ASCII-Code (Byte) und Text-Zeichen (char)
+* *isASCII* ist True, wenn *zeichenCode* 32..127, also bei druckbaren Zeichen.
 
 
 ### ... Joystick
