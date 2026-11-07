@@ -143,6 +143,7 @@ Block *RTC angeschlossen*** : Boolean
 * Gibt True zurück, wenn das Uhr Modul am I²C Bus erkannt wird.
 
 Block **read RTC Register*** : Byte
+
 Block **write RTC Register**
 * Liest oder schreibt ein bestimmtes Register.
 
