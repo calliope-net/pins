@@ -117,10 +117,10 @@ Block **zeige `Zeit Hmmss` binär in 25 LED Matrix**
 |0|1|2|3|4|Binärzahl
 |---|---|---|---|---|---
 | |dd| | | |2^4=16
-| |dd|M|y|y|2^3=8
-|w|dd|M|y|y|2^2=4
-|w|dd|M|y|y|2^1=2
-|w|dd|M|y|y|2^0=1
+| |dd|MM|y|y|2^3=8
+|w|dd|MM|y|y|2^2=4
+|w|dd|MM|y|y|2^1=2
+|w|dd|MM|y|y|2^0=1
 
 Block **Buffer (7Byte) [s,m,H,d,w,M,y] im Format BCD** : Buffer
 
