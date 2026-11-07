@@ -106,21 +106,10 @@ Block **zeige `Zeit Hmmss` binär in 25 LED Matrix**
 
 Block **Buffer (7Byte) [s,m,H,d,w,M,y] im Format BCD** : Buffer
 
-* Gibt die interne Variable (Buffer) zurück. 7 Byte Index 0..6.
+* Gibt die interne Variable (Buffer) zurück. 7 Byte Index=Register `0`..`6`.
 * Jedes Byte ist BCD codiert (binär codierte Dezimalzahl).
 * 4 Bit pro Ziffer, Bit `7654` Zehner, Bit `3210` Einer, Jahr 2-stellig
 
-
-Block **rtc_date_string** () : String 10 Zeichen
-* Liest Datum aus Variable RTC_BUFFER: `dd.MM.20yy`.
-
-Block **rtc_weekday** () : String 2 Zeichen
-* Liest Wochentag aus RTC_BUFFER: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'].
-
-Block **rtc_iso_string** () : String 12 Zeichen
-* Liest aus Variable RTC_BUFFER: `yyMMddHHmmss`.
-* Aus genau 12 Ziffern kann der benötigte Teilstring ausgeschnitten werden.
-* Format ist sortierbar z.B. für Dateinamen.
 
 ##### Uhr stellen
 
