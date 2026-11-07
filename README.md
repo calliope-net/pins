@@ -25,11 +25,11 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 
 ## Blöcke und Parameter
 
-#### Pins
+### Pins
 
-#### mehr
+#### ... mehr
 
-#### Buffer
+#### ... Buffer
 
 #### Funktionen
 
@@ -45,7 +45,18 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 
 #### Spracherkennung
 
-#### RTC Uhr
+#### ... RTC Uhr
+→ RTC: real-time clock → [de.wikipedia.org/wiki/Echtzeituhr](https://de.wikipedia.org/wiki/Echtzeituhr)
+###### [Grove - High Precision RTC (Real Time Clock)](https://wiki.seeedstudio.com/Grove_High_Precision_RTC)
+
+Block **Datum und Zeit einlesen**
+* <ins>Muss am Anfang jeder Schleife aufgerufen werden.</ins>
+* Liest 7 Byte in Variable RTC_BUFFER.
+* BCD codiert: 4 Bit pro Ziffer, Bit `7654` Zehner, Bit `3210` Einer, Jahr 2-stellig
+
+> <ins>Die folgenden Blöcke lesen nur die Variable, nicht den I²C-Bus.</ins>
+
+
 
 #### GPIO
 
