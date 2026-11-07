@@ -119,6 +119,7 @@ Block **oscillator stop** : Boolean
 
 Block **Uhr stellen 1 Zeichencode** (ascii_code) : String
 * Stellt die Uhr mit 5 ASCII Zeichen-Codes von Keypad oder Keyboard.
+* erlaubte Codes: 42=* 48=0 49=1 50=2 51=3 52=4 53=5 54=6 55=7 56=8 57=9 35=# 13=ENTER
 * Muss 5 mal mit ASCII Code aufgerufen werden, gibt den zusammengesetzten String zurück.\
   *1. Zeichen:* `*` neu  (ascii_code=42)\
   *2. Zeichen:* Register `0..6`,\
