@@ -5,12 +5,24 @@
 
 /* Druck-Optimierung für Tabellen-Linien */
 @media print {
+  table {
+    border-collapse: collapse !important; /* Zwingt den Browser, Rahmen zusammenzuführen */
+    width: 100% !important;
+  }
+
   table, th, td {
-    border: 1px solid #000000 !important; /* Erwirkt tiefschwarze Linien beim Drucken */
+    border: 1px solid #000000 !important; /* KORRIGIERT: Kein Leerzeichen bei 1px */
   }
   
   th {
-    border-bottom: 2px solid #000000 !important; /* Macht den Header deutlicher */
+    border-bottom: 2px solid #000000 !important; /* KORRIGIERT: Kein Leerzeichen bei 2px */
     font-weight: bold !important;
+    background-color: #f2f2f2 !important; /* Optionale leichte Tönung für den Kopf */
+  }
+  
+  /* Verhindert, dass Tabellenzeilen unschön mitten im Text auf zwei Seiten zerschnitten werden */
+  tr {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
   }
 }
