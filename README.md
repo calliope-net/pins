@@ -132,13 +132,8 @@ Block **Uhr stellen 1 Zeichencode** (ascii_code) : String
   * `*000#` Sekunde 0
 
 Block **Uhr stellen 5 Zeichen** (*000#)
-* 
-
-
-Block **rtc_write** (index, int8)
-* Stellt die Uhr. Ändert ein bestimmtes Register *index*.
-* `0`Seconds, `1`Minutes, `2`Hours, `3`Days, `4`Weekdays, `5`Months, `6`Years
-* *int8*: 0..59 Byte wird in BCD konvertiert und im RTC-Modul gespeichert. 
+* Schreibt ein Byte in das entsprechende Register.
+* 00..59 wird in BCD konvertiert und im RTC-Modul gespeichert. 
 
 
 
