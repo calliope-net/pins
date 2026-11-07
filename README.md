@@ -109,23 +109,32 @@ Block **Buffer (7Byte) [s,m,H,d,w,M,y] im Format BCD** : Buffer
 * Gibt die interne Variable (Buffer) zurück. 7 Byte Index=Register `0`..`6`.
 * Jedes Byte ist BCD codiert (binär codierte Dezimalzahl).
 * 4 Bit pro Ziffer, Bit `7654` Zehner, Bit `3210` Einer, Jahr 2-stellig
-* Formel zum Umrechnen: (rtc_Buffer[register] >> 4) * 10 + (rtc_Buffer[register] & 0x0F)
+* Formel zum Umrechnen: `(rtc_Buffer[register] >> 4) * 10 + (rtc_Buffer[register] & 0x0F)`
 
+Block **oscillator stop** : Boolean
+* Gibt True zurück, wenn die Uhr neu gestellt werden muss.
+* Kann bedeuten, dass die Knopfzelle gewechselt werden muss.
 
 ##### Uhr stellen
 
-Block **rtc_write** (index, int8)
-* Stellt die Uhr. Ändert ein bestimmtes Register *index*.
-* `0`Seconds, `1`Minutes, `2`Hours, `3`Days, `4`Weekdays, `5`Months, `6`Years
-* *int8*: 0..59 Byte wird in BCD konvertiert und im RTC-Modul gespeichert. 
-
-Block **rtc_set** (key_code) : keyString
+Block **Uhr stellen 1 Zeichencode** (key_code) : String
 * Stellt die Uhr mit 5 ASCII Zeichen-Codes von Keypad oder Keyboard.
 * Muss 5 mal mit ASCII Code aufgerufen werden, gibt den zusammengesetzten String zurück.\
   *1. Zeichen:* `*` neu, *2. Zeichen:* Register `0..6`,\
   *3. und 4. Zeichen:* 2 Ziffern dezimal `00..59`, *5. Zeichen:* `#` speichern
 * Wenn 5 Zeichen gültig sind, wird mit **rtc_write** das Register geändert.
 * Beispiel: `*120#`setzt Minute auf 20; `*401#` Montag; `*000#` Sekunde 0.
+
+Block **Uhr stellen 5 Zeichen** (*000#)
+* 
+
+
+Block **rtc_write** (index, int8)
+* Stellt die Uhr. Ändert ein bestimmtes Register *index*.
+* `0`Seconds, `1`Minutes, `2`Hours, `3`Days, `4`Weekdays, `5`Months, `6`Years
+* *int8*: 0..59 Byte wird in BCD konvertiert und im RTC-Modul gespeichert. 
+
+
 
 #### ... GPIO
 
