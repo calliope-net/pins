@@ -80,6 +80,11 @@ Block **`Datum dd.MM.yy`** : String
   * Zeit mm:ss
   * yyMMddHHmmss (12 Zeichen)
 
+Block **zeige `Zeit Hmmss` binär in 25 LED Matrix
+
+* Zeigt in den 5 Spalten der LED Matrix an:
+  * `Zeit Hmmss`
+  * `Datum wdMyy` (Wochentag 0..6, Tag 0..31, Monat 1..12, Jahr Zehner 0..9, Jahr Einer 0..9
 
 Block **rtc_date_string** () : String 10 Zeichen
 * Liest Datum aus Variable RTC_BUFFER: `dd.MM.20yy`.
