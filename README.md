@@ -102,7 +102,7 @@ Block **zeige `Zeit Hmmss` binär in 25 LED Matrix**
 * Zeigt in den 5 Spalten der LED Matrix Zeit oder Datum an.
 * Von den leuchtenden roten LEDs die Binärzahlen addieren.
 
-`Zeit Hmmss`
+`Zeit Hmmss` **0** Stunde 0..23, **1\|2** Minute 0..59, **3\|4** Sekunde 0..59
 
 |0|1|2|3|4|Binärzahl
 |---|---|---|---|---|---
@@ -112,7 +112,7 @@ Block **zeige `Zeit Hmmss` binär in 25 LED Matrix**
 |HH|m|m|s|s|2^1=2
 |HH|m|m|s|s|2^0=1
 
-`Datum wdMyy` (**0** Wochentag 0..6, **1** Tag 1..31, **2** Monat 1..12, **3\|4** Jahr 2-stellig)
+`Datum wdMyy` **0** Wochentag 0..6, **1** Tag 1..31, **2** Monat 1..12, **3\|4** Jahr 2-stellig
 
 |0|1|2|3|4|Binärzahl
 |---|---|---|---|---|---
