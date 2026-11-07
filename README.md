@@ -96,13 +96,13 @@ H|m|m|s|s|2^0=1
 
 > `Datum wdMyy` (Wochentag 0..6, Tag 0..31, Monat 1..12, Jahr Zehner 0_..9_, Jahr Einer _0.._9)
 
-0|1|2|3|4|Binärzahl
----|---|---|---|---|---
-.|d| | | |2^4=16
-.|d| |y|y|2^3=8
-w|d|M|y|y|2^2=4
-w|d|M|y|y|2^1=2
-w|d|M|y|y|2^0=1
+|0|1|2|3|4|Binärzahl
+|---|---|---|---|---|---
+|.|d| | | |2^4=16
+|.|d| |y|y|2^3=8
+|w|d|M|y|y|2^2=4
+|w|d|M|y|y|2^1=2
+|w|d|M|y|y|2^0=1
 
 Block **rtc_date_string** () : String 10 Zeichen
 * Liest Datum aus Variable RTC_BUFFER: `dd.MM.20yy`.
