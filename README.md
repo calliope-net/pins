@@ -100,7 +100,7 @@ Block **zeige `Zeit Hmmss` binär in 25 LED Matrix**
 |0|1|2|3|4|Binärzahl
 |---|---|---|---|---|---
 | |d| | | |2^4=16
-| |d| |y|y|2^3=8
+| |d|M|y|y|2^3=8
 |w|d|M|y|y|2^2=4
 |w|d|M|y|y|2^1=2
 |w|d|M|y|y|2^0=1
