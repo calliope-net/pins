@@ -123,11 +123,11 @@ Block **Uhr stellen 1 Zeichencode** (ascii_code) : String
 * Muss 5 mal mit ASCII Code aufgerufen werden, gibt den zusammengesetzten String zurück.\
   *1. Zeichen:* `*` alle Zeichen löschen, neue Eingabe beginnen\
   *2. Zeichen:* Register Nummer `0..6`\
-  *3. und 4. Zeichen:* Zahl, die in das Register geschrieben wird: 2 Ziffern dezimal `00..59`\
+  *3. und 4. Zeichen:* Zahl, die in das Register geschrieben wird. 2 Ziffern dezimal `00..59`\
   *5. Zeichen:* `#` speichern (ascii_code=35 oder ENTER=13)
 * Wenn 5 Zeichen gültig sind, wird mit dem folgenden Block das Register geändert.
 * Beispiele:
-  * `*120#`setzt Minute auf 20
+  * `*120#` setzt Minute auf 20
   * `*401#` Montag
   * `*000#` Sekunde 0
 
