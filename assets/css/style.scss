@@ -1,0 +1,16 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+/* Druck-Optimierung für Tabellen-Linien */
+@media print {
+  table, th, td {
+    border: 1px solid #000000 !important; /* Erwirkt tiefschwarze Linien beim Drucken */
+  }
+  
+  th {
+    border-bottom: 2px solid #000000 !important; /* Macht den Header deutlicher */
+    font-weight: bold !important;
+  }
+}
