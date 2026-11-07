@@ -50,9 +50,9 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 
 ### ... Tastaturen
 
-#### Qwiic Keypad 12 Tasten (I²C: 0x4B)
-
 > Hier kann ein Keypad mit 12 Tasten oder ein Keyboard mit 50 Tasten verwendet werden.
+
+#### Qwiic Keypad 12 Tasten (I²C: 0x4B)
 
 → Numeric Keypad: Tastatur, Ziffernblock → [en.wikipedia.org/wiki/Keypad](https://en.wikipedia.org/wiki/Keypad)\
 → [SparkFun Qwiic Keypad - 12 Tasten](https://www.sparkfun.com/products/15290)
