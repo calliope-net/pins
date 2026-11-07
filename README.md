@@ -54,9 +54,9 @@ Block **RTC angeschlossen** : Boolean
 Block **keypad_read** () : Byte
 * Gibt 0 zurück wenn keine Taste gedrückt, sonst ASCII-Code der gedrückten Taste.
 
-Taste|0|1|2|3|4|5|6|7|8|9|*|#
----|---|---|---|---|---|---|---|---|---|---|---|---
-Code|48|49|50|51|52|53|54|55|56|57|42|35
+|Taste|0|1|2|3|4|5|6|7|8|9|*|#
+|---|---|---|---|---|---|---|---|---|---|---|---|---
+|Code|48|49|50|51|52|53|54|55|56|57|42|35
 
 
 
