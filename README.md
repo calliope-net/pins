@@ -88,11 +88,11 @@ Block **zeige `Zeit Hmmss` binär in 25 LED Matrix**
 
 0|1|2|3|4|Wert binär
 ---|---|---|---|---|---
-d|m|m|s|s|2^4=16
-d|m|m|s|s|
-d|m|m|s|s|
-d|m|m|s|s|
-d|m|m|s|s|2^0=1
+H| | | | |2^4=16
+H| |m| |s|2^3=8
+H|m|m|s|s|2^2=4
+H|m|m|s|s|2^1=2
+H|m|m|s|s|2^0=1
 
 
 Block **rtc_date_string** () : String 10 Zeichen
