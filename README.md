@@ -65,7 +65,7 @@ Block **(*Register*) als Zahl** : Byte
   * `1` Minute `mm` 0..59
   * `2` Stunde `HH` 0..23
   * `3` Tag `dd` 1..31
-  * `4`Wochentag `ddd` So Mo Di Mi Do Fr Sa So (0..6)
+  * `4`Wochentag `ddd` So Mo Di Mi Do Fr Sa (0..6)
   * `5`Monat `MM` 1..12
   * `6`Jahr `yy` 0..99
 
