@@ -3,6 +3,12 @@
 
 ### Calliope Erweiterung für Pins: viele externe Module programmieren.
 
+Die Erweiterung für den vorhandenen Menüpunkt *Pins* enthält Blöcke für viele externe Module gleichzeitig.
+Durch Beschränkung auf Grundfunktionen bleibt die Anzahl der Blöcke übersichtlich.
+Werden mehr Funktionen benötigt, kann zu jedem Modul eine eigene Erweiterung geladen werden.
+
+Folgende Menüpunkte befinden sich unter *Fortgeschritten - Pins*:
+
 ![](png/pins.png)
 
 ## Als Erweiterung verwenden 
