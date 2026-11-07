@@ -113,7 +113,7 @@ Block **Buffer (7Byte) [s,m,H,d,w,M,y] im Format BCD** : Buffer
 
 Block **oscillator stop** : Boolean
 * Gibt True zurück, wenn die Uhr neu gestellt werden muss.
-* Kann bedeuten, dass die Knopfzelle gewechselt werden muss.
+* Kann bedeuten, dass die Knopfzelle leer wird.
 
 ##### Uhr stellen
 
@@ -126,15 +126,15 @@ Block **Uhr stellen 1 Zeichencode** (ascii_code) : String
   *3. und 4. Zeichen:* Zahl, die in das Register geschrieben wird. 2 Ziffern dezimal `00..59`\
   *5. Zeichen:* `#` speichern (ascii_code=35 oder ENTER=13)
 * Wenn 5 Zeichen gültig sind, wird mit dem folgenden Block das Register geändert.
-* Beispiele:
-  * `*120#` setzt Minute auf 20
-  * `*401#` Montag
-  * `*000#` Sekunde 0
+
 
 Block **Uhr stellen 5 Zeichen** (*000#)
 * Schreibt ein Byte in das entsprechende Register.
 * 00..59 wird in BCD konvertiert und im RTC-Modul gespeichert. 
-
+* Beispiele:
+  * `*120#` setzt Minute auf 20
+  * `*401#` Montag
+  * `*000#` Sekunde 0
 
 
 #### ... GPIO
