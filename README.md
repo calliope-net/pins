@@ -121,7 +121,7 @@ Block **Uhr stellen 1 Zeichencode** (ascii_code) : String
 * Stellt die Uhr mit 5 ASCII Zeichen-Codes von Keypad oder Keyboard.
 * erlaubte Codes: 42=* 48=0 49=1 50=2 51=3 52=4 53=5 54=6 55=7 56=8 57=9 35=# 13=ENTER
 * Muss 5 mal mit ASCII Code aufgerufen werden, gibt den zusammengesetzten String zurück.\
-  *1. Zeichen:* `*` neue Eingabe beginnen, alles löschen\
+  *1. Zeichen:* `*` alle Zeichen löschen, neue Eingabe beginnen\
   *2. Zeichen:* Register Nummer `0..6`\
   *3. und 4. Zeichen:* Zahl, die in das Register geschrieben wird: 2 Ziffern dezimal `00..59`\
   *5. Zeichen:* `#` speichern (ascii_code=35 oder ENTER=13)
