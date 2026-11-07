@@ -53,10 +53,9 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 
 Block **Datum und Zeit einlesen**
 * <ins>Muss am Anfang jeder Schleife aufgerufen werden.</ins>
-* Liest 7 Byte in eine interne Variable.
-* BCD codiert: 4 Bit pro Ziffer, Bit `7654` Zehner, Bit `3210` Einer, Jahr 2-stellig
+* Liest 7 Byte in eine interne Variable (Buffer).
 
-> <ins>Die folgenden Blöcke lesen nur die Variable, nicht den I²C-Bus.</ins>
+> <ins>Die folgenden Blöcke lesen nur die interne Variable, nicht die Uhr.</ins>
 
 Block **`0 Sekunde` als Zahl** : Byte
 * Liest 1 Byte aus der internen Variable BCD zu dezimal konvertiert.
@@ -83,7 +82,7 @@ Block **`Datum dd.MM.yy`** : String
 Block **zeige `Zeit Hmmss` binär in 25 LED Matrix**
 
 * Zeigt in den 5 Spalten der LED Matrix Zeit oder Datum an.
-* Von den leuchtenden LEDs die Binärzahlen addieren.
+* Von den leuchtenden roten LEDs die Binärzahlen addieren.
 
 `Zeit Hmmss`
 
@@ -104,6 +103,13 @@ Block **zeige `Zeit Hmmss` binär in 25 LED Matrix**
 |w|d|M|y|y|2^2=4
 |w|d|M|y|y|2^1=2
 |w|d|M|y|y|2^0=1
+
+Block **Buffer (7Byte) [s,m,H,d,w,M,y] im Format BCD** : Buffer
+
+* Gibt die interne Variable (Buffer) zurück. 7 Byte Index 0..6.
+* Jedes Byte ist BCD codiert (binär codierte Dezimalzahl).
+* 4 Bit pro Ziffer, Bit `7654` Zehner, Bit `3210` Einer, Jahr 2-stellig
+
 
 Block **rtc_date_string** () : String 10 Zeichen
 * Liest Datum aus Variable RTC_BUFFER: `dd.MM.20yy`.
