@@ -35,21 +35,19 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 ## Blöcke und Parameter
 
 ### Pins
-> Nur zusätzliche Blöcke, die in MakeCode nicht enthalten sind.
+> Nur zusätzliche Blöcke, die in MakeCode nicht enthalten sind.\
+> Parameter `pin` kann überall als Variable übergeben werden. Das ist bei Original Blöcken nicht möglich.
 
 Block **Digital Pin** (`pin`, on)
-* *pin* kann als Variable übergeben werden.
 * Schreibt den Pin mit Boolean Parameter *on*. 
 
 Block **Digital Pin** (`pin`) : Boolean
 * Liest *pin* digital als Boolean.
 
 Block **Analog Pin**(`pin`) : Number
-* *pin* kann als Variable übergeben werden.
 * Liest *pin* analog als Number.
 
 Block **Servo PWM `pin` Winkel** (grad)
-* *pin* kann als Variable übergeben werden.
 * Setzt den (analogen) Servo Pin auf Winkel 45..135 Grad.
 
 ### ... mehr
