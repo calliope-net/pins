@@ -1,8 +1,7 @@
 
 > Diese Seite bei [https://calliope-net.github.io/pins/](https://calliope-net.github.io/pins/) öffnen
 
-
-\uf140 f140 
+### Calliope Erweiterung für Pins: Displays, Tastaturen und weitere I²C Module mit Blöcken programmieren
 
 
 ## Als Erweiterung verwenden 
