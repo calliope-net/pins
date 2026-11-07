@@ -82,7 +82,7 @@ Block **`0 Sekunde` als Zahl** : Byte
   * `1` Minute `mm` 00..59
   * `2` Stunde `HH` 00..23
   * `3` Tag `dd` 01..31
-  * `4` Wochentag `ddd` So Mo Di Mi Do Fr Sa (00..06)
+  * `4` Wochentag `w` So Mo Di Mi Do Fr Sa (00..06)
   * `5` Monat `MM` 01..12
   * `6` Jahr `yy` 00..99
 
@@ -91,7 +91,7 @@ Block **`Datum dd.MM.yy`** : String
   * Datum `dd.MM.yy`
   * Datum `dd.MM.20yy`
   * Datum `dd.MM`
-  * Wochentag `ddd` (2 Zeichen So Mo ..)
+  * Wochentag `ww` (2 Zeichen So Mo ..)
   * Zeit `HH:mm`
   * Zeit `HH:mm:ss`
   * Zeit `mm:ss`
@@ -106,21 +106,21 @@ Block **zeige `Zeit Hmmss` binär in 25 LED Matrix**
 
 |0|1|2|3|4|Binärzahl
 |---|---|---|---|---|---
-|H| | | | |2^4=16
-|H| |m| |s|2^3=8
-|H|m|m|s|s|2^2=4
-|H|m|m|s|s|2^1=2
-|H|m|m|s|s|2^0=1
+|HH| | | | |2^4=16
+|HH| |m| |s|2^3=8
+|HH|m|m|s|s|2^2=4
+|HH|m|m|s|s|2^1=2
+|HH|m|m|s|s|2^0=1
 
 `Datum wdMyy` (Wochentag 0..6, Tag 0..31, Monat 1..12, Jahr Zehner 0_..9_, Jahr Einer _0.._9)
 
 |0|1|2|3|4|Binärzahl
 |---|---|---|---|---|---
-| |d| | | |2^4=16
-| |d|M|y|y|2^3=8
-|w|d|M|y|y|2^2=4
-|w|d|M|y|y|2^1=2
-|w|d|M|y|y|2^0=1
+| |dd| | | |2^4=16
+| |dd|M|y|y|2^3=8
+|w|dd|M|y|y|2^2=4
+|w|dd|M|y|y|2^1=2
+|w|dd|M|y|y|2^0=1
 
 Block **Buffer (7Byte) [s,m,H,d,w,M,y] im Format BCD** : Buffer
 
