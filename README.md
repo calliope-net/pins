@@ -58,7 +58,7 @@ Block **Datum und Zeit einlesen**
 
 > <ins>Die folgenden Blöcke lesen nur die Variable, nicht den I²C-Bus.</ins>
 
-Block **(Register) als Zahl** : Byte
+Block **(*Register*) als Zahl** : Byte
 * Liest 1 Byte aus der internen Variable BCD zu dezimal konvertiert.
 * Es gibt 7 *register* 0 bis 6:
   * `0` Sekunde `ss` 0..59
