@@ -35,7 +35,7 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 ## Blöcke und Parameter
 
 ### Pins
-> Nur zusätzliche Blöcke, die in MakeCode nicht enthalten sind.\
+> Hier sind nur zusätzliche Blöcke beschrieben, die in MakeCode nicht enthalten sind.\
 > Parameter `pin` kann überall als Variable übergeben werden. Das ist bei Original Blöcken nicht möglich.
 
 Block **Digital Pin** (`pin`, on)
