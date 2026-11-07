@@ -41,6 +41,25 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 
 #### ... Tastaturen
 
+
+→ Numeric Keypad: Tastatur, Ziffernblock → [en.wikipedia.org/wiki/Keypad](https://en.wikipedia.org/wiki/Keypad)
+###### [SparkFun Qwiic Keypad - 12 Tasten](https://www.sparkfun.com/products/15290)
+> Keypad speichert mehrere gedrückte Tasten, bei langsamer Abfrage geht nichts verloren.\
+> Mit /INT kann ein Hardware Interrupt ausgelöst werden.
+
+Block **RTC angeschlossen** : Boolean
+* Gibt True zurück, wenn das Uhr Modul am I²C Bus erkannt wird.
+
+
+Block **keypad_read** () : Byte
+* Gibt 0 zurück wenn keine Taste gedrückt, sonst ASCII-Code der gedrückten Taste.
+
+Taste|0|1|2|3|4|5|6|7|8|9|*|#
+---|---|---|---|---|---|---|---|---|---|---|---|---
+Code|48|49|50|51|52|53|54|55|56|57|42|35
+
+
+
 #### ... Joystick
 
 #### ... Spracherkennung
