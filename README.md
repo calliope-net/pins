@@ -71,14 +71,14 @@ Block **(*Register*) als Zahl** : Byte
 
 Block **Datum dd.MM.yy** : String
 * Kann als Text (String) zurück geben:
-  * `Datum dd.MM.yy` 8 Zeichen
-  * Datum `dd.MM.20yy` 10 Zeichen
+  * Datum dd.MM.yy
+  * Datum dd.MM.20yy
   * Datum dd.MM
-  * Wochentag ddd
+  * Wochentag ddd (2 Zeichen So Mo ..)
   * Zeit HH:mm
   * Zeit HH:mm:ss
   * Zeit mm:ss
-  * yyMMddHHmmss
+  * yyMMddHHmmss (12 Zeichen)
 
 
 Block **rtc_date_string** () : String 10 Zeichen
