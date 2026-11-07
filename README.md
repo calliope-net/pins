@@ -36,7 +36,7 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 
 ### Pins
 > Hier sind nur zusätzliche Blöcke beschrieben, die in MakeCode nicht enthalten sind.\
-> Parameter `pin` kann als Variable übergeben werden, was bei Original Blöcken nicht möglich ist.
+> Parameter `pin` kann als Variable übergeben werden.
 
 Block **Digital Pin** (`pin`, on)
 * Schreibt den digitalen Pin mit Boolean Parameter *on*. 
@@ -54,7 +54,7 @@ Block **Servo PWM `pin` Winkel** (grad)
 > Keine zusätzlichen Blöcke.
 
 ### ... Buffer
-> Buffer ist ein Array, das nur Bytes speichern kann. Bytearrays werden für jede Datenübertragung gebraucht und hier für I²C benutzt.
+> Buffer ist ein Array, das nur Bytes speichern kann. Bytearrays werden zur Datenübertragung gebraucht und hier für I²C benutzt.
 > Die Blöcke stellen nur die Eigenschaften und Methoden des Objektes Buffer - als Blöcke - zur Verfügung und werden hier nicht beschrieben.
 
 ### ... Funktionen
