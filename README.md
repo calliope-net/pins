@@ -88,14 +88,14 @@ Block **`0 Sekunde` als Zahl** : Byte
 
 Block **`Datum dd.MM.yy`** : String
 * gibt `Auswahl` als Text (String) zurück:
-  * Datum dd.MM.yy
-  * Datum dd.MM.20yy
-  * Datum dd.MM
-  * Wochentag ddd (2 Zeichen So Mo ..)
-  * Zeit HH:mm
-  * Zeit HH:mm:ss
-  * Zeit mm:ss
-  * yyMMddHHmmss (12 Zeichen)
+  * Datum `dd.MM.yy`
+  * Datum `dd.MM.20yy`
+  * Datum `dd.MM`
+  * Wochentag `ddd` (2 Zeichen So Mo ..)
+  * Zeit `HH:mm`
+  * Zeit `HH:mm:ss`
+  * Zeit `mm:ss`
+  * `yyMMddHHmmss` (12 Zeichen)
 
 Block **zeige `Zeit Hmmss` binär in 25 LED Matrix**
 
