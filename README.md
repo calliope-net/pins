@@ -94,8 +94,8 @@ Ereignis-Block **wenn Taste gedrückt war** (zeichenCode, zeichenText, isASCII)
 ### ... Spracherkennung
 
 ### ... RTC Uhr
-→ [de.wikipedia.org/wiki/Echtzeituhr](https://de.wikipedia.org/wiki/Echtzeituhr)\
-→ [Grove - High Precision RTC (Real Time Clock PCF85063TP)](https://wiki.seeedstudio.com/Grove_High_Precision_RTC)  (I²C 0x51)
+#### [Grove - High Precision RTC (Real Time Clock PCF85063TP)](https://wiki.seeedstudio.com/Grove_High_Precision_RTC) (I²C 0x51)
+→ [de.wikipedia.org/wiki/Echtzeituhr](https://de.wikipedia.org/wiki/Echtzeituhr)
 
 ##### Uhr lesen
 
