@@ -31,23 +31,25 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 
 #### ... Buffer
 
-#### Funktionen
+#### ... Funktionen
 
-#### 4-Digit Displays
+#### ... 4-Digit Displays
 
-#### I²C
+#### ... I²C
 
-#### OLED Display
+#### ... OLED Display
 
-#### Tastaturen
+#### ... Tastaturen
 
-#### Joystick
+#### ... Joystick
 
-#### Spracherkennung
+#### ... Spracherkennung
 
 #### ... RTC Uhr
 → RTC: real-time clock → [de.wikipedia.org/wiki/Echtzeituhr](https://de.wikipedia.org/wiki/Echtzeituhr)
 ###### [Grove - High Precision RTC (Real Time Clock)](https://wiki.seeedstudio.com/Grove_High_Precision_RTC)
+
+##### Uhr lesen
 
 Block **Datum und Zeit einlesen**
 * <ins>Muss am Anfang jeder Schleife aufgerufen werden.</ins>
@@ -56,11 +58,42 @@ Block **Datum und Zeit einlesen**
 
 > <ins>Die folgenden Blöcke lesen nur die Variable, nicht den I²C-Bus.</ins>
 
+Block **rtc_get** (index) : Byte
+* Liest 1 Byte aus Variable RTC_BUFFER[*index*] zu dezimal konvertiert.
+* `0`Seconds, `1`Minutes, `2`Hours, `3`Days, `4`Weekdays, `5`Months, `6`Years
 
+Block **rtc_time_string** () : String 8 Zeichen
+* Liest Zeit aus Variable RTC_BUFFER: `HH:mm:ss`.
 
-#### GPIO
+Block **rtc_date_string** () : String 10 Zeichen
+* Liest Datum aus Variable RTC_BUFFER: `dd.MM.20yy`.
 
-#### Wattmeter
+Block **rtc_weekday** () : String 2 Zeichen
+* Liest Wochentag aus RTC_BUFFER: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'].
+
+Block **rtc_iso_string** () : String 12 Zeichen
+* Liest aus Variable RTC_BUFFER: `yyMMddHHmmss`.
+* Aus genau 12 Ziffern kann der benötigte Teilstring ausgeschnitten werden.
+* Format ist sortierbar z.B. für Dateinamen.
+
+##### Uhr stellen
+
+Block **rtc_write** (index, int8)
+* Stellt die Uhr. Ändert ein bestimmtes Register *index*.
+* `0`Seconds, `1`Minutes, `2`Hours, `3`Days, `4`Weekdays, `5`Months, `6`Years
+* *int8*: 0..59 Byte wird in BCD konvertiert und im RTC-Modul gespeichert. 
+
+Block **rtc_set** (key_code) : keyString
+* Stellt die Uhr mit 5 ASCII Zeichen-Codes von Keypad oder Keyboard.
+* Muss 5 mal mit ASCII Code aufgerufen werden, gibt den zusammengesetzten String zurück.\
+  *1. Zeichen:* `*` neu, *2. Zeichen:* Register `0..6`,\
+  *3. und 4. Zeichen:* 2 Ziffern dezimal `00..59`, *5. Zeichen:* `#` speichern
+* Wenn 5 Zeichen gültig sind, wird mit **rtc_write** das Register geändert.
+* Beispiel: `*120#`setzt Minute auf 20; `*401#` Montag; `*000#` Sekunde 0.
+
+#### ... GPIO
+
+#### ... Wattmeter
 
 
 
