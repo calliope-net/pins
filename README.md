@@ -63,6 +63,22 @@ Block **Qwiic Keypad Ereignis auslösen** (on)
 * *on*=True löst das **Tastatur Ereignis** aus, wenn eine Taste gedrückt wurde.
 
 ##### M5Stack Card Keyboard 50 Tasten (I²C: 0x5E)
+→ Keyboard: Tastatur →  [de.wikipedia.org/wiki/Tastatur](https://de.wikipedia.org/wiki/Tastatur)
+###### [M5Stack Card Keyboard QWERTY 50-key](https://docs.m5stack.com/en/unit/cardkb_1.1)
+
+Block **Keyboard Zeichencode** : Byte
+* Gibt 0 zurück wenn keine Taste gedrückt, sonst ASCII-Code der gedrückten Taste.
+
+Block **Keyboard Ereignis auslösen** (on)
+* Kann in einer dauerhaft Schleife ausgerufen werden.
+* *on*=True löst das **Tastatur Ereignis** aus, wenn eine Taste gedrückt wurde.
+
+##### Tastatur Ereignis
+
+Ereignis-Block **wenn Taste gedrückt war** (zeichenCode, zeichenText, isASCII)
+* Wird ausgelöst, wenn oben der Block *auslösen* aufgerufen wird und eine Taste gedrückt war.
+* Übergibt das Zeichen als ASCII-Code, Text-Zeichen (char)
+* *isASCII* ist True, wenn *zeichenCode* 32..127
 
 
 #### ... Joystick
