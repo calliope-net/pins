@@ -112,7 +112,7 @@ Block **zeige `Zeit Hmmss` binär in 25 LED Matrix**
 |HH|m|m|s|s|2^1=2
 |HH|m|m|s|s|2^0=1
 
-`Datum wdMyy` (Wochentag 0..6, Tag 0..31, Monat 1..12, Jahr Zehner 0_..9_, Jahr Einer _0.._9)
+`Datum wdMyy` (**0** Wochentag 0..6, **1** Tag 1..31, **2** Monat 1..12, **34** Jahr 2-stellig)
 
 |0|1|2|3|4|Binärzahl
 |---|---|---|---|---|---
