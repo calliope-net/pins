@@ -120,7 +120,7 @@ Block **oscillator stop** : Boolean
 Block **Uhr stellen 1 Zeichencode** (ascii_code) : String
 * Stellt die Uhr mit 5 ASCII Zeichen-Codes von Keypad oder Keyboard.
 * erlaubte Codes: 42=* 48=0 49=1 50=2 51=3 52=4 53=5 54=6 55=7 56=8 57=9 35=# 13=ENTER
-* Muss 5 mal mit ASCII Code aufgerufen werden, gibt den zusammengesetzten String zurück.\
+* Muss 5 mal mit ASCII Code aufgerufen werden. Gibt den zusammengesetzten String zurück.\
   *1. Zeichen:* `*` alle Zeichen löschen, neue Eingabe beginnen\
   *2. Zeichen:* Register Nummer `0..6`\
   *3. und 4. Zeichen:* Zahl, die in das Register geschrieben wird. 2 Ziffern dezimal `00..59`\
@@ -136,6 +136,22 @@ Block **Uhr stellen 5 Zeichen** (*000#)
   * `*401#` Montag
   * `*000#` Sekunde 0
 
+
+##### RTC Register
+
+Block *RTC angeschlossen*** : Boolean
+* Gibt True zurück, wenn das Uhr Modul am I²C Bus erkannt wird.
+
+Block **read RTC Register*** : Byte
+Block **write RTC Register**
+* Liest oder schreibt ein bestimmtes Register.
+
+Block **convert Byte** : Byte
+* Konvertiert ein Byte von → in:
+  * BCD → DEC
+  * BCD Zehner
+  * BCD Einer
+  * DEC → BCD
 
 #### ... GPIO
 
