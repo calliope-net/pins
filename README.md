@@ -71,8 +71,8 @@ Block **(*Register*) als Zahl** : Byte
 
 Block **Datum dd.MM.yy** : String
 * Kann als Text (String) zurück geben:
-  * Datum dd.MM.yy
-  * Datum dd.MM.20yy
+  * `Datum dd.MM.yy` 8 Zeichen
+  * Datum `dd.MM.20yy` 10 Zeichen
   * Datum dd.MM
   * Wochentag ddd
   * Zeit HH:mm
