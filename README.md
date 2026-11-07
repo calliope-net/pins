@@ -41,6 +41,7 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 
 #### ... Tastaturen
 
+##### Qwiic Keypad 12 Tasten (I²C: 0x4B)
 
 → Numeric Keypad: Tastatur, Ziffernblock → [en.wikipedia.org/wiki/Keypad](https://en.wikipedia.org/wiki/Keypad)
 ###### [SparkFun Qwiic Keypad - 12 Tasten](https://www.sparkfun.com/products/15290)
@@ -58,6 +59,8 @@ Block **keypad_read** () : Byte
 |---|---|---|---|---|---|---|---|---|---|---|---|---
 |Code|48|49|50|51|52|53|54|55|56|57|42|35
 
+
+##### M5Stack Card Keyboard 50 Tasten (I²C: 0x5E)
 
 
 #### ... Joystick
