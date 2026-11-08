@@ -20,7 +20,7 @@ Durch Beschränkung auf Grundfunktionen bleibt die Anzahl der Blöcke übersicht
 
 |Menüpunkt|Beschreibung|Erweiterung|
 |---|---|---|
-|[Pins](#pins)|neue Blöcke für Pins||
+|[Pins](#pins)|Blöcke mit Pin als Parameter||
 |[...mehr](#-mehr)|keine neuen Blöcke||
 |[...Buffer](#-buffer)|Buffer Objekt||
 |[...Funktionen](#-funktionen)|zusätzliche Funktionen||
