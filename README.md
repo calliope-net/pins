@@ -16,12 +16,17 @@ Die Erweiterung für den vorhandenen Menüpunkt *Pins* enthält Blöcke für vie
 Durch Beschränkung auf Grundfunktionen bleibt die Anzahl der Blöcke übersichtlich.
 > Für mehr Funktionen gibt es zu jedem Modul eine eigene Erweiterung.
 
-#### Auf dieser Seite
+#### Inhalt dieser Seite
 
 |Menüpunkt|Beschreibung|Erweiterung|
 |---|---|---|
-|[Pins](#pins)|Original ||
-|[...mehr](#-mehr)|Advanced||
+|[Pins](#pins)|neue Blöcke für Pins||
+|[...mehr](#-mehr)|keine neuen Blöcke||
+|[...Buffer](#-buffer)|Buffer Objekt||
+|[...Funktionen](#-funktionen)|zusätzliche Funktionen||
+|[...4-Digit_Displays](#-4-digt-displays)|mehrere gleichzeitig||
+|[...OLED Display](#-oled-display)|3 verschiedene OLED Displays||
+|[...Tastaturen](#-tastaturen)|12 oder 50 Tasten||
 
 
 ## Als Erweiterung verwenden 
