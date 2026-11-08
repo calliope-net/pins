@@ -28,7 +28,7 @@ Durch Beschränkung auf Grundfunktionen bleibt die Anzahl der Blöcke übersicht
 |[...I²C](#-ic)|I²C write und read Buffer|[calliope-net/i2c](https://calliope-net.github.io/i2c/)|
 |[...OLED Display](#-oled-display)|16x8 und 16x16 Zeichen|[calliope-net/matrix](https://calliope-net.github.io/matrix/)|
 |[...Tastaturen](#-tastaturen)|12 oder 50 Tasten|[calliope-net/keypad](https://calliope-net.github.io/keypad/)|
-|[...Joystick](#-joystick)|Qwiic Joystick|[calliope-net/i2c](https://calliope-net.github.io/i2c/)|
+|[...Joystick](#-joystick)|Qwiic Joystick|[calliope-net/joystick](https://calliope-net.github.io/joystick/)|
 |[...Spracherkennung](#-spracherkennung)|Voice Sensor||
 |[...RTC Uhr](#-rtc-uhr)|Quarzuhr|[calliope-net/rtc-uhr](https://calliope-net.github.io/rtc-uhr/)|
 |[...GPIO](#-gpio)|8 Ein- oder Ausgänge|[calliope-net/gpio](https://calliope-net.github.io/gpio/)|
