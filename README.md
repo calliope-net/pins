@@ -26,7 +26,7 @@ Durch Beschränkung auf Grundfunktionen bleibt die Anzahl der Blöcke übersicht
 |[...Funktionen](#-funktionen)|zusätzliche Funktionen||
 |[...4-Digit Displays](#-4-digit-displays)|4-8-12-16 Ziffern anzeigen||
 |[...I²C](#-ic)|I²C write und read Buffer||
-|[...OLED Display](#-oled-display)|3 verschiedene OLED Displays||
+|[...OLED Display](#-oled-display)|3 verschiedene OLED Displays|calliope-net/lcd-16x2\calliope-net/lcd-20x4|
 |[...Tastaturen](#-tastaturen)|12 oder 50 Tasten||
 |[...Joystick](#-joystick)|Qwiic Joystick||
 |[...Spracherkennung](#-spracherkennung)|Voice Sensor||
