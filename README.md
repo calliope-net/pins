@@ -18,16 +18,16 @@ Durch Beschränkung auf Grundfunktionen bleibt die Anzahl der Blöcke übersicht
 
 #### Inhalt dieser Seite
 
-|Menüpunkt|Beschreibung|Erweiterung|
+|Menüpunkt|Beschreibung|eigene Erweiterung|
 |---|---|---|
 |[Pins](#pins)|Blöcke mit Pin als Variable||
 |[...mehr](#-mehr)|keine neuen Blöcke||
-|[...Buffer](#-buffer)|Buffer Objekt||
-|[...Funktionen](#-funktionen)|zusätzliche Funktionen||
+|[...Buffer](#-buffer)|Buffer Objekt|[calliope-net/i2c](https://calliope-net.github.io/i2c/)|
+|[...Funktionen](#-funktionen)|zusätzliche Funktionen|[calliope-net/bit](https://calliope-net.github.io/bit/)|
 |[...4-Digit Displays](#-4-digit-displays)|4-8-12-16 Ziffern anzeigen||
-|[...I²C](#-ic)|I²C write und read Buffer||
+|[...I²C](#-ic)|I²C write und read Buffer|[calliope-net/i2c](https://calliope-net.github.io/i2c/)|
 |[...OLED Display](#-oled-display)|16x8 und 16x16 Zeichen|[calliope-net/matrix](https://calliope-net.github.io/matrix/)|
-|[...Tastaturen](#-tastaturen)|12 oder 50 Tasten||
+|[...Tastaturen](#-tastaturen)|12 oder 50 Tasten|[calliope-net/keypad](https://calliope-net.github.io/keypad/)|
 |[...Joystick](#-joystick)|Qwiic Joystick||
 |[...Spracherkennung](#-spracherkennung)|Voice Sensor||
 |[...RTC Uhr](#-rtc-uhr)|Quarzuhr||
