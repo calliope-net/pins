@@ -24,9 +24,17 @@ Durch Beschränkung auf Grundfunktionen bleibt die Anzahl der Blöcke übersicht
 |[...mehr](#-mehr)|keine neuen Blöcke||
 |[...Buffer](#-buffer)|Buffer Objekt||
 |[...Funktionen](#-funktionen)|zusätzliche Funktionen||
-|[...4-Digit_Displays](#-4-digt-displays)|mehrere gleichzeitig||
+|[...4-Digit Displays](#-4-digit-displays)|mehrere gleichzeitig||
 |[...OLED Display](#-oled-display)|3 verschiedene OLED Displays||
 |[...Tastaturen](#-tastaturen)|12 oder 50 Tasten||
+|[...Joystick](#-joystick)|Joystick||
+|[...Spracherkennung](#-spracherkennung)|Voice Sensor||
+|[...RTC Uhr](#-rtc-uhr)|Quarzuhr||
+|[...GPIO](#-gpio)|8 Ein- oder Ausgänge||
+|[...Wattmeter](#-wattmeter)|Spannung und Strom messen||
+
+
+
 
 
 ## Als Erweiterung verwenden 
