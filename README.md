@@ -25,6 +25,7 @@ Durch Beschränkung auf Grundfunktionen bleibt die Anzahl der Blöcke übersicht
 |[...Buffer](#-buffer)|Buffer Objekt||
 |[...Funktionen](#-funktionen)|zusätzliche Funktionen||
 |[...4-Digit Displays](#-4-digit-displays)|mehrere gleichzeitig||
+|[...I²C](#-ic)|I²C write und read Buffer||
 |[...OLED Display](#-oled-display)|3 verschiedene OLED Displays||
 |[...Tastaturen](#-tastaturen)|12 oder 50 Tasten||
 |[...Joystick](#-joystick)|Joystick||
