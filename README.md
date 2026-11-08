@@ -38,7 +38,7 @@ Durch Beschränkung auf Grundfunktionen bleibt die Anzahl der Blöcke übersicht
 
 
 
-#### Als Erweiterung verwenden 
+### Als Erweiterung verwenden 
 
 Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 
