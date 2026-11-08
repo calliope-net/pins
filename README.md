@@ -24,11 +24,11 @@ Durch Beschränkung auf Grundfunktionen bleibt die Anzahl der Blöcke übersicht
 |[...mehr](#-mehr)|keine neuen Blöcke||
 |[...Buffer](#-buffer)|Buffer Objekt||
 |[...Funktionen](#-funktionen)|zusätzliche Funktionen||
-|[...4-Digit Displays](#-4-digit-displays)|mehrere gleichzeitig||
+|[...4-Digit Displays](#-4-digit-displays)|4-8-12-16 Ziffern anzeigen||
 |[...I²C](#-ic)|I²C write und read Buffer||
 |[...OLED Display](#-oled-display)|3 verschiedene OLED Displays||
 |[...Tastaturen](#-tastaturen)|12 oder 50 Tasten||
-|[...Joystick](#-joystick)|Joystick||
+|[...Joystick](#-joystick)|Qwiic Joystick||
 |[...Spracherkennung](#-spracherkennung)|Voice Sensor||
 |[...RTC Uhr](#-rtc-uhr)|Quarzuhr||
 |[...GPIO](#-gpio)|8 Ein- oder Ausgänge||
