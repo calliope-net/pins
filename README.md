@@ -16,6 +16,14 @@ Die Erweiterung für den vorhandenen Menüpunkt *Pins* enthält Blöcke für vie
 Durch Beschränkung auf Grundfunktionen bleibt die Anzahl der Blöcke übersichtlich.
 > Für mehr Funktionen gibt es zu jedem Modul eine eigene Erweiterung.
 
+#### Auf dieser Seite
+
+|Menüpunkt|Beschreibung|Erweiterung|
+|---|---|---|
+|[Pins](#pins)|Original ||
+|[...mehr](#-mehr)|Advanced||
+
+
 ## Als Erweiterung verwenden 
 
 Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
