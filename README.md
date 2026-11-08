@@ -188,6 +188,7 @@ Block **Buffer (7Byte) [s,m,H,d,w,M,y] im Format BCD** : Buffer
 
 Block **oscillator stop** : Boolean
 * Gibt True zurück, wenn die Uhr neu gestellt werden muss.
+* Wird durch Schreiben in Register 0 (Sekunde) auf False zurück gesetzt.
 * Kann bedeuten, dass die Knopfzelle leer wird.
 
 ##### Uhr stellen
