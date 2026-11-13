@@ -10,10 +10,12 @@ https://learn.sparkfun.com/tutorials/qwiic-eeprom-hookup-guide
 https://github.com/sparkfun/Qwiic_EEPROM_Py/archive/main.zip 
 Nach dem Beispiel - Code 'qwiic_eeprom.py'
 https://github.com/sparkfun/Qwiic_EEPROM_Py/blob/main/qwiic_eeprom.py
-*/
-{
+*/ {
     // ========== I²C ==========
-    export enum eI2Ceeprom { EEPROM_x50 = 0x50 }
+    export enum eI2Ceeprom {
+        EEPROM_x50 = 0x50, EEPROM_x51 = 0x51, EEPROM_x52 = 0x52, EEPROM_x53 = 0x53,
+        EEPROM_x54 = 0x54, EEPROM_x55 = 0x55, EEPROM_x56 = 0x56, EEPROM_x57 = 0x57
+    }
     export enum eEEPROM_Startadresse { F800 = 0xF800, FC00 = 0xFC00, F000 = 0xF000, F400 = 0xF400 }
 
     // I2C EEPROM lesen -> in Buffer
@@ -49,17 +51,19 @@ https://github.com/sparkfun/Qwiic_EEPROM_Py/blob/main/qwiic_eeprom.py
 
     // ==========  group="EEPROM schreiben und lesen" color="#FF7F3F" subcategory="EEPROM"
 
-    //% group="EEPROM lesen (I²C 0x50)" color="#FF7F3F" subcategory="EEPROM"
+    //% group="EEPROM lesen in Buffer (I²C 0x50..0x57)" color="#FF7F3F" subcategory="EEPROM"
     //% block="EEPROM lesen Adresse %adr Länge %size || %i2c" weight=6
-    export function readEEPROM(adr: number, size: number, i2c = eI2Ceeprom.EEPROM_x50): number[] {
-        return i2cReadEEPROM(adr, size, i2c).toArray(NumberFormat.UInt8LE)
+    //% adr.shadow=pins_hex16
+    export function readEEPROM(adr: number, size: number, i2c = eI2Ceeprom.EEPROM_x50): Buffer {
+        return i2cReadEEPROM(adr, size, i2c) //.toArray(NumberFormat.UInt8LE)
     }
 
     //% group="EEPROM schreiben (Adresse: 0..65535)" color="#FF7F3F" subcategory="EEPROM"
-    //% block="EEPROM schreiben Adresse %adr Bytes %bytes || %i2c" weight=4
-    //% byte.min=0 byte.max=255
-    export function progEEPROM(adr: number, bytes: number[], i2c = eI2Ceeprom.EEPROM_x50) {
-        return i2cWriteEEPROM(adr, Buffer.fromArray(bytes), i2c)
+    //% block="EEPROM schreiben Adresse %adr Buffer %bytes || %i2c" weight=4
+    //% adr.shadow=pins_hex16
+    export function progEEPROM(adr: number, bytes: Buffer, i2c = eI2Ceeprom.EEPROM_x50) {
+        return i2cWriteEEPROM(adr, bytes, i2c)
+        //  return i2cWriteEEPROM(adr, Buffer.fromArray(bytes), i2c)
     }
 
     //% group="EEPROM 512 Page-Adressen je 128 Byte" color="#FF7F3F" subcategory="EEPROM"
