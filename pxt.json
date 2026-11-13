@@ -19,7 +19,8 @@
         "voice.ts",
         "rtc.ts",
         "gpio.ts",
-        "wattmeter.ts"
+        "wattmeter.ts",
+        "buffer.ts"
     ],
     "testFiles": [
         "test.ts"
