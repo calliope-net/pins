@@ -12,6 +12,7 @@
         "pins.ts",
         "functions.ts",
         "4_digit_display.ts",
+        "buffer.ts",
         "i2c.ts",
         "oled.ts",
         "keyboards.ts",
@@ -19,8 +20,7 @@
         "voice.ts",
         "rtc.ts",
         "gpio.ts",
-        "wattmeter.ts",
-        "buffer.ts"
+        "wattmeter.ts"
     ],
     "testFiles": [
         "test.ts"
