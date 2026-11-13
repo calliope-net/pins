@@ -21,7 +21,8 @@
         "rtc.ts",
         "gpio.ts",
         "wattmeter.ts",
-        "voice.ts"
+        "voice.ts",
+        "eeprom.ts"
     ],
     "testFiles": [
         "test.ts"
