@@ -1,4 +1,4 @@
-// Gib deinen Code hier ein
+
 namespace pins { // buffer.ts
 
 
