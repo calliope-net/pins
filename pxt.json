@@ -15,13 +15,13 @@
         "buffer.ts",
         "i2c.ts",
         "oled.ts",
+        "lcd.ts",
         "keyboards.ts",
         "joystick.ts",
         "voice.ts",
         "rtc.ts",
         "gpio.ts",
-        "wattmeter.ts",
-        "lcd.ts"
+        "wattmeter.ts"
     ],
     "testFiles": [
         "test.ts"
