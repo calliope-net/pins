@@ -33,7 +33,8 @@ Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
         }
 
 
-        // ========== group="LCD Display"
+        // ========== group="LCD 16x2|20x4 (I²C 0x3E|0x72)" subcategory="LCD Display" color=#001FCF
+
 
         /*
         i2c_check = true erkennt, ob Display angeschlossen ist beim ersten i2cWriteBuffer und schaltet bei Fehlen auf 'kein Display'
@@ -93,7 +94,7 @@ Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
             LCD_RETURNHOME = 0x02
         }
 
-        //% group="LCD Display" subcategory="LCD Display" color=#001FCF
+        //% group="LCD 16x2|20x4 (I²C 0x3E|0x72)" subcategory="LCD Display" color=#001FCF
         //% block="Display löschen" weight=5
         export function clear_display() {
             if (q_display == eDisplay.qwiic_16_2 || q_display == eDisplay.qwiic_20_4) {
@@ -106,7 +107,7 @@ Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
             }
         }
 
-        //% group="LCD Display" subcategory="LCD Display" color=#001FCF
+        //% group="LCD 16x2|20x4 (I²C 0x3E|0x72)" subcategory="LCD Display" color=#001FCF
         //% block="Display %display Cursor %cursor || Blink %blink" weight=2
         //% display.defl=true blink.defl=false
         //% display.shadow=toggleOnOff cursor.shadow=toggleOnOff blink.shadow=toggleOnOff
@@ -139,7 +140,7 @@ Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
             right
         }
 
-        //% group="Text anzeigen"
+        //% group="Text anzeigen" subcategory="LCD Display" color=#001FCF
         //% block="Text Zeile %row von %col bis %end %value || %align" weight=7
         //% row.min=0 row.max=3 col.min=0 col.max=19 end.min=0 end.max=19 end.defl=15
         //% value.shadow=lcd_text
@@ -202,7 +203,7 @@ Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
             return buffer
         }
 
-        //% group="Text anzeigen"
+        //% group="Text anzeigen" subcategory="LCD Display" color=#001FCF
         //% block="Cursor Zeile %row von %col" weight=3
         //% row.min=0 row.max=3 col.min=0 col.max=19
         export function set_cursor(row: number, col: number) {
@@ -226,7 +227,7 @@ Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
             }
         }
 
-        //% group="Text anzeigen"
+        //% group="Text anzeigen" subcategory="LCD Display" color=#001FCF
         //% block="Text %value" weight=2
         //% value.shadow=lcd_text
         export function write_lcd(value: any) {
@@ -273,7 +274,7 @@ Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
             inc0 = 0
         }
 
-        //% group="Text Array"
+        //% group="Text Array" subcategory="LCD Display" color=#001FCF
         //% block="Text Array %text_list %increment || Index %list_index Substring %string_index" weight=2
         //% increment.shadow=toggleYesNo
         //% inlineInputMode=inline
@@ -326,7 +327,7 @@ Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
 
         // ========== group="Konfiguration"
 
-        //% group="Konfiguration"
+        //% group="Konfiguration" subcategory="LCD Display" color=#001FCF
         //% block="%display" weight=2
         export function get_display(display: eDisplay) { return display == q_display }
 
