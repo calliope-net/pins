@@ -14,14 +14,14 @@
         "4_digit_display.ts",
         "buffer.ts",
         "i2c.ts",
-        "oled.ts",
         "lcd.ts",
+        "oled.ts",
         "keyboards.ts",
         "joystick.ts",
-        "voice.ts",
         "rtc.ts",
         "gpio.ts",
-        "wattmeter.ts"
+        "wattmeter.ts",
+        "voice.ts"
     ],
     "testFiles": [
         "test.ts"
