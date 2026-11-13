@@ -15,12 +15,14 @@ namespace pins { // pins.ts
         C17 = DigitalPin.C17
     }
 
-    //% blockId=pins_eDigitalPins block="%pin" blockHidden=true
-    export function pins_eDigitalPins(pin: eDigitalPins): number {
+    //% group="Digital" color=#D80000
+    //% blockId=pins_eDigitalPins block="%pin" weight=4
+    //% blockSetVariable=dPin
+    export function pins_eDigitalPins(pin: eDigitalPins): number { //blockHidden=true
         return pin
     }
 
-    //% group="Digital"
+    //% group="Digital" color=#D80000
     //% block="Digital Pin %pin %on" weight=3
     //% pin.shadow=pins_eDigitalPins
     //% on.shadow=toggleOnOff
@@ -28,7 +30,7 @@ namespace pins { // pins.ts
         pins.digitalWritePin(<DigitalPin>pin, on ? 1 : 0)
     }
 
-    //% group="Digital"
+    //% group="Digital" color=#D80000
     //% block="Digital Pin %pin" weight=2
     //% pin.shadow=pins_eDigitalPins
     export function pinDigitalRead(pin: number) {
@@ -46,23 +48,24 @@ namespace pins { // pins.ts
 
     // ========== group="Analog"
 
-    //% group="Analog"
+    //% group="Analog" color=#D80000
+    //% blockId=pins_AnalogPin block="%pin" weight=3
+    //% blockSetVariable=aPin
+    export function pins_AnalogPin(pin: AnalogPin) { //  blockHidden=true
+        return pin
+    }
+
+    //% group="Analog" color=#D80000
     //% block="Analog Pin %pin" weight=2
     //% pin.shadow=pins_AnalogPin
     export function pinAnalogRead(pin: number) {
         return pins.analogReadPin(pin)
     }
 
-    //% blockId=pins_AnalogPin blockHidden=true
-    //% group="Analog"
-    //% block="%pin" weight=1
-    export function pins_AnalogPin(pin: AnalogPin) {
-        return pin
-    }
 
     // ========== group="Servo"
 
-    //% group="Servo"
+    //% group="Servo" color=#D80000
     //% block="Servo PWM %pin Winkel %winkel °" weight=2
     //% pin.shadow=pins_AnalogPin
     //% winkel.min=45 winkel.max=135 winkel.defl=90
